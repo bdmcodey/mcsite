@@ -4,7 +4,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return '<img src="static/img.jpg">'
+    return '<img style="position: absolute; top: 50%; left: 50%; margin-top: -287px; margin-left: -392px;" src="static/img.jpg">'
 
 if __name__ == '__main__':
     app.run()
+	
