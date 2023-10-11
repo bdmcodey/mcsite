@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>You can smile, you can cry at the same time - matthewcodey.com</title>
+{% extends "base.html" %}
+{% block title %}You can smile, you can cry at the same time{% endblock %}
+{% block head %}
+    {{ super() }}
     <style>
         img {
             position: absolute; 
@@ -12,10 +11,7 @@
             margin-left: -453px;
         }
     </style>
-</head>
-<body>
-    <div class="content">
-        <img src="static/img.jpg">
-    </div>
-</body>
-</html>
+{% endblock %}
+{% block content %}
+    <img src="static/img.jpg">
+{% endblock %}
