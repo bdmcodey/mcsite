@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>You can smile, you can cry at the same time - matthewcodey.com</title>
-    <style>
-        img {
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            margin-top: -349px; 
-            margin-left: -453px;
-        }
-    </style>
-</head>
-<body>
-    <div class="content">
-        <img src="static/img.jpg">
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}You can smile, you can cry at the same time{% endblock %}
+{% block head %}
+{{ super() }}
+<style>
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -349px;
+        margin-left: -453px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<a href="{{ url_for('home') }}"><img src="static/img.jpg"></a>
+{% endblock %}
