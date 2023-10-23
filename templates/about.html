@@ -3,19 +3,19 @@
 <main role="main">
     <div class="container" style="margin-top:80px">
         <div class="row">
-            <div class="col-4">
+            <div class="col-lg-4">
                 <h2>{% block title %}About{% endblock %}</h2>
             </div>
-            <div class="col-8">
+            <div class="col-lg-8">
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 <strong>Words</strong>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <p>And the people all know that heaven's doors are closed.</p>
