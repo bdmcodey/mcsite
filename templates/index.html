@@ -3,15 +3,19 @@
 {% block head %}
 {{ super() }}
 <style>
-    img {
+    .col {
+        margin: 0;
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-top: -349px;
-        margin-left: -453px;
+        transform: translate(-50%, -50%);
     }
 </style>
 {% endblock %}
 {% block content %}
-<a href="{{ url_for('home') }}"><img src="static/img.jpg"></a>
+<div class="text-center">
+    <div class="col">
+        <a href="{{ url_for('home') }}"><img class="img-fluid rounded mx-auto d-block" src="static/img.jpg"></a>
+    </div>
+</div>
 {% endblock %}
