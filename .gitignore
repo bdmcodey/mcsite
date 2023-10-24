@@ -126,3 +126,6 @@ dmypy.json
 .idea/mysite.iml
 .idea/misc.xml
 .idea/
+*.old
+*.old2
+*.old3
