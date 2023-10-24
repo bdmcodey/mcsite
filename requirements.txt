@@ -76,7 +76,7 @@ pytz==2019.1
 pywin32==225
 pywinpty==0.5.5
 pyzmq==18.1.0
-requests==2.22.0
+requests==2.31.0
 requests-oauthlib==1.2.0
 schedule==0.6.0
 Send2Trash==1.5.0
