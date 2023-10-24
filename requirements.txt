@@ -94,7 +94,7 @@ virtualenv==16.6.1
 virtualenvwrapper-win==1.2.5
 wcwidth==0.1.7
 webencodings==0.5.1
-Werkzeug==0.15.6
+Werkzeug==2.2.3
 wrapt==1.11.1
 WTForms==2.2.1
 zipp==0.6.0
