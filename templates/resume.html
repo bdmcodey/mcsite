@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Resume{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="resume-head">
+      <div>
+        <div class="kicker">Curriculum vitae</div>
+        <h2 class="title">Matthew Codey</h2>
+        <div class="muted-line">MLIS · Academic Librarian · Los Angeles, CA</div>
+      </div>
+      <a class="btn btn-ghost" href="{{ url_for('static', filename='cv/Matthew_Codey_CV.pdf') }}" download>Download PDF ↓</a>
+    </div>
+
+    <div class="resume-sec">
+      <h3>Professional summary</h3>
+      <p class="muted">MLIS professional with more than fifteen years in academic libraries, pairing hands-on library-systems expertise with a user-centered, equity-minded approach to reference and instruction. Ex Libris Alma Certified Administrator experienced in large-scale metadata management, discovery-service enhancement, and staff supervision, with a record of collaborative service and governance leadership.</p>
+    </div>
+
+    <div class="resume-sec">
+      <h3>Experience</h3>
+      <div class="job">
+        <div class="job-top"><span class="job-role">Senior Library Assistant — Wilson Dental Library, USC</span><span class="job-date">Oct 2014 – Present</span></div>
+        <div class="job-where">Los Angeles, CA</div>
+        <ul>
+          <li>Coordinate the full serials lifecycle — ordering, receiving, processing, claims, and vendor/subscription-agent correspondence.</li>
+          <li>Provide in-person and virtual reference (LibChat, LibAnswers), guiding students and faculty through research strategies, database navigation, and access to physical and electronic resources.</li>
+          <li>Oversee quality control of the ILS (Alma): maintain the bibliographic database and correct records; audit e-resources for link integrity and access.</li>
+          <li>Recruit, train, supervise, and schedule student workers; manage timecards and performance.</li>
+          <li>Designed and delivered an accessibility workshop as part of the ABC Committee; compile circulation and collection statistics and reports.</li>
+          <li>Service &amp; leadership: Staff Professional Development Committee, Staff Council, ABC Committee, and Chair of the Culture Committee.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <div class="job-top"><span class="job-role">Library Assistant III — Geisel Library, UC San Diego</span><span class="job-date">Aug 2007 – Sep 2014</span></div>
+        <div class="job-where">La Jolla, CA</div>
+        <ul>
+          <li>Staffed the main circulation desk and managed processing of returned materials within Access Services.</li>
+          <li>Hired, trained, and supervised 30–40 student assistants.</li>
+          <li>Led the searching unit: resolved lost/missing items and claims returns, coordinating with billing on fines and fees.</li>
+          <li>Partnered with the Metadata Department on records-maintenance projects.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="resume-sec">
+      <h3>Education</h3>
+      <div class="edu-item"><b>Master of Library &amp; Information Science</b> — San José State University, 2018<div class="d">Concentration: Web Programming &amp; Information Architecture</div></div>
+      <div class="edu-item"><b>B.S., Cognitive Science</b> — UC San Diego, 2007<div class="d">Specialization: Human-Computer Interaction</div></div>
+    </div>
+
+    <div class="resume-sec">
+      <h3>Technical skills</h3>
+      <div class="skillrow"><b>Library systems:</b> Ex Libris Alma (Certified Administrator) &amp; Primo — normalization jobs, batch processing, Analytics dashboards &amp; reporting; EZproxy administration.</div>
+      <div class="skillrow"><b>Metadata &amp; cataloging:</b> MARC, BIBFRAME, RDA, and current cataloging standards.</div>
+      <div class="skillrow"><b>Programming &amp; web:</b> Python, PHP, JavaScript, SQL, HTML, CSS, Git, Visual Basic.</div>
+      <div class="skillrow"><b>Reference &amp; instruction:</b> point-of-need instruction and reference (in-person, LibChat, LibAnswers); research strategies, database navigation, information literacy.</div>
+    </div>
+
+    <div class="resume-sec">
+      <h3>Presentations &amp; affiliations</h3>
+      <div class="skillrow">Thompson, A. M., Codey, M., Lyle, C., &amp; Davis, R. O. (2017). <i>Do We Dare Discard? Retention of Print Serials in a Digital Age.</i> Poster, MLA '17, Seattle, WA.</div>
+      <div class="skillrow">Medical Library Association (2014–Present) · Beta Phi Mu Honor Society, Omega Chapter (2019–Present) · ELUNA 2019 &amp; 2020.</div>
+    </div>
+  </div>
+</section>
+{% endblock %}

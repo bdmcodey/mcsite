@@ -1,66 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    {% block head %}
-    <!-- Required meta tags -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
-    <title>{% block title %} {% endblock %} - matthewcodey.com</title>
-    {% endblock %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Matthew Codey — MLIS academic librarian working at the seam of library service and library systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <title>{% block title %}Home{% endblock %} · Matthew Codey</title>
 </head>
-
 <body>
-    {% if isIndex %}
-    <!-- pass -->
-    {% else %}
-    <header class="site-header">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url_for('index') }}">matthewcodey.com</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    {% endif %}
-    <div class="container">
-        {% block content %}{% endblock %}
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="{{ url_for('index') }}">Matthew <span>Codey</span></a>
+      <nav>
+        <ul>
+          <li><a class="navlink {% if request.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Home</a></li>
+          <li><a class="navlink {% if request.endpoint == 'projects' %}active{% endif %}" href="{{ url_for('projects') }}">Projects</a></li>
+          <li><a class="navlink {% if request.endpoint == 'resume' %}active{% endif %}" href="{{ url_for('resume') }}">Resume</a></li>
+          <li><a class="navlink {% if request.endpoint == 'contact' %}active{% endif %}" href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <!-- Optional JavaScript -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-        crossorigin="anonymous"></script>
-
+  <footer>
+    <div class="wrap foot-inner">
+      <div>© 2026 Matthew Codey · Los Angeles, CA</div>
+      <div class="foot-links">
+        <a href="mailto:matthew.codey@gmail.com">Email</a>
+        <a href="https://github.com/bdmcodey" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
 </body>
-
-{% if isIndex %}
-<!-- pass -->
-{% else %}
-<footer class="footer mt-auto py-3">
-    <span class="text-muted footer_contents">© 2023 matthewcodey.com</span>
-</footer>
-{% endif %}
-
 </html>

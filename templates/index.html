@@ -1,21 +1,46 @@
 {% extends "base.html" %}
-{% block title %}You can smile, you can cry at the same time{% endblock %}
-{% block head %}
-{{ super() }}
-<style>
-    .col {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-</style>
-{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
-<div class="text-center">
-    <div class="col">
-        <a href="{{ url_for('home') }}"><img class="img-fluid rounded mx-auto d-block" src="static/img.jpg"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">MLIS · Academic Librarian</div>
+    <h1 class="big">Where library service<br>meets library systems.</h1>
+    <p class="lede">I'm an academic librarian with fifteen-plus years in university libraries, pairing <strong>hands-on library-systems expertise</strong> — Ex Libris Alma &amp; Primo, metadata at scale, discovery-service enhancement — with a user-centered approach to reference and instruction, and a working knowledge of the code underneath it all.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="{{ url_for('projects') }}">View Projects →</a>
+      <a class="btn btn-ghost" href="{{ url_for('resume') }}">Resume</a>
+      <a class="btn btn-ghost" href="{{ url_for('contact') }}">Get in touch</a>
     </div>
+  </div>
+</section>
+
+<div class="glance">
+  <div class="wrap">
+    <div class="glance-grid">
+      <div class="glance-cell"><div class="glance-num">15+</div><div class="glance-lbl">Years in academic libraries</div></div>
+      <div class="glance-cell"><div class="glance-num">Alma</div><div class="glance-lbl">Ex Libris Certified Administrator</div></div>
+      <div class="glance-cell"><div class="glance-num">MLIS</div><div class="glance-lbl">Web Programming &amp; Information Architecture</div></div>
+    </div>
+  </div>
 </div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">What I do</div>
+    <h2 class="title">Systems-minded librarianship</h2>
+    <p class="section-intro">I work at the seam between the people using a library and the platforms that run it — administering the discovery layer and ILS, wrangling metadata, and increasingly building my own tools — and exploring how AI can help — to automate the repetitive, error-prone parts of that work, while keeping reference and instruction firmly user-centered.</p>
+    <div class="cards">
+      <a class="card" href="{{ url_for('projects') }}">
+        <span class="tag">Featured · conference talk 2026</span>
+        <h3>Enhancing MARC serials holdings with AI</h3>
+        <p>An exploration of AI approaches to converting free-text serials holdings into structured, machine-actionable MARC — see the Projects page.</p>
+      </a>
+      <a class="card" href="{{ url_for('projects') }}">
+        <span class="tag">Built &amp; self-hosted</span>
+        <h3>matthewcodey.com</h3>
+        <p>This site — a Flask app I wrote and host myself on a Linux server. Proof of the web side of the MLIS.</p>
+      </a>
+    </div>
+  </div>
+</section>
 {% endblock %}
