@@ -61,6 +61,9 @@ h1.big{font-size:clamp(2.5rem,6vw,4rem);margin-bottom:22px}
 .card p{color:var(--muted);font-size:.96rem}
 .stack{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .chip{border:1px solid var(--line);color:var(--muted);font-size:.78rem;padding:4px 12px;border-radius:999px}
+.card-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px}
+.card-links a{color:var(--accent);font-weight:600;font-size:.9rem}
+.card-links a:hover{text-decoration:underline}
 
 /* Resume */
 .resume-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px}
