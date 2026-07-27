@@ -8,6 +8,23 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+
+  <!-- Open Graph / social share preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Matthew Codey">
+  <meta property="og:title" content="Matthew Codey — Academic Librarian">
+  <meta property="og:description" content="MLIS academic librarian working at the seam of library service and library systems.">
+  <meta property="og:url" content="https://matthewcodey.com{{ request.path }}">
+  <meta property="og:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Matthew Codey — Academic Librarian">
+  <meta name="twitter:description" content="MLIS academic librarian working at the seam of library service and library systems.">
+  <meta name="twitter:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
+
   <title>{% block title %}Home{% endblock %} · Matthew Codey</title>
 </head>
 <body>
