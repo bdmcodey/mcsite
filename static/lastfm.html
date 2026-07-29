@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>StarFoxDisciple — Twenty-One Years of Scrobbles</title>
+<style>
+  :root{
+    color-scheme:dark;
+    --page:#0d0d0d;--surface:#1a1a19;--surface-2:#222220;
+    --ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+    --grid:#2c2c2a;--base:#383835;--border:rgba(255,255,255,.10);
+    --blue:#c44f9a;--move:#d95926;--return:#199e70;--quiet:#898781;
+    --s1:#c44f9a;--s2:#d95926;--s3:#199e70;
+    --seq0:#3f2a63;--seq1:#522f80;--seq2:#6d389b;--seq3:#92429f;--seq4:#c44f9a;--seq5:#db589c;--seq6:#ea75ac;--seq7:#f4b2d2;
+    --font:system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  html[data-theme="light"]{
+    color-scheme:light;
+    --page:#f9f9f7;--surface:#fcfcfb;--surface-2:#f2f1ec;
+    --ink:#0b0b0b;--ink-2:#52514e;--muted:#898781;
+    --grid:#e1e0d9;--base:#c3c2b7;--border:rgba(11,11,11,.10);
+    --blue:#b03a86;--move:#eb6834;--return:#1baf7a;--quiet:#898781;
+    --s1:#b03a86;--s2:#eb6834;--s3:#1baf7a;
+    --seq0:#f6d9ea;--seq1:#e9b3d3;--seq2:#d885b5;--seq3:#c85fa4;--seq4:#b03a86;--seq5:#8f357f;--seq6:#6a3277;--seq7:#45286b;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px 90px;}
+  header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--page) 88%,transparent);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+  .top-in{max-width:1080px;margin:0 auto;padding:13px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+  .top h1{font-size:15.5px;margin:0;font-weight:650;letter-spacing:-0.01em;}
+  .top .sub{color:var(--muted);font-size:12px;margin-top:1px;}
+  .toggle{background:var(--surface-2);border:1px solid var(--border);color:var(--ink-2);border-radius:999px;
+    padding:7px 13px;font-size:12.5px;cursor:pointer;font-family:var(--font);flex-shrink:0;}
+  .toggle:hover{color:var(--ink)}
+  .hero{padding:46px 0 8px;}
+  .hero .kick{color:var(--blue);font-weight:600;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;}
+  .hero h2{font-size:33px;line-height:1.12;margin:10px 0 8px;font-weight:680;letter-spacing:-0.02em;max-width:22ch;}
+  .hero p{color:var(--ink-2);font-size:15.5px;max-width:64ch;margin:0;}
+  .lead{color:var(--blue);font-weight:640;}
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:26px 0 8px;}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:15px 16px 13px;}
+  .stat .v{font-size:24px;font-weight:680;letter-spacing:-0.02em;}
+  .stat .l{color:var(--muted);font-size:11.5px;margin-top:3px;}
+  section{margin-top:46px;}
+  .sec-h{margin:0 0 4px;font-size:20px;font-weight:660;letter-spacing:-0.01em;}
+  .sec-d{color:var(--ink-2);font-size:14px;margin:0 0 18px;max-width:72ch;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  svg{display:block;width:100%;height:auto;overflow:visible;}
+  .axis{fill:var(--muted);font-size:11px;font-family:var(--font);}
+  .glabel{fill:var(--ink-2);font-size:12px;font-family:var(--font);}
+  .gval{fill:var(--ink);font-size:11.5px;font-weight:600;font-family:var(--font);font-variant-numeric:tabular-nums;}
+  .gline{stroke:var(--grid);stroke-width:1;} .baseline{stroke:var(--base);stroke-width:1;}
+  .bar{fill:var(--seq4);transition:opacity .12s;} .bar:hover{opacity:.8;}
+  .chapLbl{fill:var(--ink-2);font-size:12.5px;font-weight:620;font-family:var(--font);}
+  .evtLbl{font-size:11.5px;font-weight:600;font-family:var(--font);} .evtSub{font-size:10px;font-family:var(--font);}
+  .gapLbl{fill:var(--muted);font-size:10.5px;font-family:var(--font);font-style:italic;}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;}
+  .chap{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;}
+  .chap::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--c);}
+  .chap .nm{font-weight:660;font-size:16px;margin-top:2px;} .chap .rng{color:var(--muted);font-size:11.5px;margin-top:2px;}
+  .chap .ds{color:var(--ink-2);font-size:12.5px;margin:10px 0 12px;min-height:54px;}
+  .chap .big{font-size:22px;font-weight:680;letter-spacing:-0.02em;} .chap .big span{font-size:11.5px;color:var(--muted);font-weight:500;}
+  .chap .rate{font-size:12px;color:var(--ink-2);margin-top:3px;} .chap .rate b{color:var(--c);font-weight:660;}
+  .chap .tags{margin-top:11px;display:flex;flex-wrap:wrap;gap:5px;}
+  .chap .tag{font-size:11px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:2px 9px;}
+  .chap .top{margin-top:11px;border-top:1px solid var(--grid);padding-top:9px;font-size:12px;color:var(--muted);}
+  .chap .top b{color:var(--ink);font-weight:600;}
+  .eras{display:flex;flex-direction:column;gap:2px;}
+  .era{display:grid;grid-template-columns:52px 1fr;gap:14px;align-items:center;padding:6px 0;border-bottom:1px solid var(--grid);}
+  .era .yr{font-weight:680;font-size:14.5px;font-variant-numeric:tabular-nums;}
+  .era .bars{display:flex;gap:7px;flex-wrap:wrap;}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2);background:var(--surface-2);
+    border:1px solid var(--border);border-radius:999px;padding:3px 10px;}
+  .chip i{width:8px;height:8px;border-radius:2px;} .chip b{color:var(--ink);font-weight:600;}
+  .legend{display:flex;gap:15px;flex-wrap:wrap;margin-top:13px;color:var(--ink-2);font-size:12.5px;}
+  .legend span{display:inline-flex;align-items:center;gap:6px;} .legend i{width:10px;height:10px;border-radius:2px;}
+  .binges{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .binge{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:15px;position:relative;overflow:hidden;}
+  .binge .rank{position:absolute;top:10px;right:12px;font-size:12px;color:var(--muted);font-weight:600;}
+  .binge .name{font-weight:640;font-size:15px;padding-right:26px;} .binge .meta{color:var(--muted);font-size:12px;margin-top:4px;}
+  .binge .n{font-size:21px;font-weight:680;margin-top:9px;color:var(--blue);} .binge .n span{font-size:12px;color:var(--muted);font-weight:500;}
+  .binge .track{height:5px;background:var(--surface-2);border-radius:3px;margin-top:9px;overflow:hidden;}
+  .binge .track>i{display:block;height:100%;background:var(--seq4);border-radius:3px;}
+  .hm-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:10px;flex-wrap:wrap;}
+  .hm-legend{display:inline-flex;align-items:center;gap:3px;color:var(--muted);font-size:11.5px;}
+  .hm-legend i{width:15px;height:12px;border-radius:2px;} .hm-legend span{margin:0 4px;}
+  .hm-wrap{overflow-x:auto;} .cell:hover{stroke:var(--ink);stroke-width:1.5;}
+  .bucket-row{display:flex;align-items:center;gap:12px;margin:8px 0;}
+  .bucket-row .bl{width:120px;font-size:13px;color:var(--ink-2);text-align:right;flex-shrink:0;}
+  .bucket-row .bt{flex:1;height:24px;background:var(--surface-2);border-radius:6px;overflow:hidden;}
+  .bucket-row .bt>i{display:block;height:100%;border-radius:6px;} .bucket-row .bn{width:66px;font-size:13px;font-weight:620;font-variant-numeric:tabular-nums;}
+  .tip{position:fixed;pointer-events:none;z-index:60;background:var(--surface);border:1px solid var(--border);border-radius:9px;
+    padding:8px 11px;font-size:12.5px;color:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.28);opacity:0;transition:opacity .1s;max-width:230px;}
+  .tip .t-n{font-weight:660} .tip .t-s{color:var(--muted);font-size:11.5px}
+  .note{background:var(--surface-2);border-left:3px solid var(--move);border-radius:0 10px 10px 0;padding:12px 15px;color:var(--ink-2);font-size:13px;margin-top:15px;}
+  .note b{color:var(--ink);font-weight:620;}
+  .foot{margin-top:52px;padding-top:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12.5px;}
+  .foot b{color:var(--ink-2);}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.grid2,.cards,.binges{grid-template-columns:1fr}.hero h2{font-size:26px}}
+</style>
+</head>
+<body>
+<div class="tip" id="tip"></div>
+<header class="top"><div class="top-in">
+  <div><h1>Twenty-One Years of Scrobbles</h1><div class="sub" id="sub"></div></div>
+  <button class="toggle" id="toggle">☀ Light</button>
+</div></header>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kick">A listening autobiography · 2005–2026</div>
+    <h2>What was on repeat, and when.</h2>
+    <p id="hero-p"></p>
+  </div>
+  <div class="stats" id="stats"></div>
+
+  <section id="chapters">
+    <h3 class="sec-h">A life in three chapters</h3>
+    <p class="sec-d">Monthly scrobbles across the whole span, in Pacific time. The two dashed lines are the turning points you lived — the 2014 move and the 2020 return — and the shaded gap in 2023 is where the scrobbler went dark, not where the music did.</p>
+    <div class="card"><div id="chart-timeline"></div></div>
+    <div class="cards" id="chap-cards"></div>
+  </section>
+
+  <section id="artists">
+    <h3 class="sec-h">The pillars</h3>
+    <p class="sec-d">Your most-scrobbled artists across all twenty-one years, now with the genre and origin the enrichment recovered.</p>
+    <div class="card"><div id="chart-artists"></div></div>
+  </section>
+
+  <section id="genres">
+    <h3 class="sec-h">The sound</h3>
+    <p class="sec-d">Your listening by primary genre — each artist counted once, under their defining tag, weighted by how much you played them.</p>
+    <div class="card"><div id="chart-genres"></div></div>
+  </section>
+
+  <section id="geography">
+    <h3 class="sec-h">Where it comes from</h3>
+    <p class="sec-d">Scrobbles by the artist's country of origin. American-rooted, but with a deep European seam — the French and Italian showing is your library-music and yé-yé era.</p>
+    <div class="card"><div id="chart-geo"></div></div>
+  </section>
+
+  <section id="nostalgia">
+    <h3 class="sec-h">Old souls</h3>
+    <p class="sec-d">When your artists were born or formed. You listen backward as much as forward — the peak is the mid-century, not the present day.</p>
+    <div class="card"><div id="chart-decades"></div>
+      <div class="note" id="nost-note"></div>
+    </div>
+  </section>
+
+  <section id="eras">
+    <h3 class="sec-h">Your eras</h3>
+    <p class="sec-d">The three artists that ruled each year — a diary of obsessions, read top to bottom.</p>
+    <div class="card"><div class="eras" id="eras-list"></div>
+      <div class="legend"><span><i style="background:var(--s1)"></i>#1</span><span><i style="background:var(--s2)"></i>#2</span><span><i style="background:var(--s3)"></i>#3</span></div>
+    </div>
+  </section>
+
+  <section id="binges">
+    <h3 class="sec-h">Obsessions</h3>
+    <p class="sec-d">The most intense single weeks — one artist over seven days, spread across real days of listening (import artifacts excluded).</p>
+    <div class="binges" id="binges-list"></div>
+  </section>
+
+  <section id="rhythm">
+    <h3 class="sec-h">Rhythm</h3>
+    <p class="sec-d">When you listen, in your own Pacific time — an evening person with a long day-plateau, sharpened by the always-on years.</p>
+    <div class="grid2">
+      <div class="card"><div class="glabel" style="margin-bottom:8px">By hour of day</div><div id="chart-hour"></div></div>
+      <div class="card"><div class="glabel" style="margin-bottom:8px">By day of week</div><div id="chart-dow"></div></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <div class="hm-head"><div class="glabel">Week &times; hour — total plays per slot (Pacific)</div>
+        <div class="hm-legend"><span>Fewer</span><i style="background:var(--seq0)"></i><i style="background:var(--seq1)"></i><i style="background:var(--seq2)"></i><i style="background:var(--seq3)"></i><i style="background:var(--seq4)"></i><i style="background:var(--seq5)"></i><i style="background:var(--seq6)"></i><span>More</span></div>
+      </div>
+      <div class="hm-wrap"><div id="chart-heat"></div></div>
+    </div>
+  </section>
+
+  <section id="discovery">
+    <h3 class="sec-h">Discovery</h3>
+    <p class="sec-d">New artists entering your world each year — the first time you ever scrobbled them. The pandemic reopened the floodgates.</p>
+    <div class="card"><div id="chart-disc"></div></div>
+  </section>
+
+  <section id="loyalty">
+    <h3 class="sec-h">The long haul</h3>
+    <p class="sec-d">Artists you kept returning to across the most calendar years — the ones that survived every chapter.</p>
+    <div class="card"><div id="chart-loyal"></div></div>
+  </section>
+
+  <section id="devotion">
+    <h3 class="sec-h">Devotion vs. curiosity</h3>
+    <p class="sec-d" id="dev-d"></p>
+    <div class="card"><div id="buckets"></div></div>
+  </section>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+const DATA={"meta": {"total": 557878, "artists": 12740, "tracks": 57542, "start": "2005-02-13", "end": "2026-07-28", "coverage": 94.2, "imports": 14126}, "monthly": [{"m": "2005-02", "n": 776}, {"m": "2005-03", "n": 3000}, {"m": "2005-04", "n": 1751}, {"m": "2005-05", "n": 2967}, {"m": "2005-06", "n": 2644}, {"m": "2005-07", "n": 3310}, {"m": "2005-08", "n": 2671}, {"m": "2005-09", "n": 765}, {"m": "2005-10", "n": 1330}, {"m": "2005-11", "n": 734}, {"m": "2005-12", "n": 618}, {"m": "2006-01", "n": 705}, {"m": "2006-02", "n": 1103}, {"m": "2006-03", "n": 588}, {"m": "2006-04", "n": 1209}, {"m": "2006-05", "n": 1195}, {"m": "2006-06", "n": 1060}, {"m": "2006-07", "n": 811}, {"m": "2006-08", "n": 830}, {"m": "2006-09", "n": 168}, {"m": "2006-10", "n": 75}, {"m": "2006-11", "n": 11}, {"m": "2006-12", "n": 626}, {"m": "2007-01", "n": 2355}, {"m": "2007-02", "n": 1261}, {"m": "2007-03", "n": 690}, {"m": "2007-04", "n": 1400}, {"m": "2007-05", "n": 1828}, {"m": "2007-06", "n": 983}, {"m": "2007-07", "n": 730}, {"m": "2007-08", "n": 240}, {"m": "2007-09", "n": 793}, {"m": "2007-10", "n": 736}, {"m": "2007-11", "n": 223}, {"m": "2007-12", "n": 1762}, {"m": "2008-01", "n": 733}, {"m": "2008-02", "n": 1134}, {"m": "2008-03", "n": 1389}, {"m": "2008-04", "n": 1128}, {"m": "2008-05", "n": 3615}, {"m": "2008-06", "n": 1097}, {"m": "2008-07", "n": 1610}, {"m": "2008-08", "n": 1246}, {"m": "2008-09", "n": 589}, {"m": "2008-10", "n": 593}, {"m": "2008-11", "n": 4925}, {"m": "2008-12", "n": 402}, {"m": "2009-01", "n": 515}, {"m": "2009-02", "n": 4515}, {"m": "2009-03", "n": 2149}, {"m": "2009-04", "n": 4329}, {"m": "2009-05", "n": 234}, {"m": "2009-06", "n": 155}, {"m": "2009-07", "n": 1122}, {"m": "2009-08", "n": 812}, {"m": "2009-09", "n": 2312}, {"m": "2009-10", "n": 1648}, {"m": "2009-11", "n": 387}, {"m": "2009-12", "n": 541}, {"m": "2010-01", "n": 1260}, {"m": "2010-02", "n": 999}, {"m": "2010-03", "n": 89}, {"m": "2010-04", "n": 532}, {"m": "2010-05", "n": 1667}, {"m": "2010-06", "n": 3059}, {"m": "2010-07", "n": 3942}, {"m": "2010-08", "n": 2530}, {"m": "2010-09", "n": 2432}, {"m": "2010-10", "n": 2706}, {"m": "2010-11", "n": 3458}, {"m": "2010-12", "n": 3218}, {"m": "2011-01", "n": 3571}, {"m": "2011-02", "n": 2468}, {"m": "2011-03", "n": 2870}, {"m": "2011-04", "n": 2436}, {"m": "2011-05", "n": 1357}, {"m": "2011-06", "n": 1194}, {"m": "2011-07", "n": 386}, {"m": "2011-08", "n": 182}, {"m": "2011-09", "n": 680}, {"m": "2011-10", "n": 1996}, {"m": "2011-11", "n": 989}, {"m": "2011-12", "n": 2045}, {"m": "2012-01", "n": 1562}, {"m": "2012-02", "n": 744}, {"m": "2012-03", "n": 974}, {"m": "2012-04", "n": 861}, {"m": "2012-05", "n": 979}, {"m": "2012-06", "n": 1571}, {"m": "2012-07", "n": 750}, {"m": "2012-08", "n": 2176}, {"m": "2012-09", "n": 2447}, {"m": "2012-10", "n": 2304}, {"m": "2012-11", "n": 1899}, {"m": "2012-12", "n": 3074}, {"m": "2013-01", "n": 2140}, {"m": "2013-02", "n": 2361}, {"m": "2013-03", "n": 2296}, {"m": "2013-04", "n": 624}, {"m": "2013-05", "n": 2411}, {"m": "2013-06", "n": 2012}, {"m": "2013-07", "n": 2236}, {"m": "2013-08", "n": 2500}, {"m": "2013-09", "n": 2058}, {"m": "2013-10", "n": 2370}, {"m": "2013-11", "n": 1575}, {"m": "2013-12", "n": 175}, {"m": "2014-01", "n": 1433}, {"m": "2014-02", "n": 265}, {"m": "2014-03", "n": 258}, {"m": "2014-04", "n": 166}, {"m": "2014-05", "n": 148}, {"m": "2014-06", "n": 235}, {"m": "2014-07", "n": 125}, {"m": "2014-08", "n": 141}, {"m": "2014-09", "n": 2}, {"m": "2014-10", "n": 13}, {"m": "2014-11", "n": 7}, {"m": "2014-12", "n": 147}, {"m": "2015-01", "n": 42}, {"m": "2015-02", "n": 2}, {"m": "2015-03", "n": 194}, {"m": "2015-04", "n": 0}, {"m": "2015-05", "n": 0}, {"m": "2015-06", "n": 0}, {"m": "2015-07", "n": 0}, {"m": "2015-08", "n": 7}, {"m": "2015-09", "n": 565}, {"m": "2015-10", "n": 333}, {"m": "2015-11", "n": 1361}, {"m": "2015-12", "n": 740}, {"m": "2016-01", "n": 201}, {"m": "2016-02", "n": 668}, {"m": "2016-03", "n": 619}, {"m": "2016-04", "n": 259}, {"m": "2016-05", "n": 411}, {"m": "2016-06", "n": 381}, {"m": "2016-07", "n": 162}, {"m": "2016-08", "n": 200}, {"m": "2016-09", "n": 486}, {"m": "2016-10", "n": 150}, {"m": "2016-11", "n": 170}, {"m": "2016-12", "n": 260}, {"m": "2017-01", "n": 561}, {"m": "2017-02", "n": 458}, {"m": "2017-03", "n": 247}, {"m": "2017-04", "n": 147}, {"m": "2017-05", "n": 499}, {"m": "2017-06", "n": 159}, {"m": "2017-07", "n": 103}, {"m": "2017-08", "n": 63}, {"m": "2017-09", "n": 112}, {"m": "2017-10", "n": 142}, {"m": "2017-11", "n": 37}, {"m": "2017-12", "n": 267}, {"m": "2018-01", "n": 108}, {"m": "2018-02", "n": 241}, {"m": "2018-03", "n": 20}, {"m": "2018-04", "n": 40}, {"m": "2018-05", "n": 89}, {"m": "2018-06", "n": 10}, {"m": "2018-07", "n": 134}, {"m": "2018-08", "n": 506}, {"m": "2018-09", "n": 1003}, {"m": "2018-10", "n": 685}, {"m": "2018-11", "n": 569}, {"m": "2018-12", "n": 159}, {"m": "2019-01", "n": 322}, {"m": "2019-02", "n": 521}, {"m": "2019-03", "n": 649}, {"m": "2019-04", "n": 330}, {"m": "2019-05", "n": 536}, {"m": "2019-06", "n": 986}, {"m": "2019-07", "n": 1290}, {"m": "2019-08", "n": 2656}, {"m": "2019-09", "n": 290}, {"m": "2019-10", "n": 397}, {"m": "2019-11", "n": 2063}, {"m": "2019-12", "n": 1210}, {"m": "2020-01", "n": 1464}, {"m": "2020-02", "n": 1413}, {"m": "2020-03", "n": 1933}, {"m": "2020-04", "n": 4528}, {"m": "2020-05", "n": 4998}, {"m": "2020-06", "n": 0}, {"m": "2020-07", "n": 2618}, {"m": "2020-08", "n": 6317}, {"m": "2020-09", "n": 4378}, {"m": "2020-10", "n": 7814}, {"m": "2020-11", "n": 8746}, {"m": "2020-12", "n": 10906}, {"m": "2021-01", "n": 13141}, {"m": "2021-02", "n": 10442}, {"m": "2021-03", "n": 11301}, {"m": "2021-04", "n": 11713}, {"m": "2021-05", "n": 10905}, {"m": "2021-06", "n": 9102}, {"m": "2021-07", "n": 9948}, {"m": "2021-08", "n": 9900}, {"m": "2021-09", "n": 9348}, {"m": "2021-10", "n": 9394}, {"m": "2021-11", "n": 7638}, {"m": "2021-12", "n": 10126}, {"m": "2022-01", "n": 9289}, {"m": "2022-02", "n": 9046}, {"m": "2022-03", "n": 9406}, {"m": "2022-04", "n": 8253}, {"m": "2022-05", "n": 8864}, {"m": "2022-06", "n": 12117}, {"m": "2022-07", "n": 9079}, {"m": "2022-08", "n": 9266}, {"m": "2022-09", "n": 8724}, {"m": "2022-10", "n": 9470}, {"m": "2022-11", "n": 3939}, {"m": "2022-12", "n": 3007}, {"m": "2023-01", "n": 7687}, {"m": "2023-02", "n": 9897}, {"m": "2023-03", "n": 13595}, {"m": "2023-04", "n": 10688}, {"m": "2023-05", "n": 0}, {"m": "2023-06", "n": 0}, {"m": "2023-07", "n": 0}, {"m": "2023-08", "n": 0}, {"m": "2023-09", "n": 0}, {"m": "2023-10", "n": 0}, {"m": "2023-11", "n": 0}, {"m": "2023-12", "n": 266}, {"m": "2024-01", "n": 1193}, {"m": "2024-02", "n": 1217}, {"m": "2024-03", "n": 1778}, {"m": "2024-04", "n": 1989}, {"m": "2024-05", "n": 1980}, {"m": "2024-06", "n": 2815}, {"m": "2024-07", "n": 2195}, {"m": "2024-08", "n": 1699}, {"m": "2024-09", "n": 1465}, {"m": "2024-10", "n": 1867}, {"m": "2024-11", "n": 1665}, {"m": "2024-12", "n": 339}, {"m": "2025-01", "n": 1336}, {"m": "2025-02", "n": 1505}, {"m": "2025-03", "n": 1942}, {"m": "2025-04", "n": 1241}, {"m": "2025-05", "n": 1402}, {"m": "2025-06", "n": 889}, {"m": "2025-07", "n": 328}, {"m": "2025-08", "n": 483}, {"m": "2025-09", "n": 601}, {"m": "2025-10", "n": 762}, {"m": "2025-11", "n": 934}, {"m": "2025-12", "n": 727}, {"m": "2026-01", "n": 1711}, {"m": "2026-02", "n": 1157}, {"m": "2026-03", "n": 1684}, {"m": "2026-04", "n": 1831}, {"m": "2026-05", "n": 1191}, {"m": "2026-06", "n": 1321}, {"m": "2026-07", "n": 912}], "events": [{"m": "2014-09", "label": "Moved to LA \u00b7 left the station", "sub": "Sept 2014"}, {"m": "2020-03", "label": "Spotify Pro \u00b7 music always on", "sub": "Mar 2020"}], "gap": {"start": "2023-05", "end": "2023-11", "label": "Scrobbler offline \u2014 no data"}, "chapters": [{"key": "radio", "name": "The Radio Years", "start": "2005-02", "end": "2014-08", "desc": "College-radio DJ, following the signal down into lo-fi DIY.", "scrobbles": 170064, "active_months": 115, "per_month": 1479, "active_days": 2569, "top_artist": "Guided by Voices", "top_artist_n": 3873, "top_genres": ["indie rock", "hip hop", "psychedelic rock", "rock"], "top_country": "US"}, {"key": "quiet", "name": "The Quiet", "start": "2014-09", "end": "2020-02", "desc": "Moved San Diego \u2192 LA. Listening falls away; old favorites too loaded to play.", "scrobbles": 27866, "active_months": 62, "per_month": 449, "active_days": 807, "top_artist": "Jacques Dutronc", "top_artist_n": 813, "top_genres": ["rock", "pop", "psychedelic rock", "psychedelic pop"], "top_country": "US"}, {"key": "alwayson", "name": "Always On", "start": "2020-03", "end": "2026-07", "desc": "A gifted Spotify Pro account. Music comes back \u2014 and never stops.", "scrobbles": 359948, "active_months": 69, "per_month": 5217, "active_days": 1847, "top_artist": "Piero Umiliani", "top_artist_n": 6695, "top_genres": ["jazz", "rock", "pop", "psychedelic rock"], "top_country": "US"}], "per_year": [{"year": 2005, "n": 20566}, {"year": 2006, "n": 8381}, {"year": 2007, "n": 13001}, {"year": 2008, "n": 18461}, {"year": 2009, "n": 18719}, {"year": 2010, "n": 25892}, {"year": 2011, "n": 20174}, {"year": 2012, "n": 19341}, {"year": 2013, "n": 22758}, {"year": 2014, "n": 2940}, {"year": 2015, "n": 3244}, {"year": 2016, "n": 3967}, {"year": 2017, "n": 2795}, {"year": 2018, "n": 3564}, {"year": 2019, "n": 11250}, {"year": 2020, "n": 55115}, {"year": 2021, "n": 122958}, {"year": 2022, "n": 100460}, {"year": 2023, "n": 42133}, {"year": 2024, "n": 20202}, {"year": 2025, "n": 12150}, {"year": 2026, "n": 9807}], "top_artists": [{"artist": "Piero Umiliani", "n": 6696, "genre": "jazz", "country": "IT"}, {"artist": "Guided by Voices", "n": 4919, "genre": "indie rock", "country": "US"}, {"artist": "Kevin Ayers", "n": 3767, "genre": "canterbury scene", "country": "GB"}, {"artist": "Alessandro Alessandroni", "n": 3524, "genre": "lounge", "country": "IT"}, {"artist": "Jacques Dutronc", "n": 3326, "genre": "singer-songwriter", "country": "FR"}, {"artist": "John Cale", "n": 3197, "genre": "art rock", "country": null}, {"artist": "Gillian Hills", "n": 3135, "genre": null, "country": "GB"}, {"artist": "The Klubs", "n": 3105, "genre": null, "country": null}, {"artist": "The Cleaners From Venus", "n": 2810, "genre": null, "country": null}, {"artist": "Margo Guryan", "n": 2786, "genre": "psychedelic pop", "country": "US"}, {"artist": "Jacqueline Taieb", "n": 2609, "genre": "pop", "country": "FR"}, {"artist": "Research 1-6-12", "n": 2316, "genre": "psychedelic rock", "country": "US"}, {"artist": "Elmer Gantry's Velvet Opera", "n": 2312, "genre": "psychedelic rock", "country": "GB"}, {"artist": "Donnie & Joe Emerson", "n": 2022, "genre": null, "country": "US"}, {"artist": "Giuliano Sorgini", "n": 1954, "genre": null, "country": "IT"}, {"artist": "I Marc 4", "n": 1945, "genre": null, "country": "IT"}, {"artist": "Emitt Rhodes", "n": 1826, "genre": "singer-songwriter", "country": "US"}, {"artist": "Brigitte Bardot", "n": 1795, "genre": "pop", "country": "FR"}, {"artist": "Ana Mazzotti", "n": 1786, "genre": null, "country": "BR"}, {"artist": "Frank Zappa", "n": 1783, "genre": "progressive rock", "country": "US"}, {"artist": "Lil B", "n": 1707, "genre": "hip hop", "country": "US"}, {"artist": "Captain Beefheart & His Magic Band", "n": 1667, "genre": "psychedelic rock", "country": "US"}, {"artist": "Ronald Langestraat", "n": 1664, "genre": null, "country": "NL"}, {"artist": "Robert Lester Folsom", "n": 1663, "genre": null, "country": "US"}, {"artist": "Filmmaker", "n": 1662, "genre": "post-punk", "country": "CO"}], "eras": [{"year": 2005, "top": [{"artist": "Xiu Xiu", "n": 599}, {"artist": "Clap Your Hands Say Yeah!", "n": 591}, {"artist": "Joy Division", "n": 541}]}, {"year": 2006, "top": [{"artist": "Guided by Voices", "n": 469}, {"artist": "Quasimoto", "n": 317}, {"artist": "The Microphones", "n": 271}]}, {"year": 2007, "top": [{"artist": "Modest Mouse", "n": 373}, {"artist": "Guided by Voices", "n": 314}, {"artist": "Berserk", "n": 309}]}, {"year": 2008, "top": [{"artist": "The Klubs", "n": 954}, {"artist": "Research 1-6-12", "n": 762}, {"artist": "Elmer Gantry's Velvet Opera", "n": 647}]}, {"year": 2009, "top": [{"artist": "The Klubs", "n": 1216}, {"artist": "Research 1-6-12", "n": 1052}, {"artist": "Elmer Gantry's Velvet Opera", "n": 918}]}, {"year": 2010, "top": [{"artist": "Guided by Voices", "n": 1291}, {"artist": "Salem", "n": 1079}, {"artist": "Last Sons of Krypton", "n": 765}]}, {"year": 2011, "top": [{"artist": "Iceage", "n": 1075}, {"artist": "Guided by Voices", "n": 779}, {"artist": "Avon Ladies", "n": 628}]}, {"year": 2012, "top": [{"artist": "Dawn of Humans", "n": 894}, {"artist": "Bits of Shit", "n": 477}, {"artist": "Kitchen's Floor", "n": 465}]}, {"year": 2013, "top": [{"artist": "Heavy Times", "n": 681}, {"artist": "Satanic Rockers", "n": 672}, {"artist": "Kitchen's Floor", "n": 650}]}, {"year": 2014, "top": [{"artist": "Lil B 'The BasedGod'", "n": 396}, {"artist": "Buck Biloxi and the Fucks", "n": 130}, {"artist": "Blank Realm", "n": 110}]}, {"year": 2015, "top": [{"artist": "The Klubs", "n": 362}, {"artist": "Elmer Gantry's Velvet Opera", "n": 342}, {"artist": "Royal Headache", "n": 273}]}, {"year": 2016, "top": [{"artist": "Ween", "n": 143}, {"artist": "Royal Headache", "n": 136}, {"artist": "Country Teasers", "n": 100}]}, {"year": 2017, "top": [{"artist": "Winterk\u00e4lte", "n": 96}, {"artist": "Ink & Dagger", "n": 92}, {"artist": "Ultra Chicks", "n": 91}]}, {"year": 2018, "top": [{"artist": "Jacques Dutronc", "n": 124}, {"artist": "Jacqueline Taieb", "n": 116}, {"artist": "Guided by Voices", "n": 103}]}, {"year": 2019, "top": [{"artist": "Jacques Dutronc", "n": 544}, {"artist": "Jacqueline Taieb", "n": 471}, {"artist": "Gillian Hills", "n": 402}]}, {"year": 2020, "top": [{"artist": "Filmmaker", "n": 933}, {"artist": "Cymande", "n": 832}, {"artist": "Gillian Hills", "n": 823}]}, {"year": 2021, "top": [{"artist": "Kevin Ayers", "n": 2610}, {"artist": "John Cale", "n": 2127}, {"artist": "The Cleaners From Venus", "n": 1561}]}, {"year": 2022, "top": [{"artist": "Kevin Ayers", "n": 1050}, {"artist": "Dwight Sykes", "n": 1004}, {"artist": "Cloud One", "n": 982}]}, {"year": 2023, "top": [{"artist": "Piero Umiliani", "n": 6335}, {"artist": "Alessandro Alessandroni", "n": 3401}, {"artist": "I Marc 4", "n": 1776}]}, {"year": 2024, "top": [{"artist": "Modest Mouse", "n": 286}, {"artist": "Lil B", "n": 244}, {"artist": "Locked Club", "n": 232}]}, {"year": 2025, "top": [{"artist": "Playboi Carti", "n": 684}, {"artist": "DJ Sabrina The Teenage DJ", "n": 574}, {"artist": "Locked Club", "n": 442}]}, {"year": 2026, "top": [{"artist": "Ronald Langestraat", "n": 188}, {"artist": "Arthur Russell", "n": 161}, {"artist": "Dwight Sykes", "n": 140}]}], "discovery": [{"year": 2005, "n": 859}, {"year": 2006, "n": 156}, {"year": 2007, "n": 158}, {"year": 2008, "n": 479}, {"year": 2009, "n": 369}, {"year": 2010, "n": 556}, {"year": 2011, "n": 677}, {"year": 2012, "n": 502}, {"year": 2013, "n": 176}, {"year": 2014, "n": 118}, {"year": 2015, "n": 62}, {"year": 2016, "n": 167}, {"year": 2017, "n": 194}, {"year": 2018, "n": 134}, {"year": 2019, "n": 239}, {"year": 2020, "n": 1610}, {"year": 2021, "n": 810}, {"year": 2022, "n": 1507}, {"year": 2023, "n": 104}, {"year": 2024, "n": 1774}, {"year": 2025, "n": 1122}, {"year": 2026, "n": 967}], "by_hour": [{"hour": 0, "n": 24585}, {"hour": 1, "n": 24242}, {"hour": 2, "n": 22900}, {"hour": 3, "n": 20974}, {"hour": 4, "n": 18367}, {"hour": 5, "n": 15536}, {"hour": 6, "n": 13992}, {"hour": 7, "n": 13830}, {"hour": 8, "n": 15895}, {"hour": 9, "n": 19045}, {"hour": 10, "n": 21467}, {"hour": 11, "n": 22664}, {"hour": 12, "n": 24516}, {"hour": 13, "n": 25936}, {"hour": 14, "n": 27706}, {"hour": 15, "n": 26386}, {"hour": 16, "n": 27927}, {"hour": 17, "n": 25854}, {"hour": 18, "n": 24761}, {"hour": 19, "n": 23894}, {"hour": 20, "n": 25181}, {"hour": 21, "n": 26355}, {"hour": 22, "n": 26701}, {"hour": 23, "n": 25038}], "by_dow": [{"dow": "Mon", "n": 79874}, {"dow": "Tue", "n": 79317}, {"dow": "Wed", "n": 79116}, {"dow": "Thu", "n": 77964}, {"dow": "Fri", "n": 77206}, {"dow": "Sat", "n": 78804}, {"dow": "Sun", "n": 71471}], "heatmap": {"dow": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], "grid": [[3711, 3395, 3327, 3173, 2943, 2494, 2105, 2096, 2299, 2810, 3069, 3277, 3572, 3505, 4032, 4016, 4228, 3843, 3594, 3539, 3743, 3709, 3880, 3514], [3537, 3273, 3236, 3011, 2527, 2108, 2021, 2014, 2365, 2973, 3551, 3485, 3769, 3896, 4083, 3776, 4275, 3681, 3549, 3517, 3676, 3752, 3939, 3303], [3432, 3527, 3325, 2864, 2418, 2063, 1873, 1891, 2299, 2771, 3446, 3903, 3942, 3989, 4219, 3801, 4045, 3446, 3612, 3475, 3571, 3890, 3779, 3535], [3478, 3734, 3335, 3050, 2668, 2030, 1804, 1832, 2454, 3091, 3343, 3233, 3521, 3870, 4282, 3763, 3936, 3744, 3378, 3195, 3497, 3779, 3649, 3298], [3246, 3244, 3109, 2954, 2769, 2439, 2095, 2129, 2472, 2874, 3277, 3319, 3628, 3810, 3716, 3799, 3913, 3776, 3372, 2888, 3209, 3418, 3744, 4006], [3721, 3632, 3519, 3212, 2636, 2320, 2108, 2024, 2067, 2291, 2798, 3142, 3523, 3962, 4150, 4216, 4079, 3554, 3600, 3530, 3784, 3647, 3640, 3649], [3460, 3437, 3049, 2710, 2406, 2082, 1986, 1844, 1939, 2235, 1983, 2305, 2561, 2904, 3224, 3015, 3451, 3810, 3656, 3750, 3701, 4160, 4070, 3733]]}, "binges": [{"label": "Iceage", "n": 679, "start": "2011-01-23", "end": "2011-01-30", "days": 8}, {"label": "Piero Umiliani", "n": 566, "start": "2023-02-25", "end": "2023-03-04", "days": 8}, {"label": "Guided by Voices", "n": 547, "start": "2010-10-29", "end": "2010-11-05", "days": 6}, {"label": "Salem", "n": 504, "start": "2010-06-23", "end": "2010-06-30", "days": 8}, {"label": "The Zeros", "n": 479, "start": "2010-12-29", "end": "2011-01-05", "days": 6}, {"label": "Useless Eaters", "n": 469, "start": "2011-04-16", "end": "2011-04-21", "days": 4}, {"label": "Avon Ladies", "n": 452, "start": "2011-03-29", "end": "2011-04-04", "days": 6}, {"label": "Fucked Up", "n": 452, "start": "2010-08-03", "end": "2010-08-08", "days": 6}, {"label": "The Nerves", "n": 399, "start": "2010-11-03", "end": "2010-11-09", "days": 6}, {"label": "Sad Boys", "n": 374, "start": "2013-02-04", "end": "2013-02-11", "days": 7}, {"label": "The Spits", "n": 374, "start": "2011-10-27", "end": "2011-11-02", "days": 7}, {"label": "Dawn of Humans", "n": 365, "start": "2012-06-22", "end": "2012-06-29", "days": 5}], "loyal": [{"artist": "Guided by Voices", "n": 4919, "years": 20}, {"artist": "Dead Moon", "n": 400, "years": 19}, {"artist": "Lou Reed", "n": 847, "years": 17}, {"artist": "Spacemen 3", "n": 518, "years": 17}, {"artist": "Psychic TV", "n": 366, "years": 17}, {"artist": "Suicide", "n": 1050, "years": 16}, {"artist": "Television Personalities", "n": 766, "years": 16}, {"artist": "13th Floor Elevators", "n": 368, "years": 16}, {"artist": "Arzachel", "n": 327, "years": 16}, {"artist": "The Spits", "n": 1362, "years": 15}, {"artist": "Joy Division", "n": 749, "years": 15}, {"artist": "Brainbombs", "n": 465, "years": 15}, {"artist": "Brian Eno", "n": 441, "years": 15}, {"artist": "Devo", "n": 410, "years": 15}], "buckets": [{"bucket": "Tried once", "n": 4106}, {"bucket": "2\u201319", "n": 5878}, {"bucket": "20\u201399", "n": 1675}, {"bucket": "100\u2013499", "n": 802}, {"bucket": "500\u20131999", "n": 265}, {"bucket": "2000+", "n": 14}], "genres": [{"genre": "jazz", "n": 25779}, {"genre": "rock", "n": 24257}, {"genre": "psychedelic rock", "n": 15016}, {"genre": "indie rock", "n": 13656}, {"genre": "pop", "n": 12313}, {"genre": "hip hop", "n": 10764}, {"genre": "post-punk", "n": 10172}, {"genre": "garage rock", "n": 9030}, {"genre": "punk rock", "n": 7760}, {"genre": "punk", "n": 7678}, {"genre": "psychedelic pop", "n": 7142}, {"genre": "electronic", "n": 6475}, {"genre": "soul", "n": 6185}, {"genre": "funk", "n": 6117}, {"genre": "singer-songwriter", "n": 5500}, {"genre": "alternative rock", "n": 4760}, {"genre": "art rock", "n": 4419}, {"genre": "folk", "n": 3881}], "countries": [{"code": "US", "name": "United States", "n": 228890}, {"code": "GB", "name": "United Kingdom", "n": 78101}, {"code": "FR", "name": "France", "n": 38968}, {"code": "IT", "name": "Italy", "n": 27573}, {"code": "CA", "name": "Canada", "n": 10063}, {"code": "AU", "name": "Australia", "n": 8888}, {"code": "DE", "name": "Germany", "n": 8029}, {"code": "JP", "name": "Japan", "n": 5706}, {"code": "BR", "name": "Brazil", "n": 4648}, {"code": "NL", "name": "Netherlands", "n": 3674}, {"code": "NG", "name": "Nigeria", "n": 2493}, {"code": "DK", "name": "Denmark", "n": 2398}, {"code": "SE", "name": "Sweden", "n": 2153}, {"code": "BE", "name": "Belgium", "n": 1977}, {"code": "CO", "name": "Colombia", "n": 1764}], "decades": [{"decade": 1910, "n": 4761}, {"decade": 1920, "n": 22246}, {"decade": 1930, "n": 29039}, {"decade": 1940, "n": 81330}, {"decade": 1950, "n": 25835}, {"decade": 1960, "n": 67151}, {"decade": 1970, "n": 43271}, {"decade": 1980, "n": 35243}, {"decade": 1990, "n": 30466}, {"decade": 2000, "n": 41538}, {"decade": 2010, "n": 12824}, {"decade": 2020, "n": 223}]};
+const $=id=>document.getElementById(id);
+const NS="http://www.w3.org/2000/svg";
+const fmt=n=>n.toLocaleString("en-US");
+const tip=$("tip");
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function showTip(h,ev){tip.innerHTML=h;tip.style.opacity=1;mv(ev);}
+function mv(ev){let x=ev.clientX+13,y=ev.clientY+13;if(x+240>innerWidth)x=ev.clientX-240;if(y+90>innerHeight)y=ev.clientY-70;tip.style.left=x+"px";tip.style.top=y+"px";}
+function bind(n,h){n.addEventListener("mousemove",e=>showTip(h,e));n.addEventListener("mouseleave",()=>tip.style.opacity=0);}
+const CHAPCOL={radio:"var(--blue)",quiet:"var(--quiet)",alwayson:"var(--return)"};
+const CFLAG={US:"🇺🇸",GB:"🇬🇧",FR:"🇫🇷",IT:"🇮🇹",CA:"🇨🇦",AU:"🇦🇺",DE:"🇩🇪",JP:"🇯🇵",BR:"🇧🇷",NL:"🇳🇱",NG:"🇳🇬",DK:"🇩🇰",SE:"🇸🇪",BE:"🇧🇪",CO:"🇨🇴",ES:"🇪🇸",JM:"🇯🇲",NZ:"🇳🇿",IE:"🇮🇪",NO:"🇳🇴",MX:"🇲🇽",AR:"🇦🇷"};
+
+// ===== header =====
+const m=DATA.meta;
+$("sub").textContent=`${m.start} → ${m.end} · ${fmt(m.total)} scrobbles · ${m.coverage}% enriched`;
+$("hero-p").innerHTML=`From February 2005 to July 2026 — <span class="lead">${fmt(m.total)} scrobbles</span>, <span class="lead">${fmt(m.artists)} artists</span>, <span class="lead">${fmt(m.tracks)} tracks</span>. Twenty-one years of a listening life: a decade down the underground, a hard quiet, and a pandemic-fueled return louder than anything before it. Genre and origin recovered for ${m.coverage}% of plays.`;
+[["Scrobbles",fmt(m.total)],["Artists",fmt(m.artists)],["Unique tracks",fmt(m.tracks)],["Years",21],["Enriched",m.coverage+"%"]]
+ .forEach(([l,v])=>{const d=document.createElement("div");d.className="stat";d.innerHTML=`<div class="v">${v}</div><div class="l">${l}</div>`;$("stats").appendChild(d);});
+
+// ===== timeline =====
+(function(){
+  const M=DATA.monthly, idx=Object.fromEntries(M.map((d,i)=>[d.m,i]));
+  const W=1000,H=340,padL=46,padR=14,padT=54,padB=34,plotW=W-padL-padR,plotH=H-padT-padB;
+  const max=Math.max(...M.map(d=>d.n)), xs=i=>padL+plotW*i/(M.length-1), ys=v=>padT+plotH*(1-v/max);
+  const svg=el("svg",{viewBox:`0 0 ${W} ${H}`});
+  DATA.chapters.forEach(c=>{const x0=xs(idx[c.start]),x1=xs(idx[c.end]);
+    svg.appendChild(el("rect",{x:x0,y:padT,width:Math.max(x1-x0,1),height:plotH,fill:CHAPCOL[c.key],opacity:c.key==="quiet"?.05:.07}));
+    const t=el("text",{x:(x0+x1)/2,y:padT-30,class:"chapLbl","text-anchor":"middle"});t.textContent=c.name;svg.appendChild(t);
+    svg.appendChild(el("line",{x1:x0+3,x2:x1-3,y1:padT-22,y2:padT-22,stroke:CHAPCOL[c.key],"stroke-width":2,opacity:.55}));});
+  // gap band
+  const g0=xs(idx[DATA.gap.start]),g1=xs(idx[DATA.gap.end]);
+  svg.appendChild(el("rect",{x:g0,y:padT,width:g1-g0,height:plotH,fill:"url(#hatch)",opacity:.9}));
+  const defs=el("defs",{});const pat=el("pattern",{id:"hatch",width:6,height:6,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"});
+  pat.appendChild(el("rect",{width:6,height:6,fill:"var(--surface-2)"}));pat.appendChild(el("line",{x1:0,y1:0,x2:0,y2:6,stroke:"var(--muted)","stroke-width":1,opacity:.5}));
+  defs.appendChild(pat);svg.insertBefore(defs,svg.firstChild);
+  const gl=el("text",{x:(g0+g1)/2,y:padT+plotH/2,class:"gapLbl","text-anchor":"middle"});gl.textContent="no data";svg.appendChild(gl);
+  for(let g=0;g<=4;g++){const y=padT+plotH*(1-g/4);svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:y,y2:y,class:"gline"}));
+    const tx=el("text",{x:padL-8,y:y+4,class:"axis","text-anchor":"end"});tx.textContent=fmt(Math.round(max*g/4));svg.appendChild(tx);}
+  const grad=el("linearGradient",{id:"tg",x1:0,y1:0,x2:0,y2:1});
+  grad.appendChild(el("stop",{offset:"0%","stop-color":"var(--blue)","stop-opacity":.5}));
+  grad.appendChild(el("stop",{offset:"100%","stop-color":"var(--blue)","stop-opacity":.03}));svg.appendChild(grad);
+  let d=`M ${xs(0)} ${ys(M[0].n)}`;M.forEach((p,i)=>{if(i)d+=` L ${xs(i)} ${ys(p.n)}`;});
+  svg.appendChild(el("path",{d:d+` L ${xs(M.length-1)} ${padT+plotH} L ${xs(0)} ${padT+plotH} Z`,fill:"url(#tg)"}));
+  svg.appendChild(el("path",{d,fill:"none",stroke:"var(--blue)","stroke-width":1.6}));
+  M.forEach((p,i)=>{if(p.m.endsWith("-01")){const t=el("text",{x:xs(i),y:padT+plotH+16,class:"axis","text-anchor":"middle"});t.textContent=p.m.slice(0,4);svg.appendChild(t);}});
+  svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:padT+plotH,y2:padT+plotH,class:"baseline"}));
+  DATA.events.forEach((e,k)=>{const x=xs(idx[e.m]),col=k===0?"var(--move)":"var(--return)";
+    svg.appendChild(el("line",{x1:x,x2:x,y1:padT,y2:padT+plotH,stroke:col,"stroke-width":2,"stroke-dasharray":"4 3"}));
+    svg.appendChild(el("circle",{cx:x,cy:padT,r:3.5,fill:col}));
+    const an=k===0?"end":"start",dx=k===0?-7:7;
+    const l1=el("text",{x:x+dx,y:padT+13,class:"evtLbl","text-anchor":an,fill:col});l1.textContent=e.label;svg.appendChild(l1);
+    const l2=el("text",{x:x+dx,y:padT+26,class:"evtSub","text-anchor":an,fill:"var(--muted)"});l2.textContent=e.sub;svg.appendChild(l2);});
+  M.forEach((p,i)=>{const hit=el("rect",{x:xs(i)-plotW/M.length/2,y:padT,width:plotW/M.length,height:plotH,fill:"transparent"});
+    bind(hit,`<div class="t-n">${p.m}</div><div class="t-s">${fmt(p.n)} scrobbles</div>`);svg.appendChild(hit);});
+  $("chart-timeline").appendChild(svg);
+})();
+
+// chapter cards
+DATA.chapters.forEach(c=>{const d=document.createElement("div");d.className="chap";d.style.setProperty("--c",CHAPCOL[c.key]);
+  const fm=x=>{const[y,mo]=x.split("-");return["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+mo-1]+" "+y;};
+  const tags=(c.top_genres||[]).slice(0,3).map(g=>`<span class="tag">${g}</span>`).join("");
+  d.innerHTML=`<div class="nm">${c.name}</div><div class="rng">${fm(c.start)} – ${fm(c.end)}</div>
+    <div class="ds">${c.desc}</div><div class="big">${fmt(c.scrobbles)} <span>scrobbles</span></div>
+    <div class="rate"><b>${fmt(c.per_month)}</b>/active month · ${fmt(c.active_days)} days</div>
+    <div class="tags">${tags}</div>
+    <div class="top">Most played: <b>${c.top_artist}</b> (${fmt(c.top_artist_n)})</div>`;
+  $("chap-cards").appendChild(d);});
+
+// ===== chart helpers =====
+function hbars(mount,rows,{label,val,sub,fmtVal=fmt,color="var(--seq4)"}){
+  const rowH=30,padR=54,labW=194,W=1000,h=rows.length*rowH+8,max=Math.max(...rows.map(val));
+  const svg=el("svg",{viewBox:`0 0 ${W} ${h}`}),trackX=labW+10,trackW=W-trackX-padR;
+  rows.forEach((r,i)=>{const v=val(r),y=i*rowH+5,bw=trackW*v/max;
+    const lab=el("text",{x:labW,y:y+rowH/2+4,class:"glabel","text-anchor":"end"});
+    let L=label(r);if(L.length>28)L=L.slice(0,27)+"…";lab.textContent=L;svg.appendChild(lab);
+    svg.appendChild(el("rect",{x:trackX,y:y+4,width:trackW,height:rowH-12,rx:5,fill:"var(--surface-2)"}));
+    const bar=el("rect",{x:trackX,y:y+4,width:Math.max(bw,2),height:rowH-12,rx:5,fill:color,class:"bar"});
+    bind(bar,`<div class="t-n">${label(r)}</div><div class="t-s">${fmtVal(v)}${sub?" · "+sub(r):""}</div>`);svg.appendChild(bar);
+    const vt=el("text",{x:trackX+bw+8,y:y+rowH/2+4,class:"gval"});vt.textContent=fmtVal(v);svg.appendChild(vt);});
+  mount.appendChild(svg);
+}
+function vbars(mount,rows,{label,val,h=250,color="var(--seq4)",tipFn}){
+  const W=1000,padL=44,padR=12,padT=14,padB=30,plotH=h-padT-padB,bw=(W-padL-padR)/rows.length,max=Math.max(...rows.map(val));
+  const svg=el("svg",{viewBox:`0 0 ${W} ${h}`});
+  for(let g=0;g<=4;g++){const y=padT+plotH*(1-g/4);svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:y,y2:y,class:"gline"}));
+    const tx=el("text",{x:padL-8,y:y+4,class:"axis","text-anchor":"end"});tx.textContent=fmt(Math.round(max*g/4));svg.appendChild(tx);}
+  rows.forEach((r,i)=>{const v=val(r),bh=plotH*v/max,x=padL+i*bw,y=padT+plotH-bh;
+    const bar=el("rect",{x:x+bw*.15,y,width:bw*.7,height:Math.max(bh,1),rx:4,fill:color,class:"bar"});
+    bind(bar,tipFn?tipFn(r):`<div class="t-n">${label(r)}</div><div class="t-s">${fmt(v)}</div>`);svg.appendChild(bar);
+    const lt=el("text",{x:x+bw/2,y:h-padB+16,class:"axis","text-anchor":"middle"});lt.textContent=label(r);svg.appendChild(lt);});
+  svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:padT+plotH,y2:padT+plotH,class:"baseline"}));mount.appendChild(svg);
+}
+function area(mount,rows,{xlab,val,h=230}){
+  const W=1000,padL=44,padR=12,padT=14,padB=28,plotH=h-padT-padB,plotW=W-padL-padR,max=Math.max(...rows.map(val));
+  const svg=el("svg",{viewBox:`0 0 ${W} ${h}`});
+  for(let g=0;g<=4;g++){const y=padT+plotH*(1-g/4);svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:y,y2:y,class:"gline"}));
+    const tx=el("text",{x:padL-8,y:y+4,class:"axis","text-anchor":"end"});tx.textContent=fmt(Math.round(max*g/4));svg.appendChild(tx);}
+  const xs=i=>padL+plotW*i/(rows.length-1),ys=v=>padT+plotH*(1-v/max);
+  let d=`M ${xs(0)} ${ys(val(rows[0]))}`;rows.forEach((r,i)=>{if(i)d+=` L ${xs(i)} ${ys(val(r))}`;});
+  const grad=el("linearGradient",{id:"ag",x1:0,y1:0,x2:0,y2:1});
+  grad.appendChild(el("stop",{offset:"0%","stop-color":"var(--seq4)","stop-opacity":.35}));
+  grad.appendChild(el("stop",{offset:"100%","stop-color":"var(--seq4)","stop-opacity":.02}));svg.appendChild(grad);
+  svg.appendChild(el("path",{d:d+` L ${xs(rows.length-1)} ${padT+plotH} L ${xs(0)} ${padT+plotH} Z`,fill:"url(#ag)"}));
+  svg.appendChild(el("path",{d,fill:"none",stroke:"var(--seq4)","stroke-width":2}));
+  rows.forEach((r,i)=>{const cx=xs(i);const hit=el("rect",{x:cx-plotW/rows.length/2,y:padT,width:plotW/rows.length,height:plotH,fill:"transparent"});
+    bind(hit,`<div class="t-n">${xlab(r,i)}</div><div class="t-s">${fmt(val(r))} scrobbles</div>`);svg.appendChild(hit);
+    if(i%3===0){const t=el("text",{x:cx,y:h-8,class:"axis","text-anchor":"middle"});t.textContent=xlab(r,i);svg.appendChild(t);}});
+  svg.appendChild(el("line",{x1:padL,x2:W-padR,y1:padT+plotH,y2:padT+plotH,class:"baseline"}));mount.appendChild(svg);
+}
+function heat(mount,grid,dow){
+  const cw=40,ch=34,padL=44,padT=20,W=padL+24*cw+10,Hh=padT+7*ch+8,max=Math.max(...grid.flat());
+  const seq=["--seq0","--seq1","--seq2","--seq3","--seq4","--seq5","--seq6"];
+  const svg=el("svg",{viewBox:`0 0 ${W} ${Hh}`,width:W});svg.setAttribute("style","min-width:"+W+"px");
+  for(let h=0;h<24;h+=3){const t=el("text",{x:padL+h*cw+cw/2,y:14,class:"axis","text-anchor":"middle"});t.textContent=h;svg.appendChild(t);}
+  grid.forEach((row,d)=>{const ty=el("text",{x:padL-8,y:padT+d*ch+ch/2+4,class:"axis","text-anchor":"end"});ty.textContent=dow[d];svg.appendChild(ty);
+    row.forEach((v,h)=>{const idx=Math.min(6,Math.floor(v/max*6.99)),col=v===0?"var(--surface-2)":`var(${seq[idx]})`;
+      const c=el("rect",{x:padL+h*cw+1.5,y:padT+d*ch+1.5,width:cw-3,height:ch-3,rx:4,fill:col,class:"cell"});
+      bind(c,`<div class="t-n">${dow[d]} ${h}:00</div><div class="t-s">${fmt(v)} scrobbles</div>`);svg.appendChild(c);});});
+  mount.appendChild(svg);
+}
+
+// ===== render =====
+hbars($("chart-artists"),DATA.top_artists.slice(0,16),{label:r=>r.artist,val:r=>r.n,
+  sub:r=>[r.genre,r.country].filter(Boolean).join(" · ")});
+hbars($("chart-genres"),DATA.genres,{label:r=>r.genre,val:r=>r.n});
+hbars($("chart-geo"),DATA.countries,{label:r=>(CFLAG[r.code]||"")+" "+r.name,val:r=>r.n});
+vbars($("chart-decades"),DATA.decades,{label:r=>r.decade+"s",val:r=>r.n,h:240,
+  tipFn:r=>`<div class="t-n">${r.decade}s</div><div class="t-s">${fmt(r.n)} scrobbles by artists born/formed then</div>`});
+const pk=DATA.decades.reduce((a,b)=>b.n>a.n?b:a);
+const modern=DATA.decades.filter(d=>d.decade>=2000).reduce((s,d)=>s+d.n,0);
+const midcent=DATA.decades.filter(d=>d.decade>=1940&&d.decade<=1979).reduce((s,d)=>s+d.n,0);
+$("nost-note").innerHTML=`<b>You listen backward.</b> The single biggest slice of your listening goes to artists who came up in the <b>${pk.decade}s</b>. Music by mid-century artists (1940s–70s) outweighs anything from the 2000s-on by roughly <b>${(midcent/Math.max(modern,1)).toFixed(1)}×</b> — a record collector's ear, not a chart-chaser's.`;
+
+// eras
+const c3=["var(--s1)","var(--s2)","var(--s3)"];
+DATA.eras.forEach(e=>{const row=document.createElement("div");row.className="era";
+  const chips=e.top.map((t,i)=>`<span class="chip"><i style="background:${c3[i]}"></i>${t.artist} <b>${fmt(t.n)}</b></span>`).join("");
+  row.innerHTML=`<div class="yr">${e.year}</div><div class="bars">${chips}</div>`;$("eras-list").appendChild(row);});
+
+// binges
+const mb=DATA.binges[0].n;
+DATA.binges.slice(0,9).forEach((b,i)=>{const d=document.createElement("div");d.className="binge";
+  d.innerHTML=`<div class="rank">#${i+1}</div><div class="name">${b.label}</div>
+    <div class="meta">${b.start} → ${b.end} · ${b.days} days</div>
+    <div class="n">${fmt(b.n)} <span>plays that week</span></div>
+    <div class="track"><i style="width:${Math.round(100*b.n/mb)}%"></i></div>`;$("binges-list").appendChild(d);});
+
+// rhythm
+area($("chart-hour"),DATA.by_hour,{xlab:r=>r.hour+"h",val:r=>r.n});
+vbars($("chart-dow"),DATA.by_dow,{label:r=>r.dow,val:r=>r.n,h:230});
+heat($("chart-heat"),DATA.heatmap.grid,DATA.heatmap.dow);
+
+// discovery
+vbars($("chart-disc"),DATA.discovery,{label:r=>String(r.year).slice(2),val:r=>r.n,h:230,color:"var(--s3)",
+  tipFn:r=>`<div class="t-n">${r.year}</div><div class="t-s">${fmt(r.n)} new artists</div>`});
+
+// loyalty
+hbars($("chart-loyal"),DATA.loyal,{label:r=>r.artist,val:r=>r.years,fmtVal:v=>v+" yrs",sub:r=>fmt(r.n)+" plays"});
+
+// devotion
+const bmax=Math.max(...DATA.buckets.map(b=>b.n));
+$("dev-d").innerHTML=`How many artists earned how many plays. <b style="color:var(--ink)">${fmt(DATA.buckets[0].n)}</b> you scrobbled exactly once — the vast tail of a lifelong crate-digger — while a devoted few crossed two thousand.`;
+const ramp=["--seq7","--seq6","--seq5","--seq4","--seq3","--seq1"];
+DATA.buckets.forEach((b,i)=>{const row=document.createElement("div");row.className="bucket-row";
+  row.innerHTML=`<div class="bl">${b.bucket}</div><div class="bt"><i style="width:${Math.max(2,100*b.n/bmax)}%;background:var(${ramp[i]})"></i></div><div class="bn">${fmt(b.n)}</div>`;
+  $("buckets").appendChild(row);});
+
+// footer
+$("foot").innerHTML=`<b>How this was built.</b> ${fmt(m.total)} Last.fm scrobbles, Feb 2005–Jul 2026. Timestamps converted from UTC to America/Los_Angeles. Artist genre, country, and era enriched via MusicBrainz + Last.fm for <b>${m.coverage}% of plays</b> (${fmt(m.artists)} artists; the unenriched remainder is a long tail of ≤20-play acts). <b>${fmt(m.imports)} scrobbles</b> in bulk-import bursts (15+/minute) excluded from rhythm & obsession charts. The <b>May–Nov 2023 gap</b> is a scrobbler outage, not silence — shown hatched and excluded from per-month rates. Genre = each artist's primary tag, counted once and weighted by plays. Generated ${new Date().toISOString().slice(0,10)}.`;
+
+const tg=$("toggle");
+tg.onclick=()=>{const d=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";
+  document.documentElement.setAttribute("data-theme",d);tg.textContent=d==="dark"?"☀ Light":"☾ Dark";};
+</script>
+</body>
+</html>
