@@ -1,7 +1,7 @@
 :root{
   --bg:#0e0e11; --surface:#16161b; --surface-2:#1d1d24;
   --text:#ececf0; --muted:#9a9aa6; --line:#2a2a33;
-  --accent:#ec4d97; --accent-soft:rgba(236,77,151,.14);
+  --accent:#a892d6; --accent-soft:rgba(168,146,214,.16);
   --radius:14px; --maxw:1080px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -39,7 +39,7 @@ h1.big{font-size:clamp(2.5rem,6vw,4rem);margin-bottom:22px}
 .lede strong{color:var(--text);font-weight:600}
 .cta-row{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:999px;font-weight:600;font-size:.95rem;font-family:inherit;transition:transform .12s,border-color .15s,color .15s;cursor:pointer}
-.btn-primary{background:var(--accent);color:#12060c}
+.btn-primary{background:var(--accent);color:#14101f}
 .btn-primary:hover{transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--line);color:var(--text);background:none}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
@@ -63,8 +63,8 @@ h1.big{font-size:clamp(2.5rem,6vw,4rem);margin-bottom:22px}
 .chip{border:1px solid var(--line);color:var(--muted);font-size:.78rem;padding:4px 12px;border-radius:999px}
 .card-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:22px}
 /* Primary "try it live" actions — filled accent pills */
-.btn-try{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#12060c;font-weight:600;font-size:.9rem;padding:10px 20px;border-radius:999px;transition:transform .12s,box-shadow .15s}
-.btn-try:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(236,77,151,.34)}
+.btn-try{display:inline-flex;align-items:center;gap:7px;background:var(--accent);color:#14101f;font-weight:600;font-size:.9rem;padding:10px 20px;border-radius:999px;transition:transform .12s,box-shadow .15s}
+.btn-try:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(168,146,214,.34)}
 .btn-try .arw{transition:transform .15s}
 .btn-try:hover .arw{transform:translateX(3px)}
 /* Secondary "view source" — quiet text link that stands apart from the buttons */
