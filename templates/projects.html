@@ -11,13 +11,15 @@
       <div class="card feature">
         <span class="tag">Featured · conference talk 2026</span>
         <h3>Enhancing MARC serials holdings with AI</h3>
-        <p>An exploratory project — and the subject of an upcoming conference presentation — applying AI to a stubborn cataloging problem: turning free-text serials holdings (human-written MARC <strong>866</strong> "textual holdings") into structured, machine-actionable <strong>853/863</strong> fields. I built and compared several approaches, from using LLMs to generate deterministic parsing and pattern-detection tools that non-programmer catalogers can run themselves, to making direct LLM API calls that perform the conversion outright — no regex or pymarc required. Delivered as a pair of Flask web tools: a converter (single statement or a whole MARC file) and a pattern detector that clusters a collection's holdings and builds a regex per pattern.</p>
+        <p>An exploratory project — and the subject of an upcoming conference presentation — applying AI to a stubborn cataloging problem: turning free-text serials holdings (human-written MARC <strong>866</strong> "textual holdings") into structured, machine-actionable <strong>853/863</strong> fields. I built and compared several approaches, from using LLMs to generate deterministic parsing and pattern-detection tools that non-programmer catalogers can run themselves, to making direct LLM API calls that perform the conversion outright — no regex or pymarc required. Delivered as a set of Flask web tools, now centered on a <strong>Holdings Workbench</strong> that detects a collection's recurring patterns, has a cataloger confirm what each captured value means, and writes the matching <strong>853/863</strong> fields in one pass — built on the standalone converter (single statement or a whole MARC file) and pattern detector it grew out of, both still available on their own.</p>
         <div class="stack"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">LLM APIs</span><span class="chip">pymarc</span><span class="chip">MARC 866 → 853/863</span></div>
         <div class="card-links">
-          <a class="btn-try" href="https://tools.matthewcodey.com/converter" target="_blank" rel="noopener">Try the converter <span class="arw">&rarr;</span></a>
-          <a class="btn-try" href="https://tools.matthewcodey.com/patterns" target="_blank" rel="noopener">Try the pattern detector <span class="arw">&rarr;</span></a>
+          <a class="btn-try" href="https://tools.matthewcodey.com/workbench" target="_blank" rel="noopener">Open the Holdings Workbench <span class="arw">&rarr;</span></a>
+          <a class="btn-try2" href="https://tools.matthewcodey.com/converter" target="_blank" rel="noopener">Converter</a>
+          <a class="btn-try2" href="https://tools.matthewcodey.com/patterns" target="_blank" rel="noopener">Pattern detector</a>
           <a class="src-link" href="https://github.com/bdmcodey/marc-serials-toolkit" target="_blank" rel="noopener">View source &rarr;</a>
         </div>
+        <p class="poc-note">A proof of concept, under active development — not a supported service.</p>
       </div>
 
       <div class="card">
