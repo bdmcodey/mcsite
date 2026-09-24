@@ -1,5 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block fulltitle %}Matthew Codey — Academic Librarian{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Matthew Codey",
+  "url": "https://matthewcodey.com/",
+  "description": "MLIS academic librarian working at the seam of library service and library systems.",
+  "worksFor": {"@type": "Organization", "name": "USC Libraries"},
+  "sameAs": [
+    "https://libraries.usc.edu/person/matthew-codey",
+    "https://github.com/bdmcodey"
+  ]
+}
+</script>
+{% endblock %}
 {% block content %}
 <section class="hero">
   <div class="wrap">

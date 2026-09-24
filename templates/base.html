@@ -19,13 +19,15 @@
   <meta property="og:title" content="Matthew Codey — Academic Librarian">
   <meta property="og:description" content="MLIS academic librarian working at the seam of library service and library systems.">
   <meta property="og:url" content="https://matthewcodey.com{{ request.path }}">
+  <link rel="canonical" href="https://matthewcodey.com{{ request.path }}">
   <meta property="og:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Matthew Codey — Academic Librarian">
   <meta name="twitter:description" content="MLIS academic librarian working at the seam of library service and library systems.">
   <meta name="twitter:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
 
-  <title>{% block title %}Home{% endblock %} · Matthew Codey</title>
+  <title>{% block fulltitle %}{% block title %}Home{% endblock %} · Matthew Codey{% endblock %}</title>
+  {% block head %}{% endblock %}
 </head>
 <body>
   <header class="nav">
