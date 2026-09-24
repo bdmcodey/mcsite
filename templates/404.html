@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Page not found{% endblock %}
+{% block canonical %}{% endblock %}
+{% block head %}<meta name="robots" content="noindex">{% endblock %}
+{% block content %}
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Error 404</div>
+    <h1 class="title">Page not found</h1>
+    <p class="section-intro">There's nothing at this address. The page may have moved when the site was redesigned, or the link may have a typo.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="{{ url_for('index') }}">Go to the homepage</a>
+      <a class="btn btn-ghost" href="{{ url_for('projects') }}">View Projects</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
