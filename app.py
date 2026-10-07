@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, Response
+from flask import Flask, render_template, send_from_directory, Response, redirect, url_for
  
 app = Flask(__name__)
  
@@ -21,6 +21,14 @@ def resume():
 @app.route('/contact/')
 def contact():
     return render_template('contact.html')
+ 
+ 
+# Pages from the pre-2026 site. Old links and search results still point here,
+# so send them to the homepage permanently instead of a 404.
+@app.route('/home/', strict_slashes=False)
+@app.route('/about/', strict_slashes=False)
+def old_pages():
+    return redirect(url_for('index'), code=301)
  
  
 # Unlisted: not linked from anywhere on the site. Served as a raw static file
