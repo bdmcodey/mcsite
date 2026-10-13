@@ -33,8 +33,12 @@ templates/          # Jinja2 templates
   projects.html     #   projects & systems work
   resume.html       #   résumé
   contact.html      #   contact
+  poster.html       #   companion page for the conference poster (unlisted draft)
+poster/             # builds the poster's figures and numbers (see poster/README.md)
 static/
-  css/main.css      # single stylesheet (theme driven by CSS variables)
+  css/main.css      # main stylesheet (theme driven by CSS variables)
+  css/poster.css    # extra styles for the poster page
+  poster/figures/   # generated SVG figures
   cv/               # downloadable CV (PDF)
   *.png             # favicon, apple-touch-icon, Open Graph image
 ```

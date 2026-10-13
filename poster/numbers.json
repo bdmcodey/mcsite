@@ -1,0 +1,82 @@
+{
+  "_comment": "Written by poster/build_figures.py. Do not edit by hand; re-run the script.",
+  "as_of_version": "0.35.0",
+  "releases": {
+    "count": 99,
+    "first": {
+      "version": "0.1.0",
+      "date": "2026-07-24"
+    },
+    "latest": {
+      "version": "0.35.0",
+      "date": "2026-10-12"
+    },
+    "by_month": {
+      "2026-07": 2,
+      "2026-08": 6,
+      "2026-09": 84,
+      "2026-10": 7
+    },
+    "milestones": [
+      {
+        "version": "0.1.0",
+        "date": "2026-07-24",
+        "label": "First working version"
+      },
+      {
+        "version": "0.11.0",
+        "date": "2026-09-16",
+        "label": "Three apps become one"
+      },
+      {
+        "version": "0.28.0",
+        "date": "2026-09-25",
+        "label": "Simulated Alma round trip"
+      }
+    ],
+    "source": "holdings-workbench marc_serials/shared/about.json, changelog"
+  },
+  "corpus": {
+    "before": {
+      "label": "1 September 2026",
+      "version": "0.6.0",
+      "statements": 112,
+      "clean": 67,
+      "warned": 3,
+      "lost": 36,
+      "none": 6,
+      "source": "holdings-workbench CORPUS-FINDINGS.md, headline table, 'at 0.6.0' column"
+    },
+    "now": {
+      "statements": 117,
+      "clean": 90,
+      "lost": 0,
+      "warned": 22,
+      "none": 5,
+      "label": "12 October 2026",
+      "version": "0.35.0",
+      "source": "holdings-workbench scripts/corpus_report.py, run by this script"
+    }
+  },
+  "statement": {
+    "866": "v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996)",
+    "853": "853 31 $8 1 $a v. $b no. $i (year) $j (month)",
+    "863": "863 40 $8 1.1 $a 27-31 $b 4-4 $i 1992-1996 $j 04-04",
+    "source": "holdings-workbench data/example_holdings.mrc (synthetic), converted by marc_serials.converter"
+  },
+  "real_export": {
+    "records": 372,
+    "statements": 1057,
+    "unaccounted": 0,
+    "alma_866s_reproduced": 48,
+    "alma_866s_checked": 48,
+    "round_trip": {
+      "same": 938,
+      "caption_only": 106,
+      "not_converted": 11,
+      "drift": 0
+    },
+    "round_trip_note": "A simulated round trip: Alma cannot be run from the Workbench, so marc_serials/display.py imitates the 866 Alma regenerates from 853/863. The imitation reproduces all 48 866s in the export that Alma itself built from hand-entered 863s.",
+    "source": "holdings-workbench CORPUS-FINDINGS.md: 'Round the loop with the ILS · 0.28.0', and the 0.29.0 and 0.30.0 sections (938 / 106 / 11 / 0 drift)"
+  }
+}

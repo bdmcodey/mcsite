@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}Automating MARC Holdings Generation with AI{% endblock %}
+{% set page_description = "Companion to the ALA Core Forum 2026 poster: turning free-text MARC 866 holdings into structured 853/863 fields, and what building the Holdings Workbench with an AI coding assistant taught along the way." %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/poster.css') }}">
+{% endblock %}
+{% set rel = n.releases %}
+{% set before = n.corpus.before %}
+{% set now = n.corpus.now %}
+{% set rx = n.real_export %}
+{% block content %}
+<div class="poster-page">
+
+<section class="poster-hero">
+  <div class="wrap">
+    <p class="draft-banner" role="note"><strong>Draft.</strong> Copy and layout are in progress; numbers are current as of Workbench {{ n.as_of_version }}.</p>
+    <div class="eyebrow">ALA Core Forum · 18–20 November 2026 · Poster</div>
+    <h1 class="big">Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
+    <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong> Matthew Codey</p>
+  </div>
+</section>
+
+<!-- Part 1 ------------------------------------------------------------- -->
+<section class="part" aria-labelledby="part1">
+  <div class="wrap">
+    <div class="kicker">Part 1</div>
+    <h2 class="part-title" id="part1">The problem, and the approaches I tried</h2>
+
+    <article class="panel">
+      <h3>The problem</h3>
+      <p>Libraries record what they hold of a serial in MARC. Much of it was typed as free text in the <strong>866</strong> field: readable by a person, opaque to a system. The structured alternative is a pair of fields: an <strong>853</strong> that names the levels (volume, issue, year, month) and an <strong>863</strong> that records the values held at each. Converting by hand is slow, and every library writes its 866s a little differently.</p>
+      <figure class="fig-frame">
+        {{ fig.statement }}
+        <figcaption>One statement from the Workbench's synthetic sample, and the fields its converter writes for it:
+          <code class="marc">{{ n.statement['853'] }}</code>
+          <code class="marc">{{ n.statement['863'] }}</code></figcaption>
+      </figure>
+    </article>
+
+    <div class="approaches">
+      <article class="panel">
+        <span class="tag">Approach</span>
+        <h3>Ask a model to convert</h3>
+        <p>Send each 866 statement to a large language model through its API and have it write the 853/863 directly: no parser, no regex.</p>
+        <p class="todo">To write: what this showed — accuracy, consistency between runs, cost, and what it means to send holdings to an outside service.</p>
+      </article>
+      <article class="panel">
+        <span class="tag">Approach</span>
+        <h3>Use AI to build a tool that converts</h3>
+        <p>Work with an AI coding assistant to write an ordinary program that does the conversion the same way every time, and that a cataloguer can check.</p>
+        <p class="todo">To write: why this was the one chosen. (Add any other approaches tried.)</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Part 2 ------------------------------------------------------------- -->
+<section class="part" aria-labelledby="part2">
+  <div class="wrap">
+    <div class="kicker">Part 2</div>
+    <h2 class="part-title" id="part2">The approach chosen: AI-assisted development of a deterministic tool</h2>
+
+    <article class="panel">
+      <h3>Built with an AI coding assistant; runs without one</h3>
+      <p>The result is the <strong>MARC Holdings Workbench</strong>, a Python application. It uses no AI when it runs: no model, no network calls, no API key, and nothing leaves the machine. The same file converts the same way every time. The AI was in how it was built: a librarian working with an AI coding assistant, release by release.</p>
+    </article>
+
+    <article class="panel">
+      <h3>How it was built</h3>
+      <p><strong>{{ rel.count }} released versions</strong> between 24 July and 12 October 2026, {{ rel.by_month['2026-09'] }} of them in September.</p>
+      <figure class="fig-frame">
+        <div class="fig-wide">{{ fig.releases_wide }}</div>
+        <div class="fig-tall">{{ fig.releases_tall }}</div>
+        <figcaption>Each dot is one release, stacked by day.</figcaption>
+      </figure>
+      <details class="data-view">
+        <summary>Releases as a table</summary>
+        <table>
+          <thead><tr><th scope="col">Month</th><th scope="col" class="num">Releases</th></tr></thead>
+          <tbody>
+          {% for month, count in rel.by_month.items() %}
+            <tr><td>{{ month }}</td><td class="num">{{ count }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        <table>
+          <thead><tr><th scope="col">Date</th><th scope="col">Version</th><th scope="col">Milestone</th></tr></thead>
+          <tbody>
+          {% for m in rel.milestones %}
+            <tr><td>{{ m.date }}</td><td>{{ m.version }}</td><td>{{ m.label }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </details>
+    </article>
+
+    <article class="panel">
+      <h3>The working rules</h3>
+      <p>Written down in the project's contributing guide "because most of them were arrived at by getting something wrong first":</p>
+      <ol class="rules">
+        <li><strong>Measure before you change.</strong> Count what actually happens on the corpus before writing a fix.</li>
+        <li><strong>Nothing disappears silently.</strong> Every value is encoded, dropped with a warning that names it, or held for review with nothing written.</li>
+        <li><strong>One reader of holdings.</strong> One parser reads every statement; a confirmed pattern supplies only what it cannot settle.</li>
+        <li><strong>If a fix needs the tests rewritten, stop.</strong> It is usually arguing with the design rather than fixing a bug.</li>
+        <li><strong>Write the changelog for cataloguers.</strong> Say what changed about the output or the screen, not how the code changed.</li>
+      </ol>
+    </article>
+
+    <article class="panel">
+      <h3>The turning point: silent losses</h3>
+      <p>A refusal is safe: nothing is written and the 866 stays. A <em>silent loss</em> is not: fields are written, the 866 is removed, and a volume or a month is gone with nothing on screen to say so. Measured on a corpus of real 866 statements, {{ before.lost }} of {{ before.statements }} lost values silently. Now none do; the ones that cannot be fully read say what they left out.</p>
+      <figure class="fig-frame">
+        {{ fig.silent_loss }}
+      </figure>
+      <details class="data-view">
+        <summary>Outcomes as a table</summary>
+        <table>
+          <thead><tr><th scope="col">Outcome</th><th scope="col" class="num">{{ before.label }} ({{ before.version }})</th><th scope="col" class="num">{{ now.label }} ({{ now.version }})</th></tr></thead>
+          <tbody>
+            <tr><td>Converted cleanly</td><td class="num">{{ before.clean }}</td><td class="num">{{ now.clean }}</td></tr>
+            <tr><td>Converted, said what it left out</td><td class="num">{{ before.warned }}</td><td class="num">{{ now.warned }}</td></tr>
+            <tr><td>Converted, losing values silently</td><td class="num">{{ before.lost }}</td><td class="num">{{ now.lost }}</td></tr>
+            <tr><td>Converted nothing (866 kept)</td><td class="num">{{ before.none }}</td><td class="num">{{ now.none }}</td></tr>
+            <tr><th scope="row">Statements</th><td class="num">{{ before.statements }}</td><td class="num">{{ now.statements }}</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </article>
+
+    <article class="panel">
+      <h3>On real data</h3>
+      <p>Tested on a real export of {{ rx.records }} records from Alma.</p>
+      <dl class="stats">
+        <div><dt>holdings statements</dt><dd>{{ '{:,}'.format(rx.statements) }}</dd></div>
+        <div><dt>values left unaccounted for</dt><dd>{{ rx.unaccounted }}</dd></div>
+        <div><dt>drift in a simulated Alma round trip</dt><dd>{{ rx.round_trip.drift }}</dd></div>
+        <div><dt>of Alma's own 866s reproduced by the simulation</dt><dd>{{ rx.alma_866s_reproduced }}/{{ rx.alma_866s_checked }}</dd></div>
+      </dl>
+      <p class="note">The round trip is simulated. Alma regenerates an 866 from the 853/863 it is given; the Workbench imitates that step, then checks that converting the regenerated 866 gives back the same 863s. The imitation was checked against the {{ rx.alma_866s_checked }} 866s in the export that Alma itself had built, and reproduces all of them.</p>
+    </article>
+
+    <article class="panel">
+      <h3>Three apps became one</h3>
+      <p>Until 16 September 2026 the Workbench was three separate web apps: a converter, a pattern detector, and a workbench joining them. They shared a goal and duplicated each other's code, and the copies drifted until one deleted the other's pattern libraries. They are now one application, with one reader of holdings.</p>
+    </article>
+
+    <article class="panel">
+      <h3>The human in the loop</h3>
+      <p>The AI writes the code; the librarian decides what "correct" means. Two bugs from October were found by the cataloguer, not by the tests:</p>
+      <ul class="bugs">
+        <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
+        <li><code>34 no 3, 4 (Summer, Autumn 1990)</code>, a list of runs, ignored the caption confirmed for it. Found in testing; fixed in 0.34.0.</li>
+      </ul>
+    </article>
+
+    <article class="panel">
+      <h3>Lessons, and what's next</h3>
+      <p class="todo">To write.</p>
+    </article>
+
+    <div class="card-links poster-links">
+      <a class="btn-try" href="https://tools.matthewcodey.com/workbench" target="_blank" rel="noopener">Open the Holdings Workbench <span class="arw" aria-hidden="true">&rarr;</span></a>
+      <a class="src-link" href="https://github.com/bdmcodey/holdings-workbench" target="_blank" rel="noopener">View source <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <p class="poc-note">A proof of concept, under active development — not a supported service.</p>
+  </div>
+</section>
+
+</div>
+{% endblock %}
