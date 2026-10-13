@@ -1,0 +1,51 @@
+<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 314" role="img" aria-labelledby="fig-silent-loss-t fig-silent-loss-d">
+<title id="fig-silent-loss-t">Silent losses, 36 to 0</title>
+<desc id="fig-silent-loss-d">Outcomes for the Workbench&#x27;s corpus of real 866 statements. On 1 September 2026 (version 0.6.0), 112 statements: 67 converted cleanly, 3 converted and said what they left out, 36 lost values silently, 6 converted nothing. On 12 October 2026 (version 0.35.0), 117 statements: 90 clean, 22 said what they left out, 0 lost values silently, 5 converted nothing.</desc>
+<style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
+.fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
+.fig .muted{fill:var(--fig-muted,#5d5a69)}
+.fig .strong{font-weight:600}
+.fig .rule{stroke:var(--fig-line,#d9d5e0);stroke-width:1;fill:none}
+.fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
+.fig .band{fill:var(--fig-band,#efeaf7)}
+.fig .dot{fill:var(--fig-dot,#a08fd0)}
+.fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
+.fig .hit{fill:transparent}
+.fig .hit:hover{fill:var(--fig-line,#d9d5e0);fill-opacity:.5}
+.fig .seg-clean{fill:var(--fig-grey-1,#8e8a99)}
+.fig .seg-warned{fill:var(--fig-accent-soft,#c4b6ea)}
+.fig .seg-lost{fill:var(--fig-accent,#6f55c0)}
+.fig .seg-none{fill:var(--fig-grey-2,#d3d0db)}
+.fig .on-accent{fill:var(--fig-on-accent,#fff)}
+.fig .sf-a{fill:var(--fig-sf-a,#6f55c0)}
+.fig .sf-b{fill:var(--fig-sf-b,#d9592a)}
+.fig .sf-i{fill:var(--fig-sf-i,#138a60)}
+.fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
+.fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
+<rect x="16" y="7" width="13" height="13" rx="3" class="seg-clean"/>
+<text x="37.0" y="18.0" font-size="13">converted cleanly</text>
+<rect x="16" y="29" width="13" height="13" rx="3" class="seg-warned"/>
+<text x="37.0" y="40.0" font-size="13">converted, said what it left out</text>
+<rect x="16" y="51" width="13" height="13" rx="3" class="seg-lost"/>
+<text x="37.0" y="62.0" font-size="13">converted, losing values silently</text>
+<rect x="16" y="73" width="13" height="13" rx="3" class="seg-none"/>
+<text x="37.0" y="84.0" font-size="13">converted nothing (866 kept)</text>
+<text x="16.0" y="132.0" font-size="13.5" class="strong">1 September 2026 · 0.6.0</text>
+<text x="324.0" y="132.0" font-size="12.5" text-anchor="end" class="muted">112 statements</text>
+<path class="seg-clean" d="M16.0,142.0 H196.7 Q196.7,142.0 196.7,142.0 V170.0 Q196.7,170.0 196.7,170.0 H16.0 Z"><title>converted cleanly: 67 of 112</title></path>
+<text x="106.3" y="161.0" font-size="13" text-anchor="middle" class="strong">67</text>
+<path class="seg-warned" d="M198.7,142.0 H206.8 Q206.8,142.0 206.8,142.0 V170.0 Q206.8,170.0 206.8,170.0 H198.7 Z"><title>converted, said what it left out: 3 of 112</title></path>
+<path class="seg-lost" d="M208.8,142.0 H305.8 Q305.8,142.0 305.8,142.0 V170.0 Q305.8,170.0 305.8,170.0 H208.8 Z"><title>converted, losing values silently: 36 of 112</title></path>
+<text x="257.3" y="161.0" font-size="13" text-anchor="middle" class="strong on-accent">36</text>
+<path class="seg-none" d="M307.8,142.0 H320.0 Q324.0,142.0 324.0,146.0 V166.0 Q324.0,170.0 320.0,170.0 H307.8 Z"><title>converted nothing (866 kept): 6 of 112</title></path>
+<line class="leader" x1="257.3" x2="257.3" y1="172" y2="180"/>
+<text x="324.0" y="196.0" font-size="13.5" text-anchor="end" class="strong">36 of 112 (32%) lost values silently</text>
+<text x="16.0" y="240.0" font-size="13.5" class="strong">12 October 2026 · 0.35.0</text>
+<text x="324.0" y="240.0" font-size="12.5" text-anchor="end" class="muted">117 statements</text>
+<path class="seg-clean" d="M16.0,250.0 H249.8 Q249.8,250.0 249.8,250.0 V278.0 Q249.8,278.0 249.8,278.0 H16.0 Z"><title>converted cleanly: 90 of 117</title></path>
+<text x="132.9" y="269.0" font-size="13" text-anchor="middle" class="strong">90</text>
+<path class="seg-warned" d="M251.8,250.0 H309.0 Q309.0,250.0 309.0,250.0 V278.0 Q309.0,278.0 309.0,278.0 H251.8 Z"><title>converted, said what it left out: 22 of 117</title></path>
+<text x="280.4" y="269.0" font-size="13" text-anchor="middle" class="strong">22</text>
+<path class="seg-none" d="M311.0,250.0 H320.0 Q324.0,250.0 324.0,254.0 V274.0 Q324.0,278.0 320.0,278.0 H311.0 Z"><title>converted nothing (866 kept): 5 of 117</title></path>
+<text x="16.0" y="304.0" font-size="13.5" class="strong">0 of 117 lose values silently</text>
+</svg>

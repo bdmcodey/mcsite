@@ -1,0 +1,91 @@
+<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 320" role="img" aria-labelledby="fig-statement-t fig-statement-d">
+<title id="fig-statement-t">One 866 statement and the 853/863 it becomes</title>
+<desc id="fig-statement-d">The free-text statement “v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996)” converts to two fields. The 853 names the levels: $a v., $b no., $i year, $j month. The 863 records the holdings: $a 27-31, $b 4-4, $i 1992-1996, $j 04-04. In full: 853 31 $8 1 $a v. $b no. $i (year) $j (month); 863 40 $8 1.1 $a 27-31 $b 4-4 $i 1992-1996 $j 04-04.</desc>
+<style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
+.fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
+.fig .muted{fill:var(--fig-muted,#5d5a69)}
+.fig .strong{font-weight:600}
+.fig .rule{stroke:var(--fig-line,#d9d5e0);stroke-width:1;fill:none}
+.fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
+.fig .band{fill:var(--fig-band,#efeaf7)}
+.fig .dot{fill:var(--fig-dot,#a08fd0)}
+.fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
+.fig .hit{fill:transparent}
+.fig .hit:hover{fill:var(--fig-line,#d9d5e0);fill-opacity:.5}
+.fig .seg-clean{fill:var(--fig-grey-1,#8e8a99)}
+.fig .seg-warned{fill:var(--fig-accent-soft,#c4b6ea)}
+.fig .seg-lost{fill:var(--fig-accent,#6f55c0)}
+.fig .seg-none{fill:var(--fig-grey-2,#d3d0db)}
+.fig .on-accent{fill:var(--fig-on-accent,#fff)}
+.fig .sf-a{fill:var(--fig-sf-a,#6f55c0)}
+.fig .sf-b{fill:var(--fig-sf-b,#d9592a)}
+.fig .sf-i{fill:var(--fig-sf-i,#138a60)}
+.fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
+.fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
+<text x="16.0" y="20.0" font-size="13" class="muted">866 · as a person typed it</text>
+<text x="66.5" y="54.0" font-size="15" class="mono" textLength="18.0" lengthAdjust="spacingAndGlyphs">v.</text>
+<rect x="66.5" y="60" width="18.0" height="3.5" rx="1.75" class="sf-a"/>
+<text x="75.5" y="76.0" font-size="11.5" text-anchor="middle" class="muted">a</text>
+<text x="93.5" y="54.0" font-size="15" class="mono" textLength="18.0" lengthAdjust="spacingAndGlyphs">27</text>
+<rect x="93.5" y="60" width="18.0" height="3.5" rx="1.75" class="sf-a"/>
+<text x="102.5" y="76.0" font-size="11.5" text-anchor="middle" class="muted">a</text>
+<text x="120.5" y="54.0" font-size="15" class="mono" textLength="27.0" lengthAdjust="spacingAndGlyphs">no.</text>
+<rect x="120.5" y="60" width="27.0" height="3.5" rx="1.75" class="sf-b"/>
+<text x="134.0" y="76.0" font-size="11.5" text-anchor="middle" class="muted">b</text>
+<text x="156.5" y="54.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">4</text>
+<rect x="156.5" y="60" width="9.0" height="3.5" rx="1.75" class="sf-b"/>
+<text x="161.0" y="76.0" font-size="11.5" text-anchor="middle" class="muted">b</text>
+<text x="165.5" y="54.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">-</text>
+<text x="174.5" y="54.0" font-size="15" class="mono" textLength="18.0" lengthAdjust="spacingAndGlyphs">v.</text>
+<rect x="174.5" y="60" width="18.0" height="3.5" rx="1.75" class="sf-a"/>
+<text x="183.5" y="76.0" font-size="11.5" text-anchor="middle" class="muted">a</text>
+<text x="201.5" y="54.0" font-size="15" class="mono" textLength="18.0" lengthAdjust="spacingAndGlyphs">31</text>
+<rect x="201.5" y="60" width="18.0" height="3.5" rx="1.75" class="sf-a"/>
+<text x="210.5" y="76.0" font-size="11.5" text-anchor="middle" class="muted">a</text>
+<text x="228.5" y="54.0" font-size="15" class="mono" textLength="27.0" lengthAdjust="spacingAndGlyphs">no.</text>
+<rect x="228.5" y="60" width="27.0" height="3.5" rx="1.75" class="sf-b"/>
+<text x="242.0" y="76.0" font-size="11.5" text-anchor="middle" class="muted">b</text>
+<text x="264.5" y="54.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">4</text>
+<rect x="264.5" y="60" width="9.0" height="3.5" rx="1.75" class="sf-b"/>
+<text x="269.0" y="76.0" font-size="11.5" text-anchor="middle" class="muted">b</text>
+<text x="66.5" y="104.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">(</text>
+<text x="75.5" y="104.0" font-size="15" class="mono" textLength="45.0" lengthAdjust="spacingAndGlyphs">April</text>
+<rect x="75.5" y="110" width="45.0" height="3.5" rx="1.75" class="sf-j"/>
+<text x="98.0" y="126.0" font-size="11.5" text-anchor="middle" class="muted">j</text>
+<text x="129.5" y="104.0" font-size="15" class="mono" textLength="36.0" lengthAdjust="spacingAndGlyphs">1992</text>
+<rect x="129.5" y="110" width="36.0" height="3.5" rx="1.75" class="sf-i"/>
+<text x="147.5" y="126.0" font-size="11.5" text-anchor="middle" class="muted">i</text>
+<text x="165.5" y="104.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">-</text>
+<text x="174.5" y="104.0" font-size="15" class="mono" textLength="45.0" lengthAdjust="spacingAndGlyphs">April</text>
+<rect x="174.5" y="110" width="45.0" height="3.5" rx="1.75" class="sf-j"/>
+<text x="197.0" y="126.0" font-size="11.5" text-anchor="middle" class="muted">j</text>
+<text x="228.5" y="104.0" font-size="15" class="mono" textLength="36.0" lengthAdjust="spacingAndGlyphs">1996</text>
+<rect x="228.5" y="110" width="36.0" height="3.5" rx="1.75" class="sf-i"/>
+<text x="246.5" y="126.0" font-size="11.5" text-anchor="middle" class="muted">i</text>
+<text x="264.5" y="104.0" font-size="15" class="mono" textLength="9.0" lengthAdjust="spacingAndGlyphs">)</text>
+<path class="arrow" d="M170.0,136 V158 M165.0,152 L170.0,158 L175.0,152"/>
+<text x="16.0" y="188.0" font-size="12.5" class="muted">subfield</text>
+<text x="132.0" y="188.0" font-size="12.5" class="muted">853 caption</text>
+<text x="222.0" y="188.0" font-size="12.5" class="muted">863 held</text>
+<line class="rule" x1="16" x2="324" y1="197" y2="197"/>
+<rect x="16" y="210" width="13" height="13" rx="3" class="sf-a"/>
+<text x="36.0" y="222.0" font-size="14" class="mono strong">$a</text>
+<text x="62.0" y="222.0" font-size="13" class="muted">volume</text>
+<text x="132.0" y="222.0" font-size="14" class="mono">v.</text>
+<text x="222.0" y="222.0" font-size="14" class="mono">27-31</text>
+<rect x="16" y="238" width="13" height="13" rx="3" class="sf-b"/>
+<text x="36.0" y="250.0" font-size="14" class="mono strong">$b</text>
+<text x="62.0" y="250.0" font-size="13" class="muted">issue</text>
+<text x="132.0" y="250.0" font-size="14" class="mono">no.</text>
+<text x="222.0" y="250.0" font-size="14" class="mono">4-4</text>
+<rect x="16" y="266" width="13" height="13" rx="3" class="sf-i"/>
+<text x="36.0" y="278.0" font-size="14" class="mono strong">$i</text>
+<text x="62.0" y="278.0" font-size="13" class="muted">year</text>
+<text x="132.0" y="278.0" font-size="14" class="mono">(year)</text>
+<text x="222.0" y="278.0" font-size="14" class="mono">1992-1996</text>
+<rect x="16" y="294" width="13" height="13" rx="3" class="sf-j"/>
+<text x="36.0" y="306.0" font-size="14" class="mono strong">$j</text>
+<text x="62.0" y="306.0" font-size="13" class="muted">month</text>
+<text x="132.0" y="306.0" font-size="14" class="mono">(month)</text>
+<text x="222.0" y="306.0" font-size="14" class="mono">04-04</text>
+</svg>
