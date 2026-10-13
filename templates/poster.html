@@ -29,7 +29,7 @@
 
     <article class="panel">
       <h3>The problem</h3>
-      <p>Libraries record what they hold of a serial in MARC. Much of it was typed as free text in the <strong>866</strong> field: readable by a person, opaque to a system. The structured alternative is a pair of fields: an <strong>853</strong> that names the levels (volume, issue, year, month) and an <strong>863</strong> that records the values held at each. Converting by hand is slow, and every library writes its 866s a little differently.</p>
+      <p>Many libraries' serials holdings are stored only as human-readable, free-text <strong>866</strong> fields rather than as MARC-encoded <strong>853/863</strong> pairs. Converting by hand is slow, different conventions for textual holdings may have been followed, and hand-typed data is prone to typos and other errors.</p>
       <figure class="fig-frame">
         {{ fig.statement }}
         <figcaption>One statement from the Workbench's synthetic sample, and the fields its converter writes for it:
@@ -48,7 +48,7 @@
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
           <div><dt>For it</dt><dd>Results tuned to a bespoke collection. This is how the original parser's regular expression was written.</dd></div>
-          <div><dt>Against it</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do.</dd></div>
+          <div><dt>Against it</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
         </dl>
         <p class="todo">To write: the experience in more detail.</p>
       </article>
@@ -164,8 +164,8 @@
     </article>
 
     <article class="panel">
-      <h3>Three apps became one</h3>
-      <p>Until 16 September 2026 the Workbench was three separate web apps: a converter, a pattern detector, and a workbench joining them. They shared a goal and duplicated each other's code, and the copies drifted until one deleted the other's pattern libraries. They are now one application, with one reader of holdings.</p>
+      <h3>Two tools became one</h3>
+      <p>The Pattern Detector and the Converter came first. On 25 August the Workbench arrived to combine them: find the patterns, confirm what they mean, convert in one place. For three weeks all three ran side by side, duplicating each other's code, until the copies drifted far enough that one deleted the other's pattern libraries. On 16 September the Workbench absorbed both, and they were retired.</p>
     </article>
 
     <article class="panel">

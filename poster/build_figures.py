@@ -59,7 +59,7 @@ TOKENS = [
 # Milestones on the release strip: (version, short label).
 MILESTONES = [
     ("0.1.0", "First working version"),
-    ("0.11.0", "Three apps become one"),
+    ("0.11.0", "Workbench replaces the other two"),
     ("0.28.0", "Simulated Alma round trip"),
 ]
 
@@ -369,7 +369,7 @@ def figure_releases_wide(releases, sept):
 def figure_releases_tall(releases, sept):
     by_day, start, end = _release_layout(releases)
     days = (end - start).days + 1
-    W, T, step, dx, r = 360, 16, 9, 9, 3.6
+    W, T, step, dx, r = 372, 16, 9, 9, 3.6
     X0 = 64
     y = lambda d: T + ((d - start).days + 0.5) * step
     body = []
@@ -400,7 +400,7 @@ def figure_releases_tall(releases, sept):
 
     dates = dict(releases)
     notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, release {len(releases)}")]
-    LX = X0 + 10 * dx + 18
+    LX = X0 + 10 * dx + 10
     for v, lbl in notes:
         d = dates[v]
         cy = y(d)

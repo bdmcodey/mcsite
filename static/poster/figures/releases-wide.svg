@@ -1,6 +1,6 @@
 <svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 284" role="img" aria-labelledby="fig-releases-wide-t fig-releases-wide-d">
 <title id="fig-releases-wide-t">99 releases, 24 Jul to 12 Oct 2026</title>
-<desc id="fig-releases-wide-d">Each dot is one released version of the Workbench, stacked by day. 84 of the 99 came in September. 24 Jul: First working version (0.1.0). 16 Sep: Three apps become one (0.11.0). 25 Sep: Simulated Alma round trip (0.28.0). The latest is 0.35.0, on 12 Oct.</desc>
+<desc id="fig-releases-wide-d">Each dot is one released version of the Workbench, stacked by day. 84 of the 99 came in September. 24 Jul: First working version (0.1.0). 16 Sep: Workbench replaces the other two (0.11.0). 25 Sep: Simulated Alma round trip (0.28.0). The latest is 0.35.0, on 12 Oct.</desc>
 <style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
 .fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
 .fig .muted{fill:var(--fig-muted,#5d5a69)}
@@ -160,7 +160,7 @@
 <text x="75.1" y="165.0" font-size="12" class="muted">First working version</text>
 <line class="leader" x1="623.5" x2="623.5" y1="84" y2="189.5"/>
 <text x="618.5" y="96.0" font-size="12" text-anchor="end" class="strong">16 Sep</text>
-<text x="618.5" y="111.0" font-size="12" text-anchor="end" class="muted">Three apps become one</text>
+<text x="618.5" y="111.0" font-size="12" text-anchor="end" class="muted">Workbench replaces the other two</text>
 <line class="leader" x1="715.7" x2="715.7" y1="12" y2="158.0"/>
 <text x="720.7" y="24.0" font-size="12" class="strong">25 Sep</text>
 <text x="720.7" y="39.0" font-size="12" class="muted">Simulated Alma round trip</text>
