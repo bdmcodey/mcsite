@@ -9,6 +9,7 @@
 {% set now = n.corpus.now %}
 {% set rx = n.real_export %}
 {% set pat = n.pattern %}
+{% macro coloured(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
 {% block content %}
 <div class="poster-page">
 
@@ -32,11 +33,11 @@
       <h3>The problem</h3>
       <p>Many libraries' serials holdings are stored only as human-readable, free-text <strong>866</strong> fields rather than as MARC-encoded <strong>853/863</strong> pairs. Converting by hand is slow, different conventions for textual holdings may have been followed, and hand-typed data is prone to typos and other errors.</p>
       <p class="goal"><strong>The goal:</strong> a tool that is portable across different collections of records, works on messy holdings as they are (no manual clean-up), and never silently loses anything.</p>
-      <figure class="fig-frame">
+      <figure class="fig-frame fig-narrow">
         {{ fig.statement }}
         <figcaption>One statement from the Workbench's synthetic sample, and the fields its converter writes for it:
-          <code class="marc">{{ n.statement['853'] }}</code>
-          <code class="marc">{{ n.statement['863'] }}</code></figcaption>
+          <code class="marc">{{ coloured(n.statement.segments_853) }}</code>
+          <code class="marc">{{ coloured(n.statement.segments_863) }}</code></figcaption>
       </figure>
     </article>
 
@@ -94,21 +95,25 @@
     <article class="panel" id="how-it-reads">
       <h3>How the Workbench reads a statement</h3>
       <p>Two parts read every file. The <strong>pattern detector</strong> sorts all of a file's 866 statements into groups of the same shape, so that a cataloguer decides what something means once per group rather than once per record. The <strong>standard parser</strong> reads each statement into volumes, issues and dates, and stops rather than guesses. Here is the statement from the top of the page, as the detector reads it.</p>
-      <figure class="fig-frame">
+      <figure class="fig-frame fig-narrow">
         {{ fig.tokens }}
-        <figcaption>The detector's own output for the statement in the first figure.</figcaption>
+        <figcaption>The detector's own output for the statement in the first figure. The colours follow its subfields throughout:
+          <span class="key"><span class="swatch sw-a"></span>$a volume</span>
+          <span class="key"><span class="swatch sw-b"></span>$b issue</span>
+          <span class="key"><span class="swatch sw-i"></span>$i year</span>
+          <span class="key"><span class="swatch sw-j"></span>$j month</span></figcaption>
       </figure>
       <p>Each piece is recognised by a fixed list of rules, tried in order, and the first rule that fits wins. The order is what makes it read the way a cataloguer would: <code>1992</code> is a year before it is a number, <code>Nov.</code> is November before it is "no" followed by "v.", and a caption counts only where a word starts. Spaces are set aside, so <code>v.1</code> and <code>v. 1</code> have the same shape. The long dash marks the hyphen that divides the start of the holdings from the end; the hyphen inside the dates means "through".</p>
 
       <h4 class="step">3 · A matching rule, with a slot for each value</h4>
       <p>Statements with the same labels in the same order are one group, whatever their numbers. For each group the detector writes a <strong>regular expression</strong>: the captions it saw, and a named slot for each value. This group's is {{ '{:,}'.format(pat.regex_length) }} characters long, because it accepts any month or season, any spacing, and combined issues such as <code>8/9</code>. Simplified, with each slot named:</p>
-      <p class="rule-line"><code>{{ pat.template }}</code></p>
+      <p class="rule-line"><code>{{ coloured(pat.template_segments) }}</code></p>
       <div class="table-wrap">
         <table class="slot-table">
           <thead><tr><th scope="col">Slot</th><th scope="col">In this statement</th><th scope="col">Offered as</th></tr></thead>
           <tbody>
           {% for r in pat.slots %}
-            <tr><td><code>{{ r.slot }}</code></td><td><code>{{ r.value }}</code></td><td>{{ r.meaning }}</td></tr>
+            <tr><td><span class="swatch sw-{{ r.sf }}"></span><code>{{ r.slot }}</code></td><td><code>{{ r.value }}</code></td><td>{{ r.meaning }}</td></tr>
           {% endfor %}
           </tbody>
         </table>
@@ -118,7 +123,7 @@
       <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloguer can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What confirming changes depends on the group:</p>
       <ul class="cases">
         <li><strong>Nothing to decide.</strong> In this group every value carries its own caption, so the parser reads these statements in full and the pattern is confirmed without asking.</li>
-        <li><strong>A caption to supply.</strong> In <code>{{ pat.uncaptioned.statement }}</code>, from the same sample, the {{ pat.uncaptioned.suggested_value }} has no caption; its shape is <code>{{ pat.uncaptioned.shape }}</code>. The card suggests <code>v.</code> but still asks. On its own the parser writes <code>$a (*)</code>, the standard's placeholder for an unnamed level; with <code>v.</code> confirmed, the 853 reads <code>$a v. $b no.</code></li>
+        <li><strong>A caption to supply.</strong> In <code>{{ pat.uncaptioned.statement }}</code>, from the same sample, the {{ pat.uncaptioned.suggested_value }} has no caption; its shape is <code>{{ pat.uncaptioned.shape }}</code>. The card suggests <code>v.</code> but still asks. On its own the parser writes <code><span class="sf sf-a">$a (*)</span></code>, the standard's placeholder for an unnamed level; with <code>v.</code> confirmed, the 853 reads <code><span class="sf sf-a">$a v.</span> <span class="sf sf-b">$b no.</span></code></li>
         <li><strong>A reading only the cataloguer can give.</strong> A lone number with no caption and no date could be a volume, an issue or a year. The parser holds it rather than guess, and the meaning confirmed on its pattern is what converts it.</li>
       </ul>
 
@@ -205,7 +210,7 @@
     <article class="panel">
       <h3>The turning point: silent losses</h3>
       <p>A refusal is safe: nothing is written and the 866 stays. A <em>silent loss</em> is not: fields are written, the 866 is removed, and a volume or a month is gone with nothing on screen to say so. Measured on a corpus of real 866 statements, {{ before.lost }} of {{ before.statements }} lost values silently. Now none do; the ones that cannot be fully read say what they left out.</p>
-      <figure class="fig-frame">
+      <figure class="fig-frame fig-narrow">
         {{ fig.silent_loss }}
       </figure>
       <details class="data-view">

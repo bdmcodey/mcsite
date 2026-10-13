@@ -39,10 +39,26 @@
 .approaches .panel{margin-bottom:0}
 .approaches + .todo{margin-top:20px}
 
+/* The example's subfields keep figure 1's colours wherever they appear: an
+   underline on the text (which stays in the normal ink), or a swatch. */
+.sf{border-bottom:3px solid transparent;padding-bottom:1px}
+.sf-a{border-bottom-color:var(--fig-sf-a)}
+.sf-b{border-bottom-color:var(--fig-sf-b)}
+.sf-i{border-bottom-color:var(--fig-sf-i)}
+.sf-j{border-bottom-color:var(--fig-sf-j)}
+.swatch{display:inline-block;width:.75em;height:.75em;border-radius:3px;margin-right:.45em;vertical-align:-.05em}
+.sw-a{background:var(--fig-sf-a)}
+.sw-b{background:var(--fig-sf-b)}
+.sw-i{background:var(--fig-sf-i)}
+.sw-j{background:var(--fig-sf-j)}
+.key{white-space:nowrap;margin-left:.6em}
+.fig-frame code.marc{line-height:1.9}
+
 /* How the Workbench reads a statement; what the cataloguer controls */
 .panel h4.step{font-size:1.05rem;margin:28px 0 8px}
 .rule-line{margin:12px 0}
-.rule-line code{display:inline-block;line-height:1.7;overflow-wrap:anywhere}
+.panel p code,.panel li code{white-space:nowrap}
+.panel .rule-line code{white-space:normal;display:inline-block;line-height:1.7;overflow-wrap:anywhere}
 .table-wrap{overflow-x:auto;margin:14px 0 4px}
 .slot-table{border-collapse:collapse;font-size:.9rem;min-width:min(100%,420px)}
 .slot-table th,.slot-table td{border-bottom:1px solid var(--line);padding:7px 16px 7px 0;text-align:left;vertical-align:top;color:#cfcfd8}
@@ -66,8 +82,8 @@
 .fig-frame svg{display:block;width:100%;height:auto}
 .fig-frame figcaption{color:var(--muted);font-size:.86rem;margin-top:10px;max-width:720px}
 .fig-frame code.marc{display:block;margin-top:6px;color:var(--text);font-size:.84rem;overflow-wrap:anywhere}
-.fig-frame:has(svg[aria-labelledby^="fig-statement"]) svg,
-.fig-frame:has(svg[aria-labelledby^="fig-silent-loss"]) svg{max-width:440px}
+/* The 340-wide figures: capped so their text stays close to body size */
+.fig-narrow svg{max-width:440px}
 .fig-tall{display:none}
 .fig-tall svg{max-width:420px}
 

@@ -108,6 +108,10 @@ STYLE = """
 .fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
 .fig .band{fill:var(--fig-band,#efeaf7)}
 .fig .chip{fill:none;stroke:var(--fig-line,#d9d5e0);stroke-width:1}
+.fig .sf-a-stroke{stroke:var(--fig-sf-a,#6f55c0);stroke-width:2.5}
+.fig .sf-b-stroke{stroke:var(--fig-sf-b,#d9592a);stroke-width:2.5}
+.fig .sf-i-stroke{stroke:var(--fig-sf-i,#138a60);stroke-width:2.5}
+.fig .sf-j-stroke{stroke:var(--fig-sf-j,#b07a00);stroke-width:2.5}
 .fig .dot{fill:var(--fig-dot,#a08fd0)}
 .fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
 .fig .hit{fill:transparent}
@@ -511,6 +515,25 @@ TOKEN_LABEL = {"VOL_CAP": "VOL", "ISS_CAP": "ISS", "PT_CAP": "PT", "NUMBER": "#"
                "YEAR": "YEAR", "CHRON": "CHRON", "SEP_HYPHEN": "-",
                "PAREN_OPEN": "", "PAREN_CLOSE": ""}
 SUBFIELD = "abcdef"
+CHRON_SUBFIELD = {"year": "i", "month": "j"}
+VALUE_KINDS = {"NUMBER", "YEAR", "CHRON"}
+CAPTION_KINDS = {"VOL_CAP", "ISS_CAP", "PT_CAP"}
+COLOURED = set("abij")
+
+
+def marc_segments(field):
+    """A field as display text, cut so each coloured subfield can be marked."""
+    head, _, rest = field.partition(" $")
+    segments = [{"text": head + " ", "sf": None}]
+    for part in ("$" + rest).split(" $"):
+        part = part if part.startswith("$") else "$" + part
+        code = part[1]
+        segments.append({"text": part, "sf": code if code in COLOURED else None})
+        segments.append({"text": " ", "sf": None})
+    segments.pop()
+    if "".join(seg["text"] for seg in segments) != field:
+        raise Stop(f"could not mark the subfields of {field!r}")
+    return segments
 
 
 def read_pattern():
@@ -546,19 +569,43 @@ def read_pattern():
             meaning = f"Enumeration, level {r.level + 1} (${SUBFIELD[r.level]}), caption {r.caption}"
         else:
             meaning = d["kind_label"]
+        sf = SUBFIELD[r.level] if r.kind == "enum" else CHRON_SUBFIELD.get(r.kind)
+        if sf is None:
+            raise Stop(f"no subfield colour for the slot {r.group} ({r.kind})")
         slots.append({"slot": r.group, "value": match.group(r.group),
                       "meaning": meaning, "boundary": r.boundary,
-                      "suggested": r.suggested})
+                      "suggested": r.suggested, "sf": sf})
+
+    # Each piece of the statement takes its subfield's colour: a value from
+    # the slot that captures it, a caption from the value it names. These must
+    # agree with figure 1's TOKENS, so the colours mean the same everywhere.
+    values = iter(slots)
+    for t, tok in zip(toks, tokens):
+        if t.kind in VALUE_KINDS:
+            slot = next(values)
+            if slot["value"] != t.raw:
+                raise Stop(f"piece {t.raw!r} does not line up with slot {slot['slot']}")
+            tok["sf"] = slot["sf"]
+    for i, (t, tok) in enumerate(zip(toks, tokens)):
+        if t.kind in CAPTION_KINDS:
+            tok["sf"] = next(tokens[j]["sf"] for j in range(i + 1, len(toks))
+                             if toks[j].kind in VALUE_KINDS)
+    if [(tok["raw"], tok.get("sf")) for tok in tokens] != list(TOKENS):
+        raise Stop("the detector's pieces and figure 1's colours disagree")
 
     # The rule, simplified for reading: the statement with each value replaced
     # by the name of the slot that captures it.
-    template, pos = [], 0
-    for r in slots:
-        start = STATEMENT.index(r["value"], pos)
-        template += [STATEMENT[pos:start], "\u27e8" + r["slot"] + "\u27e9"]
-        pos = start + len(r["value"])
-    template = "".join(template + [STATEMENT[pos:]])
-    if _re.sub(r"\u27e8[^\u27e9]+\u27e9", "", template) != _re.sub(
+    segments, pos, values = [], 0, iter(slots)
+    for t, tok in zip(toks, tokens):
+        start = STATEMENT.index(t.raw, pos)
+        segments.append({"text": STATEMENT[pos:start], "sf": None})
+        text_ = "<" + next(values)["slot"] + ">" if t.kind in VALUE_KINDS else t.raw
+        segments.append({"text": text_, "sf": tok.get("sf")})
+        pos = start + len(t.raw)
+    segments.append({"text": STATEMENT[pos:], "sf": None})
+    segments = [seg for seg in segments if seg["text"]]
+    template = "".join(seg["text"] for seg in segments)
+    if _re.sub(r"<[a-z_]+>", "", template) != _re.sub(
             r"\d+|April", "", STATEMENT):
         raise Stop(f"the simplified rule does not line up with the statement: {template}")
 
@@ -580,9 +627,12 @@ def read_pattern():
         "shape": group.human_label,
         "regex_length": len(group.regex),
         "template": template,
+        "template_segments": segments,
         "slots": slots,
         "decides": _what_confirming_decides([STATEMENT]),
         "uncaptioned": dict(got, statement=UNCAPTIONED,
+                            segments_853_parser=marc_segments(alone),
+                            segments_853_confirmed=marc_segments(confirmed),
                             decides=_what_confirming_decides([UNCAPTIONED]),
                             suggested_slot=suggested[0].group,
                             suggested_value=_re.fullmatch(ug.regex, UNCAPTIONED, _re.IGNORECASE)
@@ -609,7 +659,8 @@ def figure_tokens(pattern):
         widths = [max(len(t["raw"]) * CW, len(t["label"]) * LW) + 2 * PAD for t in row]
         x = (W - sum(widths) - GAP * (len(row) - 1)) / 2
         for t, w in zip(row, widths):
-            body.append(f'<rect class="chip" x="{x:.1f}" y="{y}" width="{w:.1f}" height="{CH}" rx="5"/>')
+            chip = f"chip sf-{t['sf']}-stroke" if t.get("sf") else "chip"
+            body.append(f'<rect class="{chip}" x="{x:.1f}" y="{y}" width="{w:.1f}" height="{CH}" rx="5"/>')
             body.append(text(x + w / 2, y + 18, t["raw"], "mono", 15, "middle"))
             if t["label"]:
                 strong = t["label"] == "\u2014"
@@ -679,6 +730,7 @@ def main():
         },
         "statement": {
             "866": STATEMENT, "853": f853, "863": f863,
+            "segments_853": marc_segments(f853), "segments_863": marc_segments(f863),
             "source": "holdings-workbench data/example_holdings.mrc (synthetic), converted by marc_serials.converter",
         },
         "pattern": pattern,

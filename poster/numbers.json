@@ -62,6 +62,90 @@
     "866": "v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996)",
     "853": "853 31 $8 1 $a v. $b no. $i (year) $j (month)",
     "863": "863 40 $8 1.1 $a 27-31 $b 4-4 $i 1992-1996 $j 04-04",
+    "segments_853": [
+      {
+        "text": "853 31 ",
+        "sf": null
+      },
+      {
+        "text": "$8 1",
+        "sf": null
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$a v.",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$b no.",
+        "sf": "b"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$i (year)",
+        "sf": "i"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$j (month)",
+        "sf": "j"
+      }
+    ],
+    "segments_863": [
+      {
+        "text": "863 40 ",
+        "sf": null
+      },
+      {
+        "text": "$8 1.1",
+        "sf": null
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$a 27-31",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$b 4-4",
+        "sf": "b"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$i 1992-1996",
+        "sf": "i"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "$j 04-04",
+        "sf": "j"
+      }
+    ],
     "source": "holdings-workbench data/example_holdings.mrc (synthetic), converted by marc_serials.converter"
   },
   "pattern": {
@@ -69,19 +153,23 @@
     "tokens": [
       {
         "raw": "v.",
-        "label": "VOL"
+        "label": "VOL",
+        "sf": "a"
       },
       {
         "raw": "27",
-        "label": "#"
+        "label": "#",
+        "sf": "a"
       },
       {
         "raw": "no.",
-        "label": "ISS"
+        "label": "ISS",
+        "sf": "b"
       },
       {
         "raw": "4",
-        "label": "#"
+        "label": "#",
+        "sf": "b"
       },
       {
         "raw": "-",
@@ -89,19 +177,23 @@
       },
       {
         "raw": "v.",
-        "label": "VOL"
+        "label": "VOL",
+        "sf": "a"
       },
       {
         "raw": "31",
-        "label": "#"
+        "label": "#",
+        "sf": "a"
       },
       {
         "raw": "no.",
-        "label": "ISS"
+        "label": "ISS",
+        "sf": "b"
       },
       {
         "raw": "4",
-        "label": "#"
+        "label": "#",
+        "sf": "b"
       },
       {
         "raw": "(",
@@ -109,11 +201,13 @@
       },
       {
         "raw": "April",
-        "label": "CHRON"
+        "label": "CHRON",
+        "sf": "j"
       },
       {
         "raw": "1992",
-        "label": "YEAR"
+        "label": "YEAR",
+        "sf": "i"
       },
       {
         "raw": "-",
@@ -121,11 +215,13 @@
       },
       {
         "raw": "April",
-        "label": "CHRON"
+        "label": "CHRON",
+        "sf": "j"
       },
       {
         "raw": "1996",
-        "label": "YEAR"
+        "label": "YEAR",
+        "sf": "i"
       },
       {
         "raw": ")",
@@ -134,63 +230,173 @@
     ],
     "shape": "VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR)",
     "regex_length": 1210,
-    "template": "v. ⟨start_vol⟩ no. ⟨start_iss⟩-v. ⟨end_vol⟩ no. ⟨end_iss⟩ (⟨start_month⟩ ⟨start_year⟩-⟨end_month⟩ ⟨end_year⟩)",
+    "template": "v. <start_vol> no. <start_iss>-v. <end_vol> no. <end_iss> (<start_month> <start_year>-<end_month> <end_year>)",
+    "template_segments": [
+      {
+        "text": "v.",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<start_vol>",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "no.",
+        "sf": "b"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<start_iss>",
+        "sf": "b"
+      },
+      {
+        "text": "-",
+        "sf": null
+      },
+      {
+        "text": "v.",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<end_vol>",
+        "sf": "a"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "no.",
+        "sf": "b"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<end_iss>",
+        "sf": "b"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "(",
+        "sf": null
+      },
+      {
+        "text": "<start_month>",
+        "sf": "j"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<start_year>",
+        "sf": "i"
+      },
+      {
+        "text": "-",
+        "sf": null
+      },
+      {
+        "text": "<end_month>",
+        "sf": "j"
+      },
+      {
+        "text": " ",
+        "sf": null
+      },
+      {
+        "text": "<end_year>",
+        "sf": "i"
+      },
+      {
+        "text": ")",
+        "sf": null
+      }
+    ],
     "slots": [
       {
         "slot": "start_vol",
         "value": "27",
         "meaning": "Enumeration, level 1 ($a), caption v.",
         "boundary": "start",
-        "suggested": false
+        "suggested": false,
+        "sf": "a"
       },
       {
         "slot": "start_iss",
         "value": "4",
         "meaning": "Enumeration, level 2 ($b), caption no.",
         "boundary": "start",
-        "suggested": false
+        "suggested": false,
+        "sf": "b"
       },
       {
         "slot": "end_vol",
         "value": "31",
         "meaning": "Enumeration, level 1 ($a), caption v.",
         "boundary": "end",
-        "suggested": false
+        "suggested": false,
+        "sf": "a"
       },
       {
         "slot": "end_iss",
         "value": "4",
         "meaning": "Enumeration, level 2 ($b), caption no.",
         "boundary": "end",
-        "suggested": false
+        "suggested": false,
+        "sf": "b"
       },
       {
         "slot": "start_month",
         "value": "April",
         "meaning": "Month / season",
         "boundary": "start",
-        "suggested": false
+        "suggested": false,
+        "sf": "j"
       },
       {
         "slot": "start_year",
         "value": "1992",
         "meaning": "Year",
         "boundary": "start",
-        "suggested": false
+        "suggested": false,
+        "sf": "i"
       },
       {
         "slot": "end_month",
         "value": "April",
         "meaning": "Month / season",
         "boundary": "end",
-        "suggested": false
+        "suggested": false,
+        "sf": "j"
       },
       {
         "slot": "end_year",
         "value": "1996",
         "meaning": "Year",
         "boundary": "end",
-        "suggested": false
+        "suggested": false,
+        "sf": "i"
       }
     ],
     "decides": "nothing",
@@ -199,6 +405,90 @@
       "853_parser": "853 31 $8 1 $a (*) $b no. $i (year) $j (season)",
       "853_confirmed": "853 31 $8 1 $a v. $b no. $i (year) $j (season)",
       "statement": "39 no 1 (Spring 1995)",
+      "segments_853_parser": [
+        {
+          "text": "853 31 ",
+          "sf": null
+        },
+        {
+          "text": "$8 1",
+          "sf": null
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$a (*)",
+          "sf": "a"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$b no.",
+          "sf": "b"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$i (year)",
+          "sf": "i"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$j (season)",
+          "sf": "j"
+        }
+      ],
+      "segments_853_confirmed": [
+        {
+          "text": "853 31 ",
+          "sf": null
+        },
+        {
+          "text": "$8 1",
+          "sf": null
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$a v.",
+          "sf": "a"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$b no.",
+          "sf": "b"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$i (year)",
+          "sf": "i"
+        },
+        {
+          "text": " ",
+          "sf": null
+        },
+        {
+          "text": "$j (season)",
+          "sf": "j"
+        }
+      ],
       "decides": "caption",
       "suggested_slot": "start_num",
       "suggested_value": "39"
