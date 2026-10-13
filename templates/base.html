@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="{{ page_description or "Matthew Codey — MLIS academic librarian working at the seam of library service and library systems." }}">
+  <meta name="description" content="{{ page_description or "Matthew Codey — MLIS-holding academic libraries paraprofessional working at the seam of library service and library systems." }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -17,13 +17,13 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Matthew Codey">
   <meta property="og:title" content="{{ self.fulltitle() }}">
-  <meta property="og:description" content="{{ page_description or "MLIS academic librarian working at the seam of library service and library systems." }}">
+  <meta property="og:description" content="{{ page_description or "MLIS-holding academic libraries paraprofessional working at the seam of library service and library systems." }}">
   <meta property="og:url" content="https://matthewcodey.com{{ request.path }}">
   {% block canonical %}<link rel="canonical" href="https://matthewcodey.com{{ request.path }}">{% endblock %}
   <meta property="og:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ self.fulltitle() }}">
-  <meta name="twitter:description" content="{{ page_description or "MLIS academic librarian working at the seam of library service and library systems." }}">
+  <meta name="twitter:description" content="{{ page_description or "MLIS-holding academic libraries paraprofessional working at the seam of library service and library systems." }}">
   <meta name="twitter:image" content="https://matthewcodey.com{{ url_for('static', filename='og-image.png') }}">
 
   <title>{% block fulltitle %}{% block title %}Home{% endblock %} · Matthew Codey{% endblock %}</title>

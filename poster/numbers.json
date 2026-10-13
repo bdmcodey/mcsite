@@ -64,6 +64,147 @@
     "863": "863 40 $8 1.1 $a 27-31 $b 4-4 $i 1992-1996 $j 04-04",
     "source": "holdings-workbench data/example_holdings.mrc (synthetic), converted by marc_serials.converter"
   },
+  "pattern": {
+    "statement": "v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996)",
+    "tokens": [
+      {
+        "raw": "v.",
+        "label": "VOL"
+      },
+      {
+        "raw": "27",
+        "label": "#"
+      },
+      {
+        "raw": "no.",
+        "label": "ISS"
+      },
+      {
+        "raw": "4",
+        "label": "#"
+      },
+      {
+        "raw": "-",
+        "label": "—"
+      },
+      {
+        "raw": "v.",
+        "label": "VOL"
+      },
+      {
+        "raw": "31",
+        "label": "#"
+      },
+      {
+        "raw": "no.",
+        "label": "ISS"
+      },
+      {
+        "raw": "4",
+        "label": "#"
+      },
+      {
+        "raw": "(",
+        "label": ""
+      },
+      {
+        "raw": "April",
+        "label": "CHRON"
+      },
+      {
+        "raw": "1992",
+        "label": "YEAR"
+      },
+      {
+        "raw": "-",
+        "label": "-"
+      },
+      {
+        "raw": "April",
+        "label": "CHRON"
+      },
+      {
+        "raw": "1996",
+        "label": "YEAR"
+      },
+      {
+        "raw": ")",
+        "label": ""
+      }
+    ],
+    "shape": "VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR)",
+    "regex_length": 1210,
+    "template": "v. ⟨start_vol⟩ no. ⟨start_iss⟩-v. ⟨end_vol⟩ no. ⟨end_iss⟩ (⟨start_month⟩ ⟨start_year⟩-⟨end_month⟩ ⟨end_year⟩)",
+    "slots": [
+      {
+        "slot": "start_vol",
+        "value": "27",
+        "meaning": "Enumeration, level 1 ($a), caption v.",
+        "boundary": "start",
+        "suggested": false
+      },
+      {
+        "slot": "start_iss",
+        "value": "4",
+        "meaning": "Enumeration, level 2 ($b), caption no.",
+        "boundary": "start",
+        "suggested": false
+      },
+      {
+        "slot": "end_vol",
+        "value": "31",
+        "meaning": "Enumeration, level 1 ($a), caption v.",
+        "boundary": "end",
+        "suggested": false
+      },
+      {
+        "slot": "end_iss",
+        "value": "4",
+        "meaning": "Enumeration, level 2 ($b), caption no.",
+        "boundary": "end",
+        "suggested": false
+      },
+      {
+        "slot": "start_month",
+        "value": "April",
+        "meaning": "Month / season",
+        "boundary": "start",
+        "suggested": false
+      },
+      {
+        "slot": "start_year",
+        "value": "1992",
+        "meaning": "Year",
+        "boundary": "start",
+        "suggested": false
+      },
+      {
+        "slot": "end_month",
+        "value": "April",
+        "meaning": "Month / season",
+        "boundary": "end",
+        "suggested": false
+      },
+      {
+        "slot": "end_year",
+        "value": "1996",
+        "meaning": "Year",
+        "boundary": "end",
+        "suggested": false
+      }
+    ],
+    "decides": "nothing",
+    "uncaptioned": {
+      "shape": "# ISS(CHRON YEAR)",
+      "853_parser": "853 31 $8 1 $a (*) $b no. $i (year) $j (season)",
+      "853_confirmed": "853 31 $8 1 $a v. $b no. $i (year) $j (season)",
+      "statement": "39 no 1 (Spring 1995)",
+      "decides": "caption",
+      "suggested_slot": "start_num",
+      "suggested_value": "39"
+    },
+    "source": "holdings-workbench marc_serials.detector and marc_serials.bridge, run by this script"
+  },
   "real_export": {
     "records": 372,
     "statements": 1057,

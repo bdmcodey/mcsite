@@ -8,6 +8,7 @@
 .fig .rule{stroke:var(--fig-line,#d9d5e0);stroke-width:1;fill:none}
 .fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
 .fig .band{fill:var(--fig-band,#efeaf7)}
+.fig .chip{fill:none;stroke:var(--fig-line,#d9d5e0);stroke-width:1}
 .fig .dot{fill:var(--fig-dot,#a08fd0)}
 .fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
 .fig .hit{fill:transparent}

@@ -2,7 +2,7 @@
 
 My personal website — a small Flask application I built, version-control here, and
 self-host on my own Linux server. It doubles as an honest demonstration of the
-web-development and systems side of my work as an academic librarian.
+web-development and systems side of my work in academic libraries.
 
 **Live:** https://matthewcodey.com
 

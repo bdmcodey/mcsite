@@ -39,6 +39,22 @@
 .approaches .panel{margin-bottom:0}
 .approaches + .todo{margin-top:20px}
 
+/* How the Workbench reads a statement; what the cataloguer controls */
+.panel h4.step{font-size:1.05rem;margin:28px 0 8px}
+.rule-line{margin:12px 0}
+.rule-line code{display:inline-block;line-height:1.7;overflow-wrap:anywhere}
+.table-wrap{overflow-x:auto;margin:14px 0 4px}
+.slot-table{border-collapse:collapse;font-size:.9rem;min-width:min(100%,420px)}
+.slot-table th,.slot-table td{border-bottom:1px solid var(--line);padding:7px 16px 7px 0;text-align:left;vertical-align:top;color:#cfcfd8}
+.slot-table th{color:var(--text);font-weight:600}
+.cases,.controls ul{margin:12px 0 0 20px;color:#cfcfd8;max-width:720px}
+.cases li,.controls li{margin-bottom:8px}
+.controls{display:grid;grid-template-columns:1fr;gap:16px;margin:18px 0}
+@media(min-width:1000px){.controls{grid-template-columns:repeat(3,1fr)}}
+.controls section{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.controls h4{font-size:1rem;margin-bottom:4px;color:var(--accent)}
+.controls ul{margin-left:18px;font-size:.93rem}
+
 /* Drafted copy awaiting Matthew's edit */
 .draft-copy{border:1px dashed var(--accent);border-radius:10px;padding:14px 16px;margin-bottom:14px}
 .draft-label{color:var(--accent) !important;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
@@ -89,4 +105,7 @@
   .fig-wide{display:none}
   .fig-tall{display:block}
   .panel{padding:20px 16px}
+  .slot-table{font-size:.84rem;min-width:0}
+  .slot-table th,.slot-table td{padding-right:10px}
+  .slot-table code{overflow-wrap:anywhere}
 }

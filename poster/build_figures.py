@@ -107,6 +107,7 @@ STYLE = """
 .fig .rule{stroke:var(--fig-line,#d9d5e0);stroke-width:1;fill:none}
 .fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
 .fig .band{fill:var(--fig-band,#efeaf7)}
+.fig .chip{fill:none;stroke:var(--fig-line,#d9d5e0);stroke-width:1}
 .fig .dot{fill:var(--fig-dot,#a08fd0)}
 .fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
 .fig .hit{fill:transparent}
@@ -490,6 +491,143 @@ def figure_silent_loss(before, now):
 
 
 # --------------------------------------------------------------------------
+# How a statement becomes a pattern: the detector's tokens, the shape, the
+# named slots and the meanings it offers, as the Workbench produces them.
+# --------------------------------------------------------------------------
+
+# The same statement as figure 1, and a second from the same synthetic sample
+# whose first number carries no caption: the case a cataloguer decides.
+UNCAPTIONED = "39 no 1 (Spring 1995)"
+EXPECTED_SHAPE = "VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR)"
+EXPECTED_UNCAPTIONED = {
+    "shape": "# ISS(CHRON YEAR)",
+    "853_parser": "853 31 $8 1 $a (*) $b no. $i (year) $j (season)",
+    "853_confirmed": "853 31 $8 1 $a v. $b no. $i (year) $j (season)",
+}
+
+# Short labels for the detector's token kinds, as the Patterns screen writes
+# them in a group's heading.
+TOKEN_LABEL = {"VOL_CAP": "VOL", "ISS_CAP": "ISS", "PT_CAP": "PT", "NUMBER": "#",
+               "YEAR": "YEAR", "CHRON": "CHRON", "SEP_HYPHEN": "-",
+               "PAREN_OPEN": "", "PAREN_CLOSE": ""}
+SUBFIELD = "abcdef"
+
+
+def read_pattern():
+    """Run the Workbench's detector on the statements, and check what it says."""
+    import re as _re
+    from dataclasses import replace
+    from marc_serials.detector import (detect_patterns, tokenize, _strip_spaces,
+                                       _find_range_sep)
+    from marc_serials.bridge import infer_roles, apply_patterns
+    from marc_serials.library import ConfirmedPattern
+    from marc_serials.parser import parse_866
+    from marc_serials.converter import convert_holdings
+    from marc_serials.webapp import _what_confirming_decides
+
+    toks = _strip_spaces(tokenize(STATEMENT))
+    sep = _find_range_sep(toks)
+    tokens = []
+    for i, t in enumerate(toks):
+        if t.kind not in TOKEN_LABEL:
+            raise Stop(f"the detector now reads {t.raw!r} as {t.kind}; update TOKEN_LABEL")
+        tokens.append({"raw": t.raw, "label": "\u2014" if i == sep else TOKEN_LABEL[t.kind]})
+
+    group = detect_patterns([STATEMENT])[0]
+    if group.human_label != EXPECTED_SHAPE:
+        raise Stop(f"the detector now heads this group {group.human_label!r}")
+    match = _re.fullmatch(group.regex, STATEMENT, _re.IGNORECASE)
+    if not match:
+        raise Stop("the generated expression no longer matches its own statement")
+    slots = []
+    for r in infer_roles(group.named_groups):
+        d = r.to_dict()
+        if r.kind == "enum":
+            meaning = f"Enumeration, level {r.level + 1} (${SUBFIELD[r.level]}), caption {r.caption}"
+        else:
+            meaning = d["kind_label"]
+        slots.append({"slot": r.group, "value": match.group(r.group),
+                      "meaning": meaning, "boundary": r.boundary,
+                      "suggested": r.suggested})
+
+    # The rule, simplified for reading: the statement with each value replaced
+    # by the name of the slot that captures it.
+    template, pos = [], 0
+    for r in slots:
+        start = STATEMENT.index(r["value"], pos)
+        template += [STATEMENT[pos:start], "\u27e8" + r["slot"] + "\u27e9"]
+        pos = start + len(r["value"])
+    template = "".join(template + [STATEMENT[pos:]])
+    if _re.sub(r"\u27e8[^\u27e9]+\u27e9", "", template) != _re.sub(
+            r"\d+|April", "", STATEMENT):
+        raise Stop(f"the simplified rule does not line up with the statement: {template}")
+
+    # The uncaptioned statement: what the parser writes alone, and with the
+    # caption the card suggests confirmed.
+    ug = detect_patterns([UNCAPTIONED])[0]
+    alone = convert_holdings(parse_866(UNCAPTIONED)).field_853.display()
+    roles = [replace(r, suggested=False) for r in infer_roles(ug.named_groups)]
+    suggested = [r for r in infer_roles(ug.named_groups) if r.suggested]
+    confirmed_pattern = ConfirmedPattern(id="p", label=ug.human_label, regex=ug.regex, roles=roles)
+    confirmed = convert_holdings(apply_patterns(UNCAPTIONED, [confirmed_pattern])[0]).field_853.display()
+    got = {"shape": ug.human_label, "853_parser": alone, "853_confirmed": confirmed}
+    if got != EXPECTED_UNCAPTIONED or len(suggested) != 1 or suggested[0].caption != "v.":
+        raise Stop(f"the uncaptioned example no longer behaves as the page says: {got}")
+
+    return {
+        "statement": STATEMENT,
+        "tokens": tokens,
+        "shape": group.human_label,
+        "regex_length": len(group.regex),
+        "template": template,
+        "slots": slots,
+        "decides": _what_confirming_decides([STATEMENT]),
+        "uncaptioned": dict(got, statement=UNCAPTIONED,
+                            decides=_what_confirming_decides([UNCAPTIONED]),
+                            suggested_slot=suggested[0].group,
+                            suggested_value=_re.fullmatch(ug.regex, UNCAPTIONED, _re.IGNORECASE)
+                            .group(suggested[0].group)),
+        "source": "holdings-workbench marc_serials.detector and marc_serials.bridge, run by this script",
+    }
+
+
+def figure_tokens(pattern):
+    """The statement cut into labelled pieces, and the shape those labels make."""
+    W, CW, LW = 340, 9.0, 6.4          # width; a token character; a label character
+    PAD, GAP, CH = 5, 6, 26            # chip padding, gap between chips, chip height
+    brk = STATEMENT.index(" (") + 1
+    toks = pattern["tokens"]
+    # Which line each piece goes on: the numbering, then the dates.
+    rows, pos = [[], []], 0
+    for tok in toks:
+        start = STATEMENT.index(tok["raw"], pos)
+        pos = start + len(tok["raw"])
+        rows[0 if start < brk else 1].append(tok)
+    body = [text(16, 20, "1 · Cut into labelled pieces", "muted", 13)]
+    y = 40
+    for row in rows:
+        widths = [max(len(t["raw"]) * CW, len(t["label"]) * LW) + 2 * PAD for t in row]
+        x = (W - sum(widths) - GAP * (len(row) - 1)) / 2
+        for t, w in zip(row, widths):
+            body.append(f'<rect class="chip" x="{x:.1f}" y="{y}" width="{w:.1f}" height="{CH}" rx="5"/>')
+            body.append(text(x + w / 2, y + 18, t["raw"], "mono", 15, "middle"))
+            if t["label"]:
+                strong = t["label"] == "\u2014"
+                body.append(text(x + w / 2, y + CH + 15, t["label"],
+                                 "mono strong" if strong else "mono muted", 10.5, "middle"))
+            x += w + GAP
+        y += CH + 34
+    y += 18
+    body.append(text(16, y, "2 · Its shape", "muted", 13))
+    body.append(text(W / 2, y + 28, pattern["shape"], "mono strong", 12, "middle"))
+    H = y + 42
+    desc = ("The statement " + STATEMENT + " is cut into pieces, each labelled: "
+            + ", ".join(f"{t['raw']} {t['label'] or '(punctuation)'}" for t in toks)
+            + f". In order, the labels make its shape: {pattern['shape']}.")
+    return svg(W, H, "fig-tokens", "How the detector reads a statement", desc, "\n".join(body))
+
+
+# --------------------------------------------------------------------------
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.strip().splitlines()[0])
@@ -505,6 +643,7 @@ def main():
         version, releases = read_releases(wb)
         corpus = read_corpus(wb, sys.executable)
         f853, f863 = convert_statement()
+        pattern = read_pattern()
     except (Stop, subprocess.CalledProcessError) as e:
         sys.exit(f"Stopped: {e}")
 
@@ -521,6 +660,7 @@ def main():
     (FIG_DIR / "releases-wide.svg").write_text(figure_releases_wide(releases, sept), encoding="utf-8")
     (FIG_DIR / "releases-tall.svg").write_text(figure_releases_tall(releases, sept), encoding="utf-8")
     (FIG_DIR / "silent-loss.svg").write_text(figure_silent_loss(BASELINE, now), encoding="utf-8")
+    (FIG_DIR / "tokens.svg").write_text(figure_tokens(pattern), encoding="utf-8")
 
     numbers = {
         "_comment": "Written by poster/build_figures.py. Do not edit by hand; re-run the script.",
@@ -541,13 +681,14 @@ def main():
             "866": STATEMENT, "853": f853, "863": f863,
             "source": "holdings-workbench data/example_holdings.mrc (synthetic), converted by marc_serials.converter",
         },
+        "pattern": pattern,
         "real_export": REAL_EXPORT,
     }
     NUMBERS.write_text(json.dumps(numbers, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     print(f"Workbench {latest_v} ({latest_d}): {len(releases)} releases, {sept} in September; "
           f"corpus {corpus['statements']} statements, {corpus['lost']} silent losses.")
-    print(f"Wrote 4 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
+    print(f"Wrote 5 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
 
 
 if __name__ == "__main__":
