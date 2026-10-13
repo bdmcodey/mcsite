@@ -8,6 +8,7 @@
 {% set before = n.corpus.before %}
 {% set now = n.corpus.now %}
 {% set rx = n.real_export %}
+{% set pat = n.pattern %}
 {% block content %}
 <div class="poster-page">
 
@@ -88,6 +89,76 @@
     <article class="panel">
       <h3>Built with an AI coding assistant; runs without one</h3>
       <p>The result is the <strong>MARC Holdings Workbench</strong>, a Python application. It uses no AI when it runs: no model, no network calls, no API key, and nothing leaves the machine. The same file converts the same way every time. The AI was in how it was built: a library paraprofessional, not a developer, working with an AI coding assistant, release by release.</p>
+    </article>
+
+    <article class="panel" id="how-it-reads">
+      <h3>How the Workbench reads a statement</h3>
+      <p>Two parts read every file. The <strong>pattern detector</strong> sorts all of a file's 866 statements into groups of the same shape, so that a cataloguer decides what something means once per group rather than once per record. The <strong>standard parser</strong> reads each statement into volumes, issues and dates, and stops rather than guesses. Here is the statement from the top of the page, as the detector reads it.</p>
+      <figure class="fig-frame">
+        {{ fig.tokens }}
+        <figcaption>The detector's own output for the statement in the first figure.</figcaption>
+      </figure>
+      <p>Each piece is recognised by a fixed list of rules, tried in order, and the first rule that fits wins. The order is what makes it read the way a cataloguer would: <code>1992</code> is a year before it is a number, <code>Nov.</code> is November before it is "no" followed by "v.", and a caption counts only where a word starts. Spaces are set aside, so <code>v.1</code> and <code>v. 1</code> have the same shape. The long dash marks the hyphen that divides the start of the holdings from the end; the hyphen inside the dates means "through".</p>
+
+      <h4 class="step">3 · A matching rule, with a slot for each value</h4>
+      <p>Statements with the same labels in the same order are one group, whatever their numbers. For each group the detector writes a <strong>regular expression</strong>: the captions it saw, and a named slot for each value. This group's is {{ '{:,}'.format(pat.regex_length) }} characters long, because it accepts any month or season, any spacing, and combined issues such as <code>8/9</code>. Simplified, with each slot named:</p>
+      <p class="rule-line"><code>{{ pat.template }}</code></p>
+      <div class="table-wrap">
+        <table class="slot-table">
+          <thead><tr><th scope="col">Slot</th><th scope="col">In this statement</th><th scope="col">Offered as</th></tr></thead>
+          <tbody>
+          {% for r in pat.slots %}
+            <tr><td><code>{{ r.slot }}</code></td><td><code>{{ r.value }}</code></td><td>{{ r.meaning }}</td></tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <h4 class="step">4 · Confirm once, for the whole group</h4>
+      <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloguer can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What confirming changes depends on the group:</p>
+      <ul class="cases">
+        <li><strong>Nothing to decide.</strong> In this group every value carries its own caption, so the parser reads these statements in full and the pattern is confirmed without asking.</li>
+        <li><strong>A caption to supply.</strong> In <code>{{ pat.uncaptioned.statement }}</code>, from the same sample, the {{ pat.uncaptioned.suggested_value }} has no caption; its shape is <code>{{ pat.uncaptioned.shape }}</code>. The card suggests <code>v.</code> but still asks. On its own the parser writes <code>$a (*)</code>, the standard's placeholder for an unnamed level; with <code>v.</code> confirmed, the 853 reads <code>$a v. $b no.</code></li>
+        <li><strong>A reading only the cataloguer can give.</strong> A lone number with no caption and no date could be a volume, an issue or a year. The parser holds it rather than guess, and the meaning confirmed on its pattern is what converts it.</li>
+      </ul>
+
+      <h4 class="step">5 · The parser reads; the pattern fills the gaps</h4>
+      <p>A confirmed pattern decides which statements are its own, and supplies only what the parser cannot know: the meaning of a bare number, or a caption for a level written without one. It never overwrites a caption the statement prints. Wherever a statement says everything itself, the pattern and the parser alone write the same 853 and 863, and a test checks that both routes agree.</p>
+    </article>
+
+    <article class="panel" id="cataloguer-controls">
+      <h3>What the cataloguer controls</h3>
+      <p>The cataloguer decides what "correct" means, and the Workbench is built to take those decisions: for a group of statements, for one record, or for the whole file.</p>
+      <div class="controls">
+        <section>
+          <h4>On a pattern</h4>
+          <ul>
+            <li>Confirm or change what each value is, its caption and its level.</li>
+            <li>Mark a shape <strong>Skip</strong> to handle it by hand; its statements are left exactly as they are.</li>
+            <li>Test the expression against statements, or edit it by hand.</li>
+            <li>Export the pattern library and load it next week, or on another collection.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>On one record</h4>
+          <ul>
+            <li><strong>Edit an 866</strong> before conversion, to fix a typo such as <code>(Fal 1995-Fall 1999)</code> or a wrong caption. The corrected text goes into the file, and "Put back as uploaded" undoes it.</li>
+            <li><strong>This record's 853:</strong> its frequency (<code>$w</code>), issues per volume (<code>$u</code>), and a caption for any level its statements leave blank.</li>
+            <li>Skip the record, give each shape its own 853, mark it reviewed, or leave a note for the log.</li>
+          </ul>
+        </section>
+        <section>
+          <h4>For the whole file</h4>
+          <ul>
+            <li>Holdings level: detailed (4) or summary (3).</li>
+            <li>Subfield convention: MARC 21, or a house convention adjustable subfield by subfield; the 853 indicators and numbering continuity (<code>$v</code>).</li>
+            <li>Whether the parser converts statements no pattern claims, and <strong>strict</strong> mode: convert only what it reads in full.</li>
+            <li>What to do when a value would be left out to fit MARC: convert and mark it, hold that statement, or leave the record as uploaded.</li>
+            <li>Whether to remove each 866 (only ever once everything in it went somewhere), and whether to clear existing 853/863s first.</li>
+          </ul>
+        </section>
+      </div>
+      <p class="note">Every record says what happened to each statement: converted, to check, left out to fit MARC, held, or belongs in an 867 or 868. A "Needs attention" filter gathers what is left to do, and the downloadable log lists every decision ("Edited by you", "853 set by you", "Skipped") beside what the tool did.</p>
     </article>
 
     <article class="panel">
