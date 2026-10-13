@@ -16,7 +16,8 @@
     <p class="draft-banner" role="note"><strong>Draft.</strong> Copy and layout are in progress; numbers are current as of Workbench {{ n.as_of_version }}.</p>
     <div class="eyebrow">ALA Core Forum · 18–20 November 2026 · Poster</div>
     <h1 class="big">Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
-    <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong> Matthew Codey</p>
+    <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong></p>
+    <p class="byline">Matthew Codey</p>
   </div>
 </section>
 
@@ -43,6 +44,7 @@
         <span class="tag">Approach 1</span>
         <h3>Write the script by hand</h3>
         <p>Write the parsing code yourself: a regular expression and a script, built against your own collection's 866s.</p>
+        <p>My starting point was a script published by USC colleagues for their own post-migration clean-up <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
           <div><dt>For it</dt><dd>Results tuned to a bespoke collection. This is how the original parser's regular expression was written.</dd></div>
@@ -185,6 +187,15 @@
       <a class="src-link" href="https://github.com/bdmcodey/holdings-workbench" target="_blank" rel="noopener">View source <span aria-hidden="true">&rarr;</span></a>
     </div>
     <p class="poc-note">A proof of concept, under active development — not a supported service.</p>
+  </div>
+</section>
+
+<section class="part refs" aria-labelledby="refs">
+  <div class="wrap">
+    <h2 class="refs-title" id="refs">References</h2>
+    <ul class="ref-list">
+      <li id="ref-chung-2023">Chung, M., &amp; Pendyala, P. C. (2023). Enhancing serials holdings data: A Pymarc-powered clean-up project. <cite>Code4Lib Journal</cite>, 58. <a href="https://journal.code4lib.org/articles/17839">https://journal.code4lib.org/articles/17839</a></li>
+    </ul>
   </div>
 </section>
 
