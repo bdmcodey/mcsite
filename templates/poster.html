@@ -44,7 +44,7 @@
         <span class="tag">Approach 1</span>
         <h3>Write the script by hand</h3>
         <p>Write the parsing code yourself: a regular expression and a script, built against your own collection's 866s.</p>
-        <p>My starting point was a script published by USC colleagues for their own post-migration clean-up <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
+        <p>My starting point was a script USC colleagues wrote for ONE Archives serials migrated from Inmagic, which read 866s written year first <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for that one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
           <div><dt>For it</dt><dd>Results tuned to a bespoke collection. This is how the original parser's regular expression was written.</dd></div>
@@ -179,7 +179,11 @@
 
     <article class="panel">
       <h3>Lessons, and what's next</h3>
-      <p class="todo">To write.</p>
+      <div class="draft-copy">
+        <p class="draft-label">Draft: edit freely</p>
+        <p><strong>A script reads what it was written for, and passes over the rest.</strong> In the clean-up this work grew from, about 600 of 5,254 records came out with no 863, and were found afterwards by looking for what was missing <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. The Workbench makes the check part of the tool. Every value in a statement is encoded, or named as left out, or the statement is held for review and its 866 kept.</p>
+      </div>
+      <p class="todo">To write: other lessons, and what's next.</p>
     </article>
 
     <div class="card-links poster-links">

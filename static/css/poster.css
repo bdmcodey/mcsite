@@ -38,6 +38,10 @@
 .approaches .panel{margin-bottom:0}
 .approaches + .todo{margin-top:20px}
 
+/* Drafted copy awaiting Matthew's edit */
+.draft-copy{border:1px dashed var(--accent);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.draft-label{color:var(--accent) !important;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+
 /* Placeholders for copy still to be written */
 .todo{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted) !important;font-style:italic}
 
