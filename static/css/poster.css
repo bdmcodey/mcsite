@@ -24,9 +24,17 @@
 .panel p + p{margin-top:12px}
 .panel strong{color:var(--text)}
 .panel code{font-size:.9em;background:var(--surface-2);padding:1px 6px;border-radius:6px}
-.approaches{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.part-intro{color:#cfcfd8;max-width:720px;margin:28px 0 20px}
+.approaches{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:1000px){.approaches{grid-template-columns:repeat(3,1fr)}}
+.approaches .panel.chosen{border-color:var(--accent)}
+.facts{margin-top:16px}
+.facts div{border-top:1px solid var(--line);padding:10px 0}
+.facts dt{color:var(--accent);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
+.facts dd{color:#cfcfd8;font-size:.94rem}
+.facts dd.todo{margin:0}
 .approaches .panel{margin-bottom:0}
-.approaches + *{margin-top:20px}
+.approaches + .todo{margin-top:20px}
 
 /* Placeholders for copy still to be written */
 .todo{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted) !important;font-style:italic}
@@ -63,7 +71,6 @@
 .poster-links a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
 @media(max-width:720px){
-  .approaches{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   .fig-wide{display:none}
   .fig-tall{display:block}

@@ -37,20 +37,42 @@
       </figure>
     </article>
 
+    <p class="part-intro">Three ways to get from an 866 to an 853/863, each asking something different of the person doing it.</p>
     <div class="approaches">
       <article class="panel">
-        <span class="tag">Approach</span>
-        <h3>Ask a model to convert</h3>
-        <p>Send each 866 statement to a large language model through its API and have it write the 853/863 directly: no parser, no regex.</p>
-        <p class="todo">To write: what this showed — accuracy, consistency between runs, cost, and what it means to send holdings to an outside service.</p>
+        <span class="tag">Approach 1</span>
+        <h3>Write the script by hand</h3>
+        <p>Write the parsing code yourself: a regular expression and a script, built against your own collection's 866s.</p>
+        <dl class="facts">
+          <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
+          <div><dt>For it</dt><dd>Results tuned to a bespoke collection. This is how the original parser's regular expression was written.</dd></div>
+          <div><dt>Against it</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do.</dd></div>
+        </dl>
+        <p class="todo">To write: the experience in more detail.</p>
       </article>
       <article class="panel">
-        <span class="tag">Approach</span>
-        <h3>Use AI to build a tool that converts</h3>
-        <p>Work with an AI coding assistant to write an ordinary program that does the conversion the same way every time, and that a cataloguer can check.</p>
-        <p class="todo">To write: why this was the one chosen. (Add any other approaches tried.)</p>
+        <span class="tag">Approach 2</span>
+        <h3>Ask a model to convert</h3>
+        <p>Send the 866 statements to a large language model through its API and have it write the 853/863 directly: no parser, no regex.</p>
+        <dl class="facts">
+          <div><dt>Coding knowledge</dt><dd>The least.</dd></div>
+          <div><dt>For it</dt><dd>In limited testing, good results with little setup.</dd></div>
+          <div><dt>Against it</dt><dd>Expensive in tokens: rate limits arrived almost at once. And a model's output is stochastic, so the same corpus sent to the same model twice is likely to come back converted differently.</dd></div>
+        </dl>
+        <p class="todo">To write: the experience in more detail.</p>
+      </article>
+      <article class="panel chosen">
+        <span class="tag">Approach 3 · chosen</span>
+        <h3>Use AI to build the tool</h3>
+        <p>Describe in plain language what the tool should do and how its screens should work, and have an AI coding assistant (Claude Code) write a deterministic Python application from that. It produced the Pattern Detector and the Converter first, then the Workbench that joined them.</p>
+        <dl class="facts">
+          <div><dt>Coding knowledge</dt><dd class="todo">To write.</dd></div>
+          <div><dt>For it</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
+          <div><dt>Against it</dt><dd class="todo">To write.</dd></div>
+        </dl>
       </article>
     </div>
+    <p class="todo">To write: the three side by side — coding knowledge, setup, cost to run, consistency between runs, portability to other collections.</p>
   </div>
 </section>
 
