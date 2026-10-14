@@ -11,7 +11,7 @@
 
 .poster-hero{padding:72px 0 40px;position:relative;overflow:hidden}
 .poster-hero::before{content:"";position:absolute;top:-160px;right:-120px;width:520px;height:520px;background:radial-gradient(circle,var(--accent-soft),transparent 68%);pointer-events:none}
-.poster-hero h1.big{font-size:clamp(2rem,5vw,3.4rem);max-width:900px}
+.poster-hero h1.big{font-size:clamp(2rem,5vw,3.4rem);text-wrap:balance}
 .poster-hero .lede{margin-bottom:6px}
 .byline{color:#cfcfd8;font-size:clamp(1rem,1.8vw,1.1rem);white-space:nowrap}
 .draft-banner{display:inline-block;border:1px dashed var(--accent);color:var(--muted);font-size:.86rem;padding:6px 14px;border-radius:999px;margin-bottom:26px}
