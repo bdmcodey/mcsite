@@ -35,6 +35,7 @@ templates/          # Jinja2 templates
   contact.html      #   contact
   poster.html       #   companion page for the conference poster (unlisted draft)
 poster/             # builds the poster's figures and numbers (see poster/README.md)
+cv/build_cv.py      # builds static/cv/Matthew_Codey_CV.pdf (pip install reportlab; edit and re-run)
 static/
   css/main.css      # main stylesheet (theme driven by CSS variables)
   css/poster.css    # extra styles for the poster page
