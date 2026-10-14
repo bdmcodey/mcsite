@@ -59,11 +59,11 @@
       <article class="panel">
         <span class="tag">Approach 2</span>
         <h3>Ask a model to read the statements</h3>
-        <p>Send the 866 statements to a large language model and ask it to pick out the parts an 853/863 is built from: volumes, issues, dates. Not a conversion to 853/863, but an alternative to working out the patterns.</p>
+        <p>Send the 866 statements to a large language model through its API and ask it to pick out the parts an 853/863 is built from: volumes, issues, dates. Not a conversion to 853/863, but an alternative to working out the patterns.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The least.</dd></div>
           <div><dt>For it</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
-          <div><dt>Against it</dt><dd>Expensive in tokens: the free tier of ChatGPT stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
+          <div><dt>Against it</dt><dd>Expensive in tokens: the free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
         </dl>
         <p>Holdings are public catalogue data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
       </article>
@@ -87,7 +87,7 @@
           <tbody>
             <tr><th scope="row">Coding knowledge</th><td data-label="1 · By hand">The most</td><td data-label="2 · A model reads">The least</td><td data-label="3 · AI builds the tool">Some</td></tr>
             <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months, most of it on the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
-            <tr><th scope="row">Cost to run</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; the free tier stopped within two dozen records</td><td data-label="3 · AI builds the tool">Nothing: no model or tokens when it runs</td></tr>
+            <tr><th scope="row">Cost to run</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">Nothing: no model or tokens when it runs</td></tr>
             <tr><th scope="row">Same output every time</th><td data-label="1 · By hand">Yes</td><td data-label="2 · A model reads">Not guaranteed</td><td data-label="3 · AI builds the tool">Yes</td></tr>
             <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly: tuned to one collection</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it: patterns are found in each file, and it is tested on other libraries' statements</td></tr>
             <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully</td><td data-label="2 · A model reads">No code to read: the model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, kept honest by tests</td></tr>
@@ -285,7 +285,10 @@
         <p class="draft-label">Draft: edit freely</p>
         <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
       </div>
-      <p class="todo">To write: what's next.</p>
+      <div class="draft-copy">
+        <p class="draft-label">Draft: edit freely</p>
+        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
+      </div>
     </article>
 
     <div class="card-links poster-links">
