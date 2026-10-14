@@ -39,6 +39,29 @@ If the Workbench's output no longer matches what a figure says (the converter
 writes something different for the sample statement, or the corpus report
 changes its wording), the script stops and says why instead of drawing it.
 
+## The printed poster
+
+`build_poster.py` turns the page at `/poster/print/` (`templates/poster_print.html`,
+`static/css/poster-print.css`) into `static/poster/poster.pdf`, the file sent to
+FedEx Office. It also writes the QR code, `static/poster/figures/qr.svg`, which
+points to `https://matthewcodey.com/poster?src=qr` so scans can be counted.
+
+- Size: 36 x 48 in. portrait, plus FedEx Office's 0.125 in. bleed on every side,
+  so the PDF page is 36.25 x 48.25 in. Text stays at least 0.6 in. inside the trim.
+- It uses the same figures and numbers as the page; run `build_figures.py` first
+  if the Workbench has changed.
+- It writes the PDF only if everything fits on the sheet, and otherwise says which
+  section overflows.
+
+```bat
+pip install segno playwright
+playwright install chromium
+python poster\build_poster.py --preview poster-preview.png
+```
+
+To see it while editing, run the site locally and open
+http://127.0.0.1:5000/poster/print/ (it is 3,480 px wide; zoom out).
+
 ## Theme
 
 The figures are themed with CSS custom properties (`--fig-*`). The values

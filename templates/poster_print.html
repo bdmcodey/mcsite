@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Poster (print) · Matthew Codey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/poster-print.css') }}">
+</head>
+{% set rel = n.releases %}
+{% set before = n.corpus.before %}
+{% set now = n.corpus.now %}
+{% set rx = n.real_export %}
+{% set pat = n.pattern %}
+{% macro coloured(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
+<body>
+<main class="sheet">
+<div class="safe">
+
+  <!-- Header ---------------------------------------------------------- -->
+  <header class="head">
+    <div class="head-text">
+      <p class="eyebrow">ALA Core Forum 2026 · Louisville, KY</p>
+      <h1>Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
+      <p class="subtitle">Built with an AI coding assistant; runs without one.</p>
+      <p class="byline">Matthew Codey</p>
+    </div>
+    <div class="qr">
+      {{ fig.qr }}
+      <p class="qr-cap">More detail, the figures and a PDF of this poster</p>
+      <p class="qr-url">matthewcodey.com/poster</p>
+    </div>
+  </header>
+
+  <!-- Part 1 ---------------------------------------------------------- -->
+  <section class="part">
+    <h2><span class="num">1</span> The problem, and the approaches I tried</h2>
+    <div class="cols">
+      <div class="col">
+        <article class="block">
+          <h3>The problem</h3>
+          <p>Many libraries' serials holdings are stored only as human-readable, free-text <b>866</b> fields rather than as MARC-encoded <b>853/863</b> pairs. Converting by hand is slow, conventions vary, and hand-typed data is prone to typos and other errors.</p>
+          <p class="goal"><b>The goal:</b> a tool that is portable across collections, works on messy holdings as they are (no manual clean-up), and never silently loses anything.</p>
+          <figure class="fig fig-statement">{{ fig.statement }}</figure>
+          <p class="marc"><code>{{ coloured(n.statement.segments_853) }}</code><code>{{ coloured(n.statement.segments_863) }}</code></p>
+        </article>
+      </div>
+      <div class="col span2">
+        <div class="approaches">
+          <article class="block card">
+            <p class="tag">Approach 1</p>
+            <h3>Write the script by hand</h3>
+            <p>I adapted USC colleagues' script <span class="cite">(Chung &amp; Pendyala, 2023)</span> over six months, teaching myself Python. The hardest part was one monolithic regular expression: weeks, if not months, in regex101 before it covered every pattern.</p>
+            <p class="for"><b>For:</b> tuned to one collection; code I knew line by line.</p>
+            <p class="against"><b>Against:</b> only feasible on clean, consistent 866s, and not portable. Few institutions could write their own expression that way.</p>
+          </article>
+          <article class="block card">
+            <p class="tag">Approach 2</p>
+            <h3>Ask a model to read the statements</h3>
+            <p>Send the 866s to a large language model through its API, and ask it to pick out the volumes, issues and dates an 853/863 is built from.</p>
+            <p class="for"><b>For:</b> the least coding knowledge; good results from minimal prompting.</p>
+            <p class="against"><b>Against:</b> tokens for every statement (free access stopped within two dozen records), and output that isn't guaranteed to be the same twice.</p>
+          </article>
+          <article class="block card chosen">
+            <p class="tag">Approach 3 · chosen</p>
+            <h3>Use AI to build the tool</h3>
+            <p>Describe in plain language what the tool should do, and have an AI coding assistant (Claude Code) write a deterministic Python application.</p>
+            <p class="for"><b>For:</b> the same file converts the same way every time, with no model, API key or tokens when it runs.</p>
+            <p class="against"><b>Against:</b> a black box. I can confirm it works, and tests stop it regressing, without fully understanding why it works.</p>
+          </article>
+        </div>
+        <table class="compare">
+          <thead><tr><th></th><th>1 · By hand</th><th>2 · A model reads</th><th>3 · AI builds the tool</th></tr></thead>
+          <tbody>
+            <tr><th>Coding knowledge</th><td>The most</td><td>The least</td><td>Some</td></tr>
+            <tr><th>Cost to run</th><td>Nothing</td><td>Tokens for every statement</td><td>Nothing</td></tr>
+            <tr><th>Same output every time</th><td>Yes</td><td>Not guaranteed</td><td>Yes</td></tr>
+            <tr><th>Other collections</th><td>Poorly</td><td>Not tested far enough</td><td>Designed for it</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part 2 ---------------------------------------------------------- -->
+  <section class="part">
+    <h2><span class="num">2</span> The approach chosen: AI-assisted development of a deterministic tool</h2>
+
+    <div class="cols">
+      <div class="col">
+        <article class="block">
+          <h3>How the Workbench reads a statement</h3>
+          <figure class="fig fig-tokens">{{ fig.tokens }}</figure>
+          <p class="rule"><code>{{ coloured(pat.template_segments) }}</code></p>
+          <ol class="steps">
+            <li>Statements with the same shape are one group, whatever their numbers.</li>
+            <li>Each group gets a matching rule with a named slot for each value.</li>
+            <li>A cataloguer confirms what each value means, once per group.</li>
+            <li>The parser reads every statement; a pattern fills only what it cannot know.</li>
+          </ol>
+        </article>
+      </div>
+      <div class="col">
+        <article class="block">
+          <h3>What the cataloguer controls</h3>
+          <ul class="controls">
+            <li><b>On a pattern:</b> what each value is, its caption and level; skip a shape; test or edit the rule; reuse the library on another collection.</li>
+            <li><b>On one record:</b> edit an 866 before it is read, set this record's 853 (frequency, issues per volume, missing captions), skip it, leave a note.</li>
+            <li><b>For the whole file:</b> holdings level, subfield convention, strict reading, what to do with a value MARC has no place for, and whether to keep each 866.</li>
+          </ul>
+          <p class="small">Every decision is listed in a downloadable log.</p>
+        </article>
+        <article class="block">
+          <h3>The working rules</h3>
+          <ol class="rules">
+            <li><b>Measure before you change.</b></li>
+            <li><b>Nothing disappears silently.</b></li>
+            <li><b>One reader of holdings.</b></li>
+            <li><b>If a fix needs the tests rewritten, stop.</b></li>
+            <li><b>Write the changelog for cataloguers.</b></li>
+          </ol>
+        </article>
+        <article class="block">
+          <h3>The human in the loop</h3>
+          <p>The AI writes the code; the cataloguer decides what "correct" means. Two October bugs were found by the cataloguer, not the tests:</p>
+          <ul class="bugs">
+            <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." when its pattern was confirmed (fixed in 0.32.0).</li>
+            <li><code>34 no 3, 4 (Summer, Autumn 1990)</code> ignored its confirmed caption (fixed in 0.34.0).</li>
+          </ul>
+        </article>
+      </div>
+      <div class="col">
+        <article class="block">
+          <h3>The turning point: silent losses</h3>
+          <p>A silent loss writes the fields, removes the 866, and drops a volume or a month with nothing on screen to say so.</p>
+          <figure class="fig fig-loss">{{ fig.silent_loss }}</figure>
+        </article>
+        <article class="block">
+          <h3>On real data</h3>
+          <p>A real Alma export of {{ rx.records }} records:</p>
+          <dl class="stats">
+            <div><dt>holdings statements</dt><dd>{{ '{:,}'.format(rx.statements) }}</dd></div>
+            <div><dt>values unaccounted for</dt><dd>{{ rx.unaccounted }}</dd></div>
+            <div><dt>drift, simulated Alma round trip</dt><dd>{{ rx.round_trip.drift }}</dd></div>
+            <div><dt>of Alma's own 866s reproduced</dt><dd>{{ rx.alma_866s_reproduced }}/{{ rx.alma_866s_checked }}</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+
+    <div class="cols">
+      <article class="block span2">
+        <h3>How it was built: {{ rel.count }} releases, 24 July to 12 October 2026</h3>
+        <figure class="fig fig-releases">{{ fig.releases_wide }}</figure>
+        <p class="caption">Each dot is one release. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on 16 September replaced them.</p>
+      </article>
+      <article class="block">
+        <h3>Lessons, and what's next</h3>
+        <ul class="lessons">
+          <li><b>A script reads what it was written for, and passes over the rest.</b> The Workbench makes the check part of the tool: every value is encoded, named as left out, or held with its 866 kept.</li>
+          <li><b>Decide whether you can work with code you don't fully understand.</b> A test suite and automated checks are what made it acceptable.</li>
+          <li><b>AI is at its best building the tool, not being it.</b></li>
+          <li><b>Next:</b> testing on more real .mrc files from technical services colleagues, working toward a 1.0 release.</li>
+        </ul>
+      </article>
+    </div>
+
+  </section>
+
+  <footer class="foot">
+    <p><b>Try it:</b> tools.matthewcodey.com/workbench &nbsp;·&nbsp; <b>Source:</b> github.com/bdmcodey/holdings-workbench</p>
+    <p class="ref">Chung, M., &amp; Pendyala, P. C. (2023). Enhancing serials holdings data: A Pymarc-powered clean-up project. <i>Code4Lib Journal</i>, 58.</p>
+  </footer>
+
+</div>
+</main>
+</body>
+</html>
