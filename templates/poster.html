@@ -41,7 +41,7 @@
       </figure>
     </article>
 
-    <p class="part-intro">Three ways to get from an 866 to an 853/863, each asking something different of the person doing it.</p>
+    <p class="part-intro">Three ways to read 866 statements well enough to build 853/863 from them, each asking something different of the person doing it.</p>
     <div class="approaches">
       <article class="panel">
         <span class="tag">Approach 1</span>
@@ -50,34 +50,51 @@
         <p>My starting point was a script USC colleagues wrote for ONE Archives serials migrated from Inmagic, which read 866s written year first <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for that one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
-          <div><dt>For it</dt><dd>Results tuned to a bespoke collection. This is how the original parser's regular expression was written.</dd></div>
+          <div><dt>For it</dt><dd>Results tuned to a bespoke collection, and code I knew intimately: I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
           <div><dt>Against it</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
         </dl>
-        <p class="todo">To write: the experience in more detail.</p>
+        <p>It took me more than six months to adapt the script to my collection, much of it spent teaching myself Python; before that I had only followed online tutorials. The hardest part by far was the single, monolithic regular expression the whole parser rested on. It took weeks, if not months, of testing it against the corpus in regex101 before it accounted for every pattern. It handled most statements well, but some edge cases needed logic I couldn't see how to write. That was the wall, until AI coding assistants came along.</p>
+        <p>Asking every institution to write its own expression that way seemed unviable, and that is what led me to induce the expressions instead: find the patterns in a file, and generate a rule for each.</p>
       </article>
       <article class="panel">
         <span class="tag">Approach 2</span>
-        <h3>Ask a model to convert</h3>
-        <p>Send the 866 statements to a large language model through its API and have it write the 853/863 directly: no parser, no regex.</p>
+        <h3>Ask a model to read the statements</h3>
+        <p>Send the 866 statements to a large language model and ask it to pick out the parts an 853/863 is built from: volumes, issues, dates. Not a conversion to 853/863, but an alternative to working out the patterns.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The least.</dd></div>
-          <div><dt>For it</dt><dd>In limited testing, good results with little setup.</dd></div>
-          <div><dt>Against it</dt><dd>Expensive in tokens: rate limits arrived almost at once. And a model's output is stochastic, so the same corpus sent to the same model twice is likely to come back converted differently.</dd></div>
+          <div><dt>For it</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
+          <div><dt>Against it</dt><dd>Expensive in tokens: the free tier of ChatGPT stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
         </dl>
-        <p class="todo">To write: the experience in more detail.</p>
+        <p>Holdings are public catalogue data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
       </article>
       <article class="panel chosen">
         <span class="tag">Approach 3 · chosen</span>
         <h3>Use AI to build the tool</h3>
         <p>Describe in plain language what the tool should do and how its screens should work, and have an AI coding assistant (Claude Code) write a deterministic Python application from that. It produced the Pattern Detector and the Converter first, then the Workbench that combined them.</p>
+        <p>Both began as one-shot prompts: the Pattern Detector from a single prompt in Cursor, and the Converter from handing my original parser to Claude Code and asking for the same thing, done better, with an interface. Those were proofs of concept. The real development began with version numbers.</p>
         <dl class="facts">
-          <div><dt>Coding knowledge</dt><dd class="todo">To write.</dd></div>
+          <div><dt>Coding knowledge</dt><dd>Some. Without my familiarity with code, I couldn't have described the features I wanted as well, or spotted bugs and other problems as they came up.</dd></div>
           <div><dt>For it</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
-          <div><dt>Against it</dt><dd class="todo">To write.</dd></div>
+          <div><dt>Against it</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress.</dd></div>
         </dl>
       </article>
     </div>
-    <p class="todo">To write: the three side by side: coding knowledge, setup, cost to run, consistency between runs, portability to other collections.</p>
+    <article class="panel compare">
+      <h3>Side by side</h3>
+      <div class="table-wrap">
+        <table class="compare-table">
+          <thead><tr><th scope="col"></th><th scope="col">1 · By hand</th><th scope="col">2 · A model reads</th><th scope="col">3 · AI builds the tool</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Coding knowledge</th><td data-label="1 · By hand">The most</td><td data-label="2 · A model reads">The least</td><td data-label="3 · AI builds the tool">Some</td></tr>
+            <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months, most of it on the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
+            <tr><th scope="row">Cost to run</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; the free tier stopped within two dozen records</td><td data-label="3 · AI builds the tool">Nothing: no model or tokens when it runs</td></tr>
+            <tr><th scope="row">Same output every time</th><td data-label="1 · By hand">Yes</td><td data-label="2 · A model reads">Not guaranteed</td><td data-label="3 · AI builds the tool">Yes</td></tr>
+            <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly: tuned to one collection</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it: patterns are found in each file, and it is tested on other libraries' statements</td></tr>
+            <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully</td><td data-label="2 · A model reads">No code to read: the model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, kept honest by tests</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -260,7 +277,15 @@
         <p class="draft-label">Draft: edit freely</p>
         <p><strong>A script reads what it was written for, and passes over the rest.</strong> In the clean-up this work grew from, about 600 of 5,254 records came out with no 863, and were found afterwards by looking for what was missing <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. The Workbench makes the check part of the tool. Every value in a statement is encoded, or named as left out, or the statement is held for review and its 866 kept.</p>
       </div>
-      <p class="todo">To write: other lessons, and what's next.</p>
+      <div class="draft-copy">
+        <p class="draft-label">Draft: edit freely</p>
+        <p><strong>Decide whether you can work with code you don't fully understand.</strong> That is the real trade in building with an AI coding assistant, especially for someone who isn't a programmer. What made it acceptable for me was a test suite and automated checks: I may not know why every line works, but I know the good output can't quietly stop.</p>
+      </div>
+      <div class="draft-copy">
+        <p class="draft-label">Draft: edit freely</p>
+        <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
+      </div>
+      <p class="todo">To write: what's next.</p>
     </article>
 
     <div class="card-links poster-links">

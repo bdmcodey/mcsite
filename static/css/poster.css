@@ -38,6 +38,11 @@
 .facts dd.todo{margin:0}
 .approaches .panel{margin-bottom:0}
 .approaches + .todo{margin-top:20px}
+.approaches + .compare{margin-top:20px}
+.compare-table{border-collapse:collapse;font-size:.9rem;width:100%;min-width:560px}
+.compare-table th,.compare-table td{border-bottom:1px solid var(--line);padding:9px 14px 9px 0;text-align:left;vertical-align:top;color:#cfcfd8}
+.compare-table thead th{color:var(--accent);font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.compare-table tbody th{color:var(--text);font-weight:600;width:20%}
 
 /* The example's subfields keep figure 1's colours wherever they appear: an
    underline on the text (which stays in the normal ink), or a swatch. */
@@ -124,4 +129,11 @@
   .slot-table{font-size:.84rem;min-width:0}
   .slot-table th,.slot-table td{padding-right:10px}
   .slot-table code{overflow-wrap:anywhere}
+  /* The comparison stacks: one block per row, each value labelled */
+  .compare-table{min-width:0}
+  .compare-table thead{display:none}
+  .compare-table tr{display:block;padding:10px 0;border-bottom:1px solid var(--line)}
+  .compare-table tbody th{display:block;width:auto;border:0;padding:0 0 4px}
+  .compare-table td{display:block;border:0;padding:2px 0}
+  .compare-table td::before{content:attr(data-label) ": ";color:var(--accent);font-weight:600;font-size:.8rem}
 }
