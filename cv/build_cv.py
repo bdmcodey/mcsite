@@ -95,7 +95,7 @@ SKILLS = [
 PRESENTATIONS = [
     [("Codey, M. (2026). ", "r"),
      ("Automating MARC Holdings Generation with AI: Lessons from the Field.", "i"),
-     (" Poster session, ALA Core Forum, Louisville, KY, November 18\u201320 (forthcoming).", "r")],
+     (" Poster session, ALA Core Forum 2026, Louisville, KY (forthcoming).", "r")],
     [("Thompson, A. M., Codey, M., Lyle, C., & Davis, R. O. (2017). ", "r"),
      ("Do We Dare Discard? Retention of Print Serials in a Digital Age.", "i"),
      (" Poster session, MLA '17 Annual Meeting, Seattle, WA.", "r")],
