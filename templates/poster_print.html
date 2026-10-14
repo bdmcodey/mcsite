@@ -54,22 +54,22 @@
             <p class="tag">Approach 1</p>
             <h3>Write the script by hand</h3>
             <p>I adapted USC colleagues' script <span class="cite">(Chung &amp; Pendyala, 2023)</span> over six months, teaching myself Python. The hardest part was one monolithic regular expression: weeks, if not months, in regex101 before it covered every pattern.</p>
-            <p class="for"><b>For:</b> tuned to one collection; code I knew line by line.</p>
-            <p class="against"><b>Against:</b> only feasible on clean, consistent 866s, and not portable. Few institutions could write their own expression that way.</p>
+            <p class="for"><b>Pros:</b> tuned to one collection; code I knew line by line.</p>
+            <p class="against"><b>Cons:</b> only feasible on clean, consistent 866s, and not portable. Few institutions could write their own expression that way.</p>
           </article>
           <article class="block card">
             <p class="tag">Approach 2</p>
             <h3>Ask a model to read the statements</h3>
             <p>Send the 866s to a large language model through its API, and ask it to pick out the volumes, issues and dates an 853/863 is built from.</p>
-            <p class="for"><b>For:</b> the least coding knowledge; good results from minimal prompting.</p>
-            <p class="against"><b>Against:</b> tokens for every statement (free access stopped within two dozen records), and output that isn't guaranteed to be the same twice.</p>
+            <p class="for"><b>Pros:</b> the least coding knowledge; good results from minimal prompting.</p>
+            <p class="against"><b>Cons:</b> tokens for every statement (free access stopped within two dozen records), and output that isn't guaranteed to be the same twice.</p>
           </article>
           <article class="block card chosen">
             <p class="tag">Approach 3 · chosen</p>
             <h3>Use AI to build the tool</h3>
             <p>Describe in plain language what the tool should do, and have an AI coding assistant (Claude Code) write a deterministic Python application.</p>
-            <p class="for"><b>For:</b> the same file converts the same way every time, with no model, API key or tokens when it runs.</p>
-            <p class="against"><b>Against:</b> a black box. I can confirm it works, and tests stop it regressing, without fully understanding why it works.</p>
+            <p class="for"><b>Pros:</b> the same file converts the same way every time, with no model, API key or tokens when it runs.</p>
+            <p class="against"><b>Cons:</b> a black box. I can confirm it works, and tests stop it regressing, without fully understanding why it works.</p>
           </article>
         </div>
         <table class="compare">
