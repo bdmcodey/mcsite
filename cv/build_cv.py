@@ -93,11 +93,12 @@ SKILLS = [
 ]
 
 PRESENTATIONS = [
+    [("Codey, M. (2026). ", "r"),
+     ("Automating MARC Holdings Generation with AI: Lessons from the Field.", "i"),
+     (" Poster session, ALA Core Forum, Louisville, KY, November 18\u201320 (forthcoming).", "r")],
     [("Thompson, A. M., Codey, M., Lyle, C., & Davis, R. O. (2017). ", "r"),
      ("Do We Dare Discard? Retention of Print Serials in a Digital Age.", "i"),
      (" Poster session, MLA '17 Annual Meeting, Seattle, WA.", "r")],
-    [("Medical Library Association (2014–Present) · Beta Phi Mu Honor Society, "
-      "Omega Chapter (2019–Present) · ELUNA 2019 & 2020.", "r")],
 ]
 
 # ── Layout, measured from the original file ──────────────────────────────────
@@ -219,7 +220,7 @@ def build(path=OUT):
         y += 12.97
         p.text(LEFT, y, sub, "i", SMALL, MUTED)
 
-    for title, paras in (("TECHNICAL SKILLS", SKILLS), ("PRESENTATIONS & AFFILIATIONS", PRESENTATIONS)):
+    for title, paras in (("TECHNICAL SKILLS", SKILLS), ("PRESENTATIONS", PRESENTATIONS)):
         y += 21.75
         p.heading(y, title)
         y += 19.25 - PARA_GAP
