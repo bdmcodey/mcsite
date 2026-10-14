@@ -1,4 +1,4 @@
-/* /poster/ — companion page for the conference poster.
+/* /poster/: companion page for the conference poster.
    The figures are generated SVGs themed by --fig-* properties; their built-in
    fallbacks are the poster's light theme, and this page sets the dark one. */
 .poster-page{

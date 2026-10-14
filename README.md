@@ -1,6 +1,6 @@
 # matthewcodey.com
 
-My personal website — a small Flask application I built, version-control here, and
+My personal website: a small Flask application I built, version-control here, and
 self-host on my own Linux server. It doubles as an honest demonstration of the
 web-development and systems side of my work in academic libraries.
 
@@ -9,23 +9,23 @@ web-development and systems side of my work in academic libraries.
 ## About
 
 A multi-page portfolio: a landing page, selected projects and systems work, a
-résumé, and a contact page. It's deliberately lightweight — no build step and no
+résumé, and a contact page. It's deliberately lightweight, with no build step and no
 JavaScript framework, just server-rendered templates and a single hand-written
 stylesheet.
 
 ## Built with
 
-- **Python · Flask 3** — routing and server-rendered templates (Jinja2)
-- **Gunicorn** — WSGI server in production
-- **nginx** — reverse proxy and TLS termination
-- **Vanilla HTML/CSS** — no framework; Fraunces + Inter typefaces, dark theme, a
+- **Python · Flask 3**: routing and server-rendered templates (Jinja2)
+- **Gunicorn**: WSGI server in production
+- **nginx**: reverse proxy and TLS termination
+- **Vanilla HTML/CSS**: no framework; Fraunces + Inter typefaces, dark theme, a
   single `main.css` themed with CSS custom properties
-- **Git + a Linux VPS** — deployment by pull
+- **Git + a Linux VPS**: deployment by pull
 
 ## Structure
 
 ```
-app.py              # Flask app — one route per page
+app.py              # Flask app: one route per page
 requirements.txt    # pinned dependencies
 templates/          # Jinja2 templates
   base.html         #   shared layout (nav, footer, meta / Open Graph tags)
