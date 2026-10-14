@@ -13,7 +13,7 @@
 .fig .sf-b-stroke{stroke:var(--fig-sf-b,#d9592a);stroke-width:2.5}
 .fig .sf-i-stroke{stroke:var(--fig-sf-i,#138a60);stroke-width:2.5}
 .fig .sf-j-stroke{stroke:var(--fig-sf-j,#b07a00);stroke-width:2.5}
-.fig .dot{fill:var(--fig-dot,#a08fd0)}
+.fig .dot{fill:var(--fig-dot,#8f7dc8)}
 .fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
 .fig .hit{fill:transparent}
 .fig .hit:hover{fill:var(--fig-line,#d9d5e0);fill-opacity:.5}
