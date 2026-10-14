@@ -52,6 +52,10 @@ points to `https://matthewcodey.com/poster?src=qr` so scans can be counted.
   if the Workbench has changed.
 - It writes the PDF only if everything fits on the sheet, and otherwise says which
   section overflows.
+- The USC logo, `static/poster/figures/usc-logo.svg`, is USC's official Primary
+  Shield and Wordmark for light backgrounds (`PrimShield_Word_RegUse_Card-Blk`),
+  converted from the vector PDF with its colours set to USC's RGB cardinal
+  (`#991b1e`) and black. Don't redraw or recolour it.
 
 ```bat
 pip install segno playwright
