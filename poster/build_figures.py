@@ -670,8 +670,21 @@ def figure_tokens(pattern):
         y += CH + 34
     y += 18
     body.append(text(16, y, "2 · Its shape", "muted", 13))
-    body.append(text(W / 2, y + 28, pattern["shape"], "mono strong", 12, "middle"))
-    H = y + 42
+    # The shape, each label underlined in its subfield's colour. A label in
+    # the shape stands for the piece of the same label, in order: VOL for the
+    # volume caption and its number, YEAR for a year, and so on.
+    shape, SW = pattern["shape"], 7.2               # one monospace character at 12pt
+    sx, sy = (W - len(shape) * SW) / 2, y + 28
+    body.append(text(sx, sy, shape, "mono strong", 12,
+                     extra=f' textLength="{len(shape) * SW:.1f}" lengthAdjust="spacingAndGlyphs"'))
+    pieces = iter(toks)
+    for m in re.finditer(r"VOL|ISS|PT|CHRON|YEAR|#", shape):
+        sf = next((t.get("sf") for t in pieces if t["label"] == m.group()), None)
+        if sf is None:
+            raise Stop(f"no piece of the statement for {m.group()!r} in the shape")
+        body.append(f'<rect x="{sx + m.start() * SW:.1f}" y="{sy + 5}" '
+                    f'width="{(m.end() - m.start()) * SW:.1f}" height="3" rx="1.5" class="sf-{sf}"/>')
+    H = y + 46
     desc = ("The statement " + STATEMENT + " is cut into pieces, each labelled: "
             + ", ".join(f"{t['raw']} {t['label'] or '(punctuation)'}" for t in toks)
             + f". In order, the labels make its shape: {pattern['shape']}.")
