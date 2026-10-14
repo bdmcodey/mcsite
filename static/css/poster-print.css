@@ -1,0 +1,103 @@
+/* The printed poster: 36 x 48 in. trim, plus 0.125 in. bleed on every side
+   (FedEx Office's requirement for edge-to-edge prints), so the page is
+   36.25 x 48.25 in. Everything that matters sits at least 0.6 in. inside the
+   trim. Light theme: the site's lavender on off-white, Fraunces and Inter.
+   1 in. = 96px here. */
+
+@page{size:36.25in 48.25in;margin:0}
+:root{
+  --bg:#faf8f5; --card:#ffffff; --ink:#1f1c29; --muted:#5d5a69; --line:#d9d5e0;
+  --accent:#6f55c0; --accent-soft:#efeaf7;
+  /* Figure 1's subfield colours, light steps (checked for contrast and
+     colour-blind separation on this background) */
+  --fig-sf-a:#6f55c0; --fig-sf-b:#d9592a; --fig-sf-i:#138a60; --fig-sf-j:#b07a00;
+  --fig-surface:#ffffff;
+  /* One named code font, so the PDF looks the same on any machine */
+  --fig-mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg)}
+body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);font-size:30px;line-height:1.45;
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1,h2,h3{font-family:"Fraunces",serif;font-weight:600;letter-spacing:-.01em;line-height:1.08}
+b{font-weight:600}
+code{font-family:var(--fig-mono);font-size:.86em;background:var(--accent-soft);padding:.05em .3em;border-radius:6px}
+
+.sheet{position:relative;width:36.25in;height:48.25in;overflow:hidden;background:var(--bg)}
+/* 0.125 in. bleed + 0.6 in. margin */
+.safe{position:absolute;inset:.725in;display:flex;flex-direction:column;gap:.34in}
+
+/* Header */
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:.8in;
+      padding-bottom:.35in;border-bottom:4px solid var(--accent)}
+.eyebrow{color:var(--accent);font-weight:600;font-size:34px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.15in}
+h1{font-size:124px;letter-spacing:0;max-width:27in;text-wrap:balance}
+.subtitle{font-size:50px;font-weight:600;margin-top:.22in}
+.byline{font-size:40px;color:var(--muted);margin-top:.08in}
+.qr{flex:0 0 5.4in;text-align:center}
+.qr svg{display:block;width:4.6in;height:4.6in;margin:0 auto}
+.qr-cap{font-size:24px;color:var(--muted);margin-top:.12in}
+.qr-url{font-size:30px;font-weight:600}
+
+/* Parts */
+.part{display:flex;flex-direction:column;gap:.32in}
+h2{font-size:72px;display:flex;align-items:center;gap:.25in}
+.num{display:inline-flex;align-items:center;justify-content:center;width:1.05in;height:1.05in;border-radius:50%;
+     background:var(--accent);color:#fff;font-size:60px;flex:0 0 auto}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:.45in;align-items:start}
+.col{display:flex;flex-direction:column;gap:.32in}
+.span2{grid-column:span 2}
+
+.block{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:.32in .36in}
+.block h3{font-size:46px;margin-bottom:.14in}
+.block p + p,.block p + figure,.block figure + p{margin-top:.14in}
+.goal{border-left:8px solid var(--accent);padding-left:.18in}
+.small,.caption{font-size:26px;color:var(--muted)}
+.cite{color:var(--muted)}
+
+/* Figures: sized so their text prints at about 26-36px */
+.fig svg{display:block;width:100%;height:auto}
+.fig-statement svg{max-width:7in;margin:.1in auto 0}
+.fig-tokens svg{max-width:7.6in;margin:0 auto}
+.fig-loss svg{max-width:7.2in;margin:.1in auto 0}
+.fig-releases svg{width:100%}
+.marc code{display:block;margin-top:.08in;font-size:24px;line-height:2}
+.rule code{display:block;font-size:24px;line-height:2;background:none;padding:0}
+
+/* Subfield underlines, as on the page */
+.sf{border-bottom:5px solid transparent;padding-bottom:1px}
+.sf-a{border-bottom-color:var(--fig-sf-a)} .sf-b{border-bottom-color:var(--fig-sf-b)}
+.sf-i{border-bottom-color:var(--fig-sf-i)} .sf-j{border-bottom-color:var(--fig-sf-j)}
+
+/* Approaches */
+.approaches{display:grid;grid-template-columns:repeat(3,1fr);gap:.3in}
+.card{padding:.28in .3in}
+.card h3{font-size:40px}
+.card p{font-size:28px}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:22px;
+     letter-spacing:.1em;text-transform:uppercase;padding:.04in .14in;border-radius:999px;margin-bottom:.14in}
+.chosen{border:4px solid var(--accent)}
+.for b{color:#138a60} .against b{color:#b4471f}
+
+.compare{width:100%;border-collapse:collapse;margin-top:.3in;font-size:28px;background:var(--card);border:2px solid var(--line);border-radius:22px}
+.compare th,.compare td{text-align:left;padding:.1in .2in;border-bottom:2px solid var(--line)}
+.compare thead th{color:var(--accent);font-size:22px;letter-spacing:.08em;text-transform:uppercase}
+.compare tbody tr:last-child th,.compare tbody tr:last-child td{border-bottom:0}
+
+/* Lists */
+.steps,.rules{margin-left:.45in}
+.steps li,.rules li,.controls li,.bugs li,.lessons li{margin-top:.08in}
+.controls,.bugs,.lessons{margin-left:.4in}
+.lessons li{break-inside:avoid}
+
+/* Real data */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:.16in;margin-top:.16in}
+.stats div{background:var(--accent-soft);border-radius:16px;padding:.16in .2in;display:flex;flex-direction:column-reverse}
+.stats dd{font-size:80px;font-weight:600;color:var(--accent);line-height:1.05}
+.stats dt{font-size:24px;color:var(--muted)}
+
+.wide .fig{margin-top:.1in}
+
+.foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:.6in;
+      border-top:2px solid var(--line);padding-top:.2in;font-size:26px}
+.foot .ref{color:var(--muted);max-width:18in;text-align:right}

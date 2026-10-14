@@ -50,8 +50,8 @@
         <p>My starting point was a script USC colleagues wrote for ONE Archives serials migrated from Inmagic, which read 866s written year first <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for that one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
-          <div><dt>For it</dt><dd>Results tuned to a bespoke collection, and code I knew intimately: I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
-          <div><dt>Against it</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
+          <div><dt>Pros</dt><dd>Results tuned to a bespoke collection, and code I knew intimately: I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
+          <div><dt>Cons</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
         </dl>
         <p>It took me more than six months to adapt the script to my collection, much of it spent teaching myself Python; before that I had only followed online tutorials. The hardest part by far was the single, monolithic regular expression the whole parser rested on. It took weeks, if not months, of testing it against the corpus in regex101 before it accounted for every pattern. It handled most statements well, but some edge cases needed logic I couldn't see how to write. That was the wall, until AI coding assistants came along.</p>
         <p>Asking every institution to write its own expression that way seemed unviable, and that is what led me to induce the expressions instead: find the patterns in a file, and generate a rule for each.</p>
@@ -62,8 +62,8 @@
         <p>Send the 866 statements to a large language model through its API and ask it to pick out the parts an 853/863 is built from: volumes, issues, dates. Not a conversion to 853/863, but an alternative to working out the patterns.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The least.</dd></div>
-          <div><dt>For it</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
-          <div><dt>Against it</dt><dd>Expensive in tokens: the free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
+          <div><dt>Pros</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
+          <div><dt>Cons</dt><dd>Expensive in tokens: the free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
         </dl>
         <p>Holdings are public catalogue data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
       </article>
@@ -74,8 +74,8 @@
         <p>Both began as one-shot prompts: the Pattern Detector from a single prompt in Cursor, and the Converter from handing my original parser to Claude Code and asking for the same thing, done better, with an interface. Those were proofs of concept. The real development began with version numbers.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>Some. Without my familiarity with code, I couldn't have described the features I wanted as well, or spotted bugs and other problems as they came up.</dd></div>
-          <div><dt>For it</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
-          <div><dt>Against it</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress.</dd></div>
+          <div><dt>Pros</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
+          <div><dt>Cons</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress.</dd></div>
         </dl>
       </article>
     </div>
