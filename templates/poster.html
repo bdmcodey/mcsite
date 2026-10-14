@@ -137,7 +137,7 @@
       </div>
 
       <h4 class="step">4 · Confirm once, for the whole group</h4>
-      <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloguer can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What confirming changes depends on the group:</p>
+      <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloguer can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What changes upon confirmation depends on the group:</p>
       <ul class="cases">
         <li><strong>Nothing to decide.</strong> In this group every value carries its own caption, so the parser reads these statements in full and the pattern is confirmed without asking.</li>
         <li><strong>A caption to supply.</strong> In <code>{{ pat.uncaptioned.statement }}</code>, from the same sample, the {{ pat.uncaptioned.suggested_value }} has no caption; its shape is <code>{{ pat.uncaptioned.shape }}</code>. The card suggests <code>v.</code> but still asks. On its own the parser writes <code><span class="sf sf-a">$a (*)</span></code>, the standard's placeholder for an unnamed level; with <code>v.</code> confirmed, the 853 reads <code><span class="sf sf-a">$a v.</span> <span class="sf sf-b">$b no.</span></code></li>
