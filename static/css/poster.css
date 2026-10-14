@@ -92,8 +92,8 @@
 .fig-tall{display:none}
 .fig-tall svg{max-width:420px}
 
-.data-view{margin-top:14px;color:var(--muted);font-size:.9rem}
-.data-view summary{cursor:pointer;color:var(--accent);font-weight:500}
+.data-view{margin-top:4px;color:var(--muted);font-size:.9rem}
+.data-view summary{cursor:pointer;color:var(--accent);font-weight:500;padding:10px 0;min-height:44px}
 .data-view summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .data-view table{border-collapse:collapse;margin-top:12px;min-width:min(100%,360px)}
 .data-view th,.data-view td{border-bottom:1px solid var(--line);padding:6px 14px 6px 0;text-align:left}
