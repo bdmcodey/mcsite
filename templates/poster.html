@@ -185,7 +185,7 @@
 
     <article class="panel">
       <h3>How it was built</h3>
-      <p><strong>{{ rel.count }} released versions</strong> between 24 July and 12 October 2026, {{ rel.by_month['2026-09'] }} of them in September.</p>
+      <p><strong>{{ rel.count }} released versions</strong> between {{ (rel.first.date | long_date)[:-5] }} and {{ rel.latest.date | long_date }}, {{ rel.by_month['2026-09'] }} of them in September.</p>
       <figure class="fig-frame">
         <div class="fig-wide">{{ fig.releases_wide }}</div>
         <div class="fig-tall">{{ fig.releases_tall }}</div>

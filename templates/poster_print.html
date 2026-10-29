@@ -158,7 +158,7 @@
 
     <div class="cols">
       <article class="block span2">
-        <h3>How it was built: {{ rel.count }} releases, 24 July to 12 October 2026</h3>
+        <h3>How it was built: {{ rel.count }} releases, {{ (rel.first.date | long_date)[:-5] }} to {{ rel.latest.date | long_date }}</h3>
         <figure class="fig fig-releases">{{ fig.releases_wide }}</figure>
         <p class="caption">Each dot is one release. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on 16 September replaced them.</p>
       </article>
