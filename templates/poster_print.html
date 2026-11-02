@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Poster (print) · Matthew Codey</title>
+<title>Automating MARC Holdings Generation with AI: Lessons from the Field · Matthew Codey</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -49,7 +49,7 @@
           <h3>The problem</h3>
           <p>Many libraries' serials holdings are stored only as human-readable, free-text <b>866</b> fields rather than as MARC-encoded <b>853/863</b> pairs. Converting by hand is slow, conventions vary, and hand-typed data is prone to typos and other errors.</p>
           <p class="goal"><b>The goal:</b> a tool that is portable across collections, works on messy holdings as they are (no manual clean-up), and never silently loses anything.</p>
-          <figure class="fig fig-statement">{{ fig.statement }}</figure>
+          <figure class="fig fig-statement" role="none">{{ fig.statement }}</figure>
           <p class="marc"><code>{{ coloured(n.statement.segments_853) }}</code><code>{{ coloured(n.statement.segments_863) }}</code></p>
         </article>
       </div>
@@ -98,7 +98,7 @@
       <div class="col">
         <article class="block">
           <h3>How the Workbench reads a statement</h3>
-          <figure class="fig fig-tokens">{{ fig.tokens }}</figure>
+          <figure class="fig fig-tokens" role="none">{{ fig.tokens }}</figure>
           <p class="rule"><code>{{ coloured(pat.template_segments) }}</code></p>
           <ol class="steps">
             <li>Statements with the same shape are one group, whatever their numbers.</li>
@@ -141,7 +141,7 @@
         <article class="block">
           <h3>The turning point: silent losses</h3>
           <p>A silent loss writes the fields, removes the 866, and drops a volume or a month with nothing on screen to say so.</p>
-          <figure class="fig fig-loss">{{ fig.silent_loss }}</figure>
+          <figure class="fig fig-loss" role="none">{{ fig.silent_loss }}</figure>
         </article>
         <article class="block">
           <h3>On real data</h3>
@@ -159,7 +159,7 @@
     <div class="cols">
       <article class="block span2">
         <h3>How it was built: {{ rel.count }} releases, {{ (rel.first.date | long_date)[:-5] }} to {{ rel.latest.date | long_date }}</h3>
-        <figure class="fig fig-releases">{{ fig.releases_wide }}</figure>
+        <figure class="fig fig-releases" role="none">{{ fig.releases_wide }}</figure>
         <p class="caption">Each dot is one release. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on 16 September replaced them.</p>
       </article>
       <article class="block">
