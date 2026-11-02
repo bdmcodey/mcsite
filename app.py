@@ -69,7 +69,9 @@ def _poster_page(template):
             figures[name.replace('-', '_')] = Markup(f.read())
     with open(os.path.join(app.root_path, 'poster', 'numbers.json'), encoding='utf-8') as f:
         numbers = json.load(f)
-    resp = make_response(render_template(template, fig=figures, n=numbers))
+    pdf_bytes = os.path.getsize(os.path.join(app.static_folder, 'poster', 'poster.pdf'))
+    pdf_size = f'{pdf_bytes / 1_000_000:.1f} MB' if pdf_bytes >= 1_000_000 else f'{round(pdf_bytes / 1000)} KB'
+    resp = make_response(render_template(template, fig=figures, n=numbers, pdf_size=pdf_size))
     resp.headers['X-Robots-Tag'] = 'noindex, nofollow'
     return resp
 

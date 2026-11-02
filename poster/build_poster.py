@@ -98,7 +98,7 @@ def build_pdf(preview=None):
 
         page.pdf(path=str(PDF), width=f"{WIDTH_IN}in", height=f"{HEIGHT_IN}in",
                  print_background=True, margin={"top": "0", "right": "0", "bottom": "0", "left": "0"},
-                 prefer_css_page_size=True)
+                 prefer_css_page_size=True, tagged=True, outline=True)
         browser.close()
 
 
