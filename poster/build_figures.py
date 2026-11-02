@@ -83,15 +83,16 @@ REAL_EXPORT = {
     "unaccounted": 0,
     "alma_866s_reproduced": 48,
     "alma_866s_checked": 48,
-    "round_trip": {"same": 938, "caption_only": 106, "not_converted": 11, "drift": 0},
+    "round_trip": {"same": 938, "caption_only": 103, "not_converted": 14, "drift": 0},
     "round_trip_note": (
         "A simulated round trip: Alma cannot be run from the Workbench, so "
         "marc_serials/display.py imitates the 866 Alma regenerates from 853/863. "
         "The imitation reproduces all 48 866s in the export that Alma itself "
         "built from hand-entered 863s."
     ),
-    "source": "holdings-workbench CORPUS-FINDINGS.md: 'Round the loop with the ILS · 0.28.0', "
-              "and the 0.29.0 and 0.30.0 sections (938 / 106 / 11 / 0 drift)",
+    "source": "Matthew Codey's re-measurement on Workbench 0.49.0, 2 November 2026 "
+              "(round-trip check: 938 / 103 / 14 / 0 drift; Alma's 866s 48 of 48); "
+              "method as in holdings-workbench CORPUS-FINDINGS.md, 'Round the loop with the ILS · 0.28.0'",
 }
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -413,7 +414,8 @@ def figure_releases_tall(releases, sept):
         body.append(f'<line class="leader" x1="{cx:.1f}" x2="{LX - 4}" y1="{cy:.1f}" y2="{cy:.1f}"/>')
         body.append(text(LX, cy - 2, fmt_date(d), "strong", 12))
         body.append(text(LX, cy + 13, lbl, "muted", 11.5))
-    H = T + days * step + 12
+    # Room below the last day for its two-line label, when the latest release is on it
+    H = T + days * step + 24
     return svg(W, H, "fig-releases-tall", *_releases_text(releases, sept), "\n".join(body))
 
 
