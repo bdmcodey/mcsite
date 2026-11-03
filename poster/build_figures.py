@@ -30,6 +30,7 @@ import argparse
 import datetime as dt
 import json
 import re
+import statistics
 import subprocess
 import sys
 from collections import Counter
@@ -149,6 +150,28 @@ def read_releases(wb: Path):
         if v not in versions:
             raise Stop(f"milestone {v} is not in about.json")
     return about["version"], releases
+
+
+def release_sizes(wb: Path, releases):
+    """How much each numbered version held, counted in its changelog entries."""
+    about = json.loads((wb / "marc_serials" / "shared" / "about.json").read_text(encoding="utf-8"))
+    changes = {e["version"]: len(e["changes"]) for e in about["changelog"]}
+    if "0.6.0" not in changes:
+        raise Stop("0.6.0, the week the numbers stood still, is not in about.json")
+    days = Counter(d for _, d in releases)
+    patch = sum(1 for v, _ in releases if not v.endswith(".0"))
+    median = statistics.median(changes.values())
+    return {
+        "median_changes": int(median) if median == int(median) else median,
+        "one_change": sum(1 for n in changes.values() if n == 1),
+        "days": len(days),
+        "most_in_a_day": max(days.values()),
+        "patch": patch,
+        "minor": len(releases) - patch,
+        "changes_in_0_6_0": changes["0.6.0"],
+        "weeks": (releases[-1][1] - releases[0][1]).days // 7,
+        "source": "holdings-workbench marc_serials/shared/about.json, changelog: one change is one entry",
+    }
 
 
 def read_corpus(wb: Path, python: str):
@@ -737,6 +760,7 @@ def main():
             "latest": {"version": latest_v, "date": latest_d.isoformat()},
             "by_month": dict(sorted(months.items())),
             "milestones": [{"version": v, "date": dates[v].isoformat(), "label": lbl} for v, lbl in MILESTONES],
+            "sizes": release_sizes(wb, releases),
             "source": "holdings-workbench marc_serials/shared/about.json, changelog",
         },
         "corpus": {
