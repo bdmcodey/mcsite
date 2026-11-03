@@ -186,11 +186,18 @@
 
     <article class="panel">
       <h3>How it was built</h3>
-      <p><strong>{{ rel.count }} released versions</strong> between {{ (rel.first.date | long_date)[:-5] }} and {{ rel.latest.date | long_date }}, {{ rel.by_month['2026-09'] }} of them in September.</p>
+      {% set sz = rel.sizes %}
+      <p><strong>What the “releases” were.</strong> The Workbench went from version {{ rel.first.version }} ({{ rel.first.date | long_date }}) to {{ rel.latest.version }} ({{ rel.latest.date | long_date }}): {{ rel.count }} numbered versions in {{ sz.weeks }} weeks. These weren’t releases in the usual software sense of a batch of changes put out every few weeks. Each was one piece of work given its own number as it was finished, so the cataloguer always knew which version they were testing:</p>
+      <ul class="cases">
+        <li><strong>Most were small.</strong> The median version holds {{ sz.median_changes }} changes, and {{ sz.one_change }} hold just one. The {{ rel.count }} came out on {{ sz.days }} different days, and as many as {{ sz.most_in_a_day }} on one day.</li>
+        <li>{{ sz.patch }} went up only in the last number (fixes and small additions, like 0.44.1), and {{ sz.minor }} in the middle number (something new or changed, like 0.45.0).</li>
+        <li><strong>A few were large.</strong> 0.6.0, for example, holds {{ sz.changes_in_0_6_0 }} changes, because the numbers stood still for a week in August while the three original tools were being built.</li>
+      </ul>
+      <p>So “{{ rel.count }} releases” is accurate but overstates how much each one was. It’s better described as {{ rel.count }} small, numbered steps, each with a changelog entry written for cataloguers. From 0.50.0 on, changes will be batched and numbered only when a set is worth installing, which is the more usual practice.</p>
       <figure class="fig-frame">
         <div class="fig-wide">{{ fig.releases_wide }}</div>
         <div class="fig-tall">{{ fig.releases_tall }}</div>
-        <figcaption>Each dot is one release, stacked by day.</figcaption>
+        <figcaption>Each dot is one numbered version, stacked by day; {{ rel.by_month['2026-09'] }} of them came in September.</figcaption>
       </figure>
       <details class="data-view">
         <summary>Releases as a table</summary>

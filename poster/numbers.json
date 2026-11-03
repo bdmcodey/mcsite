@@ -34,6 +34,17 @@
         "label": "Simulated Alma round trip"
       }
     ],
+    "sizes": {
+      "median_changes": 3,
+      "one_change": 23,
+      "days": 29,
+      "most_in_a_day": 10,
+      "patch": 69,
+      "minor": 49,
+      "changes_in_0_6_0": 28,
+      "weeks": 14,
+      "source": "holdings-workbench marc_serials/shared/about.json, changelog: one change is one entry"
+    },
     "source": "holdings-workbench marc_serials/shared/about.json, changelog"
   },
   "corpus": {
