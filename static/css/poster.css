@@ -104,6 +104,8 @@
 .rules li{margin-bottom:6px}
 .bugs{margin:14px 0 0 20px;color:#cfcfd8;max-width:720px}
 .bugs li{margin-bottom:10px}
+/* A full holdings statement is too long to keep on one line on a phone */
+.panel .bugs code{white-space:normal;overflow-wrap:anywhere}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:18px 0}
 .stats div{background:var(--surface-2);padding:18px 16px;display:flex;flex-direction:column-reverse;gap:4px}
