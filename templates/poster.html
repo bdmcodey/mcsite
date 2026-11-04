@@ -272,10 +272,10 @@
 
     <article class="panel">
       <h3>The human in the loop</h3>
-      <p>The AI writes the code; the cataloguer decides what "correct" means. Two bugs from October were found by the cataloguer, not by the tests:</p>
+      <p>The AI writes the code; the cataloguer decides what "correct" means. Two bugs were found by the cataloguer, not by the tests:</p>
       <ul class="bugs">
         <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
-        <li><code>34 no 3, 4 (Summer, Autumn 1990)</code>, a list of runs, ignored the caption confirmed for it. Found in testing; fixed in 0.34.0.</li>
+        <li>In <code>v. 15 no. 6 - v. 23 nos. 2/3 (Nov/Dec 1994 - Late Summer 2002)</code>, a confirmed pattern coded the last issue as Summer (<code>$j 22</code>) and dropped "Late" without a word. The tests missed it because they checked the standard parser, not patterns. It also can't simply be coded: the serial may have an Early Summer issue too, and coding both as Summer would merge two issues into one. Only the piece can settle it, so the season is now left out, named, and the record flagged for a person to check. Fixed in 0.9.6.</li>
       </ul>
     </article>
 
