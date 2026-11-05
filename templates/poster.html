@@ -76,7 +76,7 @@
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>Some. Without my familiarity with code, I couldn't have described the features I wanted as well, or spotted bugs and other problems as they came up.</dd></div>
           <div><dt>Pros</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
-          <div><dt>Cons</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress.</dd></div>
+          <div><dt>Cons</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress. It may also be overengineered, a common complaint about tools built this way, and that only widens the gap: I can't judge, as a senior software engineer could, whether a tool this size needs all the code and tests it has.</dd></div>
         </dl>
       </article>
     </div>
@@ -88,7 +88,7 @@
           <tbody>
             <tr><th scope="row">Coding knowledge</th><td data-label="1 · By hand">The most</td><td data-label="2 · A model reads">The least</td><td data-label="3 · AI builds the tool">Some</td></tr>
             <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months, most of it on the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
-            <tr><th scope="row">Cost to run</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">Nothing: no model or tokens when it runs</td></tr>
+            <tr><th scope="row">Cost</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">To build it, likely a paid (pro or enterprise) AI assistant: a free tier is unlikely to manage a tool like this. To run it, nothing: no model or tokens</td></tr>
             <tr><th scope="row">Same output every time</th><td data-label="1 · By hand">Yes</td><td data-label="2 · A model reads">Not guaranteed</td><td data-label="3 · AI builds the tool">Yes</td></tr>
             <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly: tuned to one collection</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it: patterns are found in each file, and it is tested on other libraries' statements</td></tr>
             <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully</td><td data-label="2 · A model reads">No code to read: the model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, kept honest by tests</td></tr>
@@ -295,7 +295,7 @@
       </div>
       <div class="draft-copy">
         <p class="draft-label">Draft: edit freely</p>
-        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
+        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it. I can't evaluate it as they could: is it overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
       </div>
     </article>
 
