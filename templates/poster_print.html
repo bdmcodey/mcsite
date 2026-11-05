@@ -74,16 +74,17 @@
             <h3>Use AI to build the tool</h3>
             <p>Describe in plain language what the tool should do, and have an AI coding assistant (Claude Code) write a deterministic Python application.</p>
             <p class="for"><b>Pros:</b> the same file converts the same way every time, with no model, API key or tokens when it runs.</p>
-            <p class="against"><b>Cons:</b> a black box. I can confirm it works, and tests stop it regressing, without fully understanding why it works.</p>
+            <p class="against"><b>Cons:</b> a black box. I can confirm it works, and tests stop it regressing, without fully understanding why it works; and it may be overengineered, which I can't judge.</p>
           </article>
         </div>
         <table class="compare">
           <thead><tr><td></td><th>1 · By hand</th><th>2 · A model reads</th><th>3 · AI builds the tool</th></tr></thead>
           <tbody>
             <tr><th>Coding knowledge</th><td>The most</td><td>The least</td><td>Some</td></tr>
-            <tr><th>Cost to run</th><td>Nothing</td><td>Tokens for every statement</td><td>Nothing</td></tr>
+            <tr><th>Cost</th><td>Nothing</td><td>Tokens for every statement</td><td>A pro-level AI assistant to build; nothing to run</td></tr>
             <tr><th>Same output every time</th><td>Yes</td><td>Not guaranteed</td><td>Yes</td></tr>
             <tr><th>Other collections</th><td>Poorly</td><td>Not tested far enough</td><td>Designed for it</td></tr>
+            <tr><th>Understanding the code</th><td>Fully</td><td>No code to read</td><td>Partly: a black box, kept honest by tests</td></tr>
           </tbody>
         </table>
       </div>
@@ -168,7 +169,7 @@
           <li><b>A script reads what it was written for, and passes over the rest.</b> The Workbench makes the check part of the tool: every value is encoded, named as left out, or held with its 866 kept.</li>
           <li><b>Decide whether you can work with code you don't fully understand.</b> A test suite and automated checks are what made it acceptable.</li>
           <li><b>AI is at its best building the tool, not being it.</b></li>
-          <li><b>Next:</b> testing on more real .mrc files from technical services colleagues, working toward a 1.0 release.</li>
+          <li><b>Next:</b> testing on more real .mrc files from technical services colleagues, and a review by a software engineer, working toward a 1.0 release.</li>
         </ul>
       </article>
     </div>
