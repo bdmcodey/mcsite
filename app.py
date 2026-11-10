@@ -53,12 +53,12 @@ def lastfm():
 # poster/build_figures.py and inlined, so the page's CSS can theme them.
 @app.template_filter('long_date')
 def long_date(iso):
-    """'2026-10-16' -> '16 October 2026', the date style the poster uses."""
+    """'2026-10-16' -> 'October 16, 2026', the date style the poster uses."""
     d = date.fromisoformat(iso)
-    return f'{d.day} {d:%B %Y}'
+    return f'{d:%B} {d.day}, {d.year}'
 
-
-POSTER_FIGURES = ('statement', 'tokens', 'releases-wide', 'releases-tall', 'silent-loss', 'qr', 'usc-logo')
+POSTER_FIGURES = ('statement', 'tokens', 'releases-wide', 'releases-tall', 'releases-col',
+                  'silent-loss', 'silent-loss-wide', 'qr', 'usc-logo')
 
 
 def _poster_page(template):

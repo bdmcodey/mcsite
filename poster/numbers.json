@@ -50,7 +50,7 @@
   },
   "corpus": {
     "before": {
-      "label": "1 September 2026",
+      "label": "September 1, 2026",
       "version": "0.6.0",
       "statements": 112,
       "clean": 67,
@@ -65,7 +65,7 @@
       "lost": 0,
       "warned": 22,
       "none": 6,
-      "label": "10 November 2026",
+      "label": "November 10, 2026",
       "version": "0.50.0",
       "source": "holdings-workbench scripts/corpus_report.py, run by this script"
     }
@@ -520,6 +520,6 @@
       "drift": 0
     },
     "round_trip_note": "A simulated round trip: Alma cannot be run from the Workbench, so marc_serials/display.py imitates the 866 Alma regenerates from 853/863. The imitation reproduces all 48 866s in the export that Alma itself built from hand-entered 863s.",
-    "source": "Matthew Codey's re-measurement on Workbench 0.49.0, 2 November 2026 (round-trip check: 938 / 103 / 14 / 0 drift; Alma's 866s 48 of 48); method as in holdings-workbench CORPUS-FINDINGS.md, 'Round the loop with the ILS · 0.28.0'"
+    "source": "Matthew Codey's measurements: 0 unaccounted for, 0 drift and Alma's 866s 48 of 48 at Workbench 0.50.0 (November 10, 2026); the round trip's 938 / 103 / 14 at 0.49.0 (November 2, 2026); method as in holdings-workbench CORPUS-FINDINGS.md, 'Round the loop with the ILS · 0.28.0'"
   }
 }

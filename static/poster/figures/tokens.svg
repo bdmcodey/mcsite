@@ -1,6 +1,6 @@
 <svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 224" role="img" aria-labelledby="fig-tokens-t fig-tokens-d">
 <title id="fig-tokens-t">How the detector reads a statement</title>
-<desc id="fig-tokens-d">The statement v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996) is cut into pieces, each labelled: v. VOL, 27 #, no. ISS, 4 #, - —, v. VOL, 31 #, no. ISS, 4 #, ( (punctuation), April CHRON, 1992 YEAR, - -, April CHRON, 1996 YEAR, ) (punctuation). In order, the labels make its shape: VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR).</desc>
+<desc id="fig-tokens-d">The statement v. 27 no. 4-v. 31 no. 4 (April 1992-April 1996) is cut into pieces, each labeled: v. VOL, 27 #, no. ISS, 4 #, - —, v. VOL, 31 #, no. ISS, 4 #, ( (punctuation), April CHRON, 1992 YEAR, - -, April CHRON, 1996 YEAR, ) (punctuation). In order, the labels make its shape: VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR).</desc>
 <style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
 .fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
 .fig .muted{fill:var(--fig-muted,#5d5a69)}
@@ -27,7 +27,7 @@
 .fig .sf-i{fill:var(--fig-sf-i,#138a60)}
 .fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
 .fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
-<text x="16.0" y="20.0" font-size="13" class="muted">1 · Cut into labelled pieces</text>
+<text x="16.0" y="20.0" font-size="13" class="muted">1 · Cut into labeled pieces</text>
 <rect class="chip sf-a-stroke" x="23.3" y="40" width="29.2" height="26" rx="5"/>
 <text x="37.9" y="58.0" font-size="15" text-anchor="middle" class="mono">v.</text>
 <text x="37.9" y="81.0" font-size="10.5" text-anchor="middle" class="mono muted">VOL</text>

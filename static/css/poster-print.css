@@ -8,8 +8,8 @@
 :root{
   --bg:#faf8f5; --card:#ffffff; --ink:#1f1c29; --muted:#5d5a69; --line:#d9d5e0;
   --accent:#6f55c0; --accent-soft:#efeaf7;
-  /* Figure 1's subfield colours, light steps (checked for contrast and
-     colour-blind separation on this background) */
+  /* Figure 1's subfield colors, light steps (checked for contrast and
+     color-blind separation on this background) */
   --fig-sf-a:#6f55c0; --fig-sf-b:#d9592a; --fig-sf-i:#138a60; --fig-sf-j:#b07a00;
   --fig-surface:#ffffff;
   /* One named code font, so the PDF looks the same on any machine */
@@ -63,9 +63,9 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 
 /* Figures: sized so their text prints at about 26-36px */
 .fig svg{display:block;width:100%;height:auto}
-.fig-statement svg{max-width:7in;margin:.1in auto 0}
-.fig-tokens svg{max-width:7.6in;margin:0 auto}
-.fig-loss svg{max-width:6.2in;margin:.1in auto 0}
+.fig-statement svg{max-width:7.6in;margin:.1in auto 0}
+.fig-tokens svg{margin:0 auto}
+.fig-loss svg{max-width:19.5in;margin:.15in auto .1in}
 .fig-releases svg{width:100%}
 .marc code{display:block;margin-top:.08in;font-size:24px;line-height:2}
 .rule code{display:block;font-size:24px;line-height:2;background:none;padding:0}
@@ -79,13 +79,13 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 .approaches{display:grid;grid-template-columns:repeat(3,1fr);gap:.3in}
 .card{padding:.28in .3in}
 .card h3{font-size:40px}
-.card p{font-size:28px}
+.card p{font-size:30px}
 .tag{display:inline-block;background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:22px;
      letter-spacing:.1em;text-transform:uppercase;padding:.04in .14in;border-radius:999px;margin-bottom:.14in}
 .chosen{border:4px solid var(--accent)}
 .for b{color:#138a60} .against b{color:#b4471f}
 
-.compare{width:100%;border-collapse:collapse;margin-top:.3in;font-size:28px;background:var(--card);border:2px solid var(--line);border-radius:22px}
+.compare{width:100%;border-collapse:collapse;margin-top:.3in;font-size:31px;background:var(--card);border:2px solid var(--line);border-radius:22px}
 .compare th,.compare td{text-align:left;padding:.1in .2in;border-bottom:2px solid var(--line)}
 .compare thead th{color:var(--accent);font-size:22px;letter-spacing:.08em;text-transform:uppercase}
 .compare tbody tr:last-child th,.compare tbody tr:last-child td{border-bottom:0}

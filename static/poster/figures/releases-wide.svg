@@ -1,6 +1,6 @@
 <svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 284" role="img" aria-labelledby="fig-releases-wide-t fig-releases-wide-d">
-<title id="fig-releases-wide-t">119 releases, 24 Jul to 10 Nov 2026</title>
-<desc id="fig-releases-wide-d">Each dot is one released version of the Workbench, stacked by day. 84 of the 119 came in September. 24 Jul: First working version (0.1.0). 16 Sep: Workbench replaces the other two (0.11.0). 25 Sep: Simulated Alma round trip (0.28.0). The latest is 0.50.0, on 10 Nov.</desc>
+<title id="fig-releases-wide-t">119 numbered versions, Jul 24 to Nov 10, 2026</title>
+<desc id="fig-releases-wide-d">Each dot is one numbered version of the Workbench. 84 of the 119 came in September. Jul 24: First working version (0.1.0). Sep 16: Workbench replaces the other two (0.11.0). Sep 25: Simulated Alma round trip (0.28.0). The latest is 0.50.0, on Nov 10.</desc>
 <style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
 .fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
 .fig .muted{fill:var(--fig-muted,#5d5a69)}
@@ -28,7 +28,7 @@
 .fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
 .fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
 <rect class="band" x="356.3" y="40" width="231.9" height="216" rx="4"/>
-<text x="366.3" y="58.0" font-size="13" class="strong">84 releases in September</text>
+<text x="366.3" y="58.0" font-size="13" class="strong">84 versions in September</text>
 <line class="rule" x1="24" x2="936" y1="256" y2="256"/>
 <text x="24.0" y="276.0" font-size="12" class="muted">Jul</text>
 <line class="rule" x1="116.7" x2="116.7" y1="256" y2="262"/>
@@ -40,32 +40,32 @@
 <line class="rule" x1="827.8" x2="827.8" y1="256" y2="262"/>
 <text x="831.8" y="276.0" font-size="12" class="muted">Nov</text>
 <circle class="dot-key" cx="58.8" cy="250.0" r="5"/>
-<rect class="hit" x="54.9" y="243.0" width="7.7" height="14.0"><title>24 Jul 2026: 1 release (0.1.0)</title></rect>
+<rect class="hit" x="54.9" y="243.0" width="7.7" height="14.0"><title>Jul 24, 2026: 1 version (0.1.0)</title></rect>
 <circle class="dot" cx="105.2" cy="250.0" r="4"/>
-<rect class="hit" x="101.3" y="243.0" width="7.7" height="14.0"><title>30 Jul 2026: 1 release (0.2.0)</title></rect>
+<rect class="hit" x="101.3" y="243.0" width="7.7" height="14.0"><title>Jul 30, 2026: 1 version (0.2.0)</title></rect>
 <circle class="dot" cx="136.1" cy="250.0" r="4"/>
-<rect class="hit" x="132.2" y="243.0" width="7.7" height="14.0"><title>3 Aug 2026: 1 release (0.3.0)</title></rect>
+<rect class="hit" x="132.2" y="243.0" width="7.7" height="14.0"><title>Aug 3, 2026: 1 version (0.3.0)</title></rect>
 <circle class="dot" cx="143.8" cy="250.0" r="4"/>
 <circle class="dot" cx="143.8" cy="239.5" r="4"/>
-<rect class="hit" x="139.9" y="232.5" width="7.7" height="24.5"><title>4 Aug 2026: 2 releases (0.4.0 to 0.5.0)</title></rect>
+<rect class="hit" x="139.9" y="232.5" width="7.7" height="24.5"><title>Aug 4, 2026: 2 versions (0.4.0 to 0.5.0)</title></rect>
 <circle class="dot" cx="275.2" cy="250.0" r="4"/>
 <circle class="dot" cx="275.2" cy="239.5" r="4"/>
-<rect class="hit" x="271.3" y="232.5" width="7.7" height="24.5"><title>21 Aug 2026: 2 releases (0.5.1 to 0.5.2)</title></rect>
+<rect class="hit" x="271.3" y="232.5" width="7.7" height="24.5"><title>Aug 21, 2026: 2 versions (0.5.1 to 0.5.2)</title></rect>
 <circle class="dot" cx="306.1" cy="250.0" r="4"/>
-<rect class="hit" x="302.2" y="243.0" width="7.7" height="14.0"><title>25 Aug 2026: 1 release (0.6.0)</title></rect>
+<rect class="hit" x="302.2" y="243.0" width="7.7" height="14.0"><title>Aug 25, 2026: 1 version (0.6.0)</title></rect>
 <circle class="dot" cx="360.2" cy="250.0" r="4"/>
 <circle class="dot" cx="360.2" cy="239.5" r="4"/>
 <circle class="dot" cx="360.2" cy="229.0" r="4"/>
 <circle class="dot" cx="360.2" cy="218.5" r="4"/>
-<rect class="hit" x="356.3" y="211.5" width="7.7" height="45.5"><title>1 Sep 2026: 4 releases (0.6.1 to 0.6.4)</title></rect>
+<rect class="hit" x="356.3" y="211.5" width="7.7" height="45.5"><title>Sep 1, 2026: 4 versions (0.6.1 to 0.6.4)</title></rect>
 <circle class="dot" cx="367.9" cy="250.0" r="4"/>
-<rect class="hit" x="364.1" y="243.0" width="7.7" height="14.0"><title>2 Sep 2026: 1 release (0.7.0)</title></rect>
+<rect class="hit" x="364.1" y="243.0" width="7.7" height="14.0"><title>Sep 2, 2026: 1 version (0.7.0)</title></rect>
 <circle class="dot" cx="375.7" cy="250.0" r="4"/>
 <circle class="dot" cx="375.7" cy="239.5" r="4"/>
 <circle class="dot" cx="375.7" cy="229.0" r="4"/>
 <circle class="dot" cx="375.7" cy="218.5" r="4"/>
 <circle class="dot" cx="375.7" cy="208.0" r="4"/>
-<rect class="hit" x="371.8" y="201.0" width="7.7" height="56.0"><title>3 Sep 2026: 5 releases (0.7.1 to 0.8.0)</title></rect>
+<rect class="hit" x="371.8" y="201.0" width="7.7" height="56.0"><title>Sep 3, 2026: 5 versions (0.7.1 to 0.8.0)</title></rect>
 <circle class="dot" cx="437.5" cy="250.0" r="4"/>
 <circle class="dot" cx="437.5" cy="239.5" r="4"/>
 <circle class="dot" cx="437.5" cy="229.0" r="4"/>
@@ -76,7 +76,7 @@
 <circle class="dot" cx="437.5" cy="176.5" r="4"/>
 <circle class="dot" cx="437.5" cy="166.0" r="4"/>
 <circle class="dot" cx="437.5" cy="155.5" r="4"/>
-<rect class="hit" x="433.6" y="148.5" width="7.7" height="108.5"><title>11 Sep 2026: 10 releases (0.8.1 to 0.9.0)</title></rect>
+<rect class="hit" x="433.6" y="148.5" width="7.7" height="108.5"><title>Sep 11, 2026: 10 versions (0.8.1 to 0.9.0)</title></rect>
 <circle class="dot" cx="468.4" cy="250.0" r="4"/>
 <circle class="dot" cx="468.4" cy="239.5" r="4"/>
 <circle class="dot" cx="468.4" cy="229.0" r="4"/>
@@ -86,20 +86,20 @@
 <circle class="dot" cx="468.4" cy="187.0" r="4"/>
 <circle class="dot" cx="468.4" cy="176.5" r="4"/>
 <circle class="dot" cx="468.4" cy="166.0" r="4"/>
-<rect class="hit" x="464.5" y="159.0" width="7.7" height="98.0"><title>15 Sep 2026: 9 releases (0.9.1 to 0.9.9)</title></rect>
+<rect class="hit" x="464.5" y="159.0" width="7.7" height="98.0"><title>Sep 15, 2026: 9 versions (0.9.1 to 0.9.9)</title></rect>
 <circle class="dot" cx="476.1" cy="250.0" r="4"/>
 <circle class="dot" cx="476.1" cy="239.5" r="4"/>
 <circle class="dot-key" cx="476.1" cy="229.0" r="5"/>
 <circle class="dot" cx="476.1" cy="218.5" r="4"/>
 <circle class="dot" cx="476.1" cy="208.0" r="4"/>
 <circle class="dot" cx="476.1" cy="197.5" r="4"/>
-<rect class="hit" x="472.3" y="190.5" width="7.7" height="66.5"><title>16 Sep 2026: 6 releases (0.10.0 to 0.12.0)</title></rect>
+<rect class="hit" x="472.3" y="190.5" width="7.7" height="66.5"><title>Sep 16, 2026: 6 versions (0.10.0 to 0.12.0)</title></rect>
 <circle class="dot" cx="483.9" cy="250.0" r="4"/>
 <circle class="dot" cx="483.9" cy="239.5" r="4"/>
 <circle class="dot" cx="483.9" cy="229.0" r="4"/>
 <circle class="dot" cx="483.9" cy="218.5" r="4"/>
 <circle class="dot" cx="483.9" cy="208.0" r="4"/>
-<rect class="hit" x="480.0" y="201.0" width="7.7" height="56.0"><title>17 Sep 2026: 5 releases (0.12.1 to 0.12.5)</title></rect>
+<rect class="hit" x="480.0" y="201.0" width="7.7" height="56.0"><title>Sep 17, 2026: 5 versions (0.12.1 to 0.12.5)</title></rect>
 <circle class="dot" cx="491.6" cy="250.0" r="4"/>
 <circle class="dot" cx="491.6" cy="239.5" r="4"/>
 <circle class="dot" cx="491.6" cy="229.0" r="4"/>
@@ -108,22 +108,22 @@
 <circle class="dot" cx="491.6" cy="197.5" r="4"/>
 <circle class="dot" cx="491.6" cy="187.0" r="4"/>
 <circle class="dot" cx="491.6" cy="176.5" r="4"/>
-<rect class="hit" x="487.7" y="169.5" width="7.7" height="87.5"><title>18 Sep 2026: 8 releases (0.13.0 to 0.17.0)</title></rect>
+<rect class="hit" x="487.7" y="169.5" width="7.7" height="87.5"><title>Sep 18, 2026: 8 versions (0.13.0 to 0.17.0)</title></rect>
 <circle class="dot" cx="499.3" cy="250.0" r="4"/>
-<rect class="hit" x="495.5" y="243.0" width="7.7" height="14.0"><title>19 Sep 2026: 1 release (0.17.1)</title></rect>
+<rect class="hit" x="495.5" y="243.0" width="7.7" height="14.0"><title>Sep 19, 2026: 1 version (0.17.1)</title></rect>
 <circle class="dot" cx="514.8" cy="250.0" r="4"/>
 <circle class="dot" cx="514.8" cy="239.5" r="4"/>
 <circle class="dot" cx="514.8" cy="229.0" r="4"/>
 <circle class="dot" cx="514.8" cy="218.5" r="4"/>
 <circle class="dot" cx="514.8" cy="208.0" r="4"/>
-<rect class="hit" x="510.9" y="201.0" width="7.7" height="56.0"><title>21 Sep 2026: 5 releases (0.17.2 to 0.17.6)</title></rect>
+<rect class="hit" x="510.9" y="201.0" width="7.7" height="56.0"><title>Sep 21, 2026: 5 versions (0.17.2 to 0.17.6)</title></rect>
 <circle class="dot" cx="522.5" cy="250.0" r="4"/>
 <circle class="dot" cx="522.5" cy="239.5" r="4"/>
 <circle class="dot" cx="522.5" cy="229.0" r="4"/>
 <circle class="dot" cx="522.5" cy="218.5" r="4"/>
 <circle class="dot" cx="522.5" cy="208.0" r="4"/>
 <circle class="dot" cx="522.5" cy="197.5" r="4"/>
-<rect class="hit" x="518.6" y="190.5" width="7.7" height="66.5"><title>22 Sep 2026: 6 releases (0.18.0 to 0.21.0)</title></rect>
+<rect class="hit" x="518.6" y="190.5" width="7.7" height="66.5"><title>Sep 22, 2026: 6 versions (0.18.0 to 0.21.0)</title></rect>
 <circle class="dot" cx="530.2" cy="250.0" r="4"/>
 <circle class="dot" cx="530.2" cy="239.5" r="4"/>
 <circle class="dot" cx="530.2" cy="229.0" r="4"/>
@@ -132,9 +132,9 @@
 <circle class="dot" cx="530.2" cy="197.5" r="4"/>
 <circle class="dot" cx="530.2" cy="187.0" r="4"/>
 <circle class="dot" cx="530.2" cy="176.5" r="4"/>
-<rect class="hit" x="526.4" y="169.5" width="7.7" height="87.5"><title>23 Sep 2026: 8 releases (0.22.0 to 0.25.1)</title></rect>
+<rect class="hit" x="526.4" y="169.5" width="7.7" height="87.5"><title>Sep 23, 2026: 8 versions (0.22.0 to 0.25.1)</title></rect>
 <circle class="dot" cx="538.0" cy="250.0" r="4"/>
-<rect class="hit" x="534.1" y="243.0" width="7.7" height="14.0"><title>24 Sep 2026: 1 release (0.25.2)</title></rect>
+<rect class="hit" x="534.1" y="243.0" width="7.7" height="14.0"><title>Sep 24, 2026: 1 version (0.25.2)</title></rect>
 <circle class="dot" cx="545.7" cy="250.0" r="4"/>
 <circle class="dot" cx="545.7" cy="239.5" r="4"/>
 <circle class="dot-key" cx="545.7" cy="229.0" r="5"/>
@@ -144,31 +144,31 @@
 <circle class="dot" cx="545.7" cy="187.0" r="4"/>
 <circle class="dot" cx="545.7" cy="176.5" r="4"/>
 <circle class="dot" cx="545.7" cy="166.0" r="4"/>
-<rect class="hit" x="541.8" y="159.0" width="7.7" height="98.0"><title>25 Sep 2026: 9 releases (0.26.0 to 0.30.3)</title></rect>
+<rect class="hit" x="541.8" y="159.0" width="7.7" height="98.0"><title>Sep 25, 2026: 9 versions (0.26.0 to 0.30.3)</title></rect>
 <circle class="dot" cx="584.3" cy="250.0" r="4"/>
 <circle class="dot" cx="584.3" cy="239.5" r="4"/>
 <circle class="dot" cx="584.3" cy="229.0" r="4"/>
 <circle class="dot" cx="584.3" cy="218.5" r="4"/>
 <circle class="dot" cx="584.3" cy="208.0" r="4"/>
 <circle class="dot" cx="584.3" cy="197.5" r="4"/>
-<rect class="hit" x="580.5" y="190.5" width="7.7" height="66.5"><title>30 Sep 2026: 6 releases (0.30.4 to 0.31.2)</title></rect>
+<rect class="hit" x="580.5" y="190.5" width="7.7" height="66.5"><title>Sep 30, 2026: 6 versions (0.30.4 to 0.31.2)</title></rect>
 <circle class="dot" cx="592.1" cy="250.0" r="4"/>
 <circle class="dot" cx="592.1" cy="239.5" r="4"/>
-<rect class="hit" x="588.2" y="232.5" width="7.7" height="24.5"><title>1 Oct 2026: 2 releases (0.31.3 to 0.31.4)</title></rect>
+<rect class="hit" x="588.2" y="232.5" width="7.7" height="24.5"><title>Oct 1, 2026: 2 versions (0.31.3 to 0.31.4)</title></rect>
 <circle class="dot" cx="646.2" cy="250.0" r="4"/>
 <circle class="dot" cx="646.2" cy="239.5" r="4"/>
 <circle class="dot" cx="646.2" cy="229.0" r="4"/>
 <circle class="dot" cx="646.2" cy="218.5" r="4"/>
-<rect class="hit" x="642.3" y="211.5" width="7.7" height="45.5"><title>8 Oct 2026: 4 releases (0.31.5 to 0.34.0)</title></rect>
+<rect class="hit" x="642.3" y="211.5" width="7.7" height="45.5"><title>Oct 8, 2026: 4 versions (0.31.5 to 0.34.0)</title></rect>
 <circle class="dot" cx="677.1" cy="250.0" r="4"/>
-<rect class="hit" x="673.2" y="243.0" width="7.7" height="14.0"><title>12 Oct 2026: 1 release (0.35.0)</title></rect>
+<rect class="hit" x="673.2" y="243.0" width="7.7" height="14.0"><title>Oct 12, 2026: 1 version (0.35.0)</title></rect>
 <circle class="dot" cx="692.5" cy="250.0" r="4"/>
-<rect class="hit" x="688.7" y="243.0" width="7.7" height="14.0"><title>14 Oct 2026: 1 release (0.36.0)</title></rect>
+<rect class="hit" x="688.7" y="243.0" width="7.7" height="14.0"><title>Oct 14, 2026: 1 version (0.36.0)</title></rect>
 <circle class="dot" cx="700.3" cy="250.0" r="4"/>
 <circle class="dot" cx="700.3" cy="239.5" r="4"/>
 <circle class="dot" cx="700.3" cy="229.0" r="4"/>
 <circle class="dot" cx="700.3" cy="218.5" r="4"/>
-<rect class="hit" x="696.4" y="211.5" width="7.7" height="45.5"><title>15 Oct 2026: 4 releases (0.37.0 to 0.39.0)</title></rect>
+<rect class="hit" x="696.4" y="211.5" width="7.7" height="45.5"><title>Oct 15, 2026: 4 versions (0.37.0 to 0.39.0)</title></rect>
 <circle class="dot" cx="708.0" cy="250.0" r="4"/>
 <circle class="dot" cx="708.0" cy="239.5" r="4"/>
 <circle class="dot" cx="708.0" cy="229.0" r="4"/>
@@ -178,26 +178,26 @@
 <circle class="dot" cx="708.0" cy="187.0" r="4"/>
 <circle class="dot" cx="708.0" cy="176.5" r="4"/>
 <circle class="dot" cx="708.0" cy="166.0" r="4"/>
-<rect class="hit" x="704.1" y="159.0" width="7.7" height="98.0"><title>16 Oct 2026: 9 releases (0.40.0 to 0.46.0)</title></rect>
+<rect class="hit" x="704.1" y="159.0" width="7.7" height="98.0"><title>Oct 16, 2026: 9 versions (0.40.0 to 0.46.0)</title></rect>
 <circle class="dot" cx="808.5" cy="250.0" r="4"/>
 <circle class="dot" cx="808.5" cy="239.5" r="4"/>
 <circle class="dot" cx="808.5" cy="229.0" r="4"/>
 <circle class="dot" cx="808.5" cy="218.5" r="4"/>
-<rect class="hit" x="804.6" y="211.5" width="7.7" height="45.5"><title>29 Oct 2026: 4 releases (0.46.1 to 0.48.0)</title></rect>
+<rect class="hit" x="804.6" y="211.5" width="7.7" height="45.5"><title>Oct 29, 2026: 4 versions (0.46.1 to 0.48.0)</title></rect>
 <circle class="dot" cx="816.2" cy="250.0" r="4"/>
-<rect class="hit" x="812.3" y="243.0" width="7.7" height="14.0"><title>30 Oct 2026: 1 release (0.49.0)</title></rect>
+<rect class="hit" x="812.3" y="243.0" width="7.7" height="14.0"><title>Oct 30, 2026: 1 version (0.49.0)</title></rect>
 <circle class="dot-key" cx="901.2" cy="250.0" r="5"/>
-<rect class="hit" x="897.4" y="243.0" width="7.7" height="14.0"><title>10 Nov 2026: 1 release (0.50.0)</title></rect>
+<rect class="hit" x="897.4" y="243.0" width="7.7" height="14.0"><title>Nov 10, 2026: 1 version (0.50.0)</title></rect>
 <line class="leader" x1="58.8" x2="58.8" y1="138" y2="242.0"/>
-<text x="63.8" y="150.0" font-size="12" class="strong">24 Jul</text>
+<text x="63.8" y="150.0" font-size="12" class="strong">Jul 24</text>
 <text x="63.8" y="165.0" font-size="12" class="muted">First working version</text>
 <line class="leader" x1="476.1" x2="476.1" y1="84" y2="189.5"/>
-<text x="471.1" y="96.0" font-size="12" text-anchor="end" class="strong">16 Sep</text>
+<text x="471.1" y="96.0" font-size="12" text-anchor="end" class="strong">Sep 16</text>
 <text x="471.1" y="111.0" font-size="12" text-anchor="end" class="muted">Workbench replaces the other two</text>
 <line class="leader" x1="545.7" x2="545.7" y1="12" y2="158.0"/>
-<text x="550.7" y="24.0" font-size="12" class="strong">25 Sep</text>
+<text x="550.7" y="24.0" font-size="12" class="strong">Sep 25</text>
 <text x="550.7" y="39.0" font-size="12" class="muted">Simulated Alma round trip</text>
 <line class="leader" x1="901.2" x2="901.2" y1="116" y2="242.0"/>
-<text x="896.2" y="128.0" font-size="12" text-anchor="end" class="strong">10 Nov</text>
-<text x="896.2" y="143.0" font-size="12" text-anchor="end" class="muted">0.50.0, release 119</text>
+<text x="896.2" y="128.0" font-size="12" text-anchor="end" class="strong">Nov 10</text>
+<text x="896.2" y="143.0" font-size="12" text-anchor="end" class="muted">0.50.0, version 119</text>
 </svg>

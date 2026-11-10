@@ -11,7 +11,9 @@ It writes, and the site reads:
     static/poster/figures/statement.svg      the 866 and the 853/863 it becomes
     static/poster/figures/releases-wide.svg  the releases, as a strip (poster, desktop)
     static/poster/figures/releases-tall.svg  the same, top to bottom (phones)
-    static/poster/figures/silent-loss.svg    corpus outcomes, then and now
+    static/poster/figures/silent-loss.svg    corpus outcomes, then and now (the page)
+    static/poster/figures/silent-loss-wide.svg  the same, for the poster's two-column block
+    static/poster/figures/releases-col.svg   the versions by week, for one poster column
     poster/numbers.json                      every number, with where it came from
 
 The Workbench repository is only read. Run this with a Python that has the
@@ -69,7 +71,7 @@ MILESTONES = [
 # so they are copied with their source. The corpus then held 112 statements
 # ("held on 112 real statements"); it holds 117 now.
 BASELINE = {
-    "label": "1 September 2026",
+    "label": "September 1, 2026",
     "version": "0.6.0",
     "statements": 112,
     "clean": 67, "warned": 3, "lost": 36, "none": 6,
@@ -91,15 +93,16 @@ REAL_EXPORT = {
         "The imitation reproduces all 48 866s in the export that Alma itself "
         "built from hand-entered 863s."
     ),
-    "source": "Matthew Codey's re-measurement on Workbench 0.49.0, 2 November 2026 "
-              "(round-trip check: 938 / 103 / 14 / 0 drift; Alma's 866s 48 of 48); "
+    "source": "Matthew Codey's measurements: 0 unaccounted for, 0 drift and Alma's 866s 48 of 48 "
+              "at Workbench 0.50.0 (November 10, 2026); the round trip's 938 / 103 / 14 at 0.49.0 "
+              "(November 2, 2026); "
               "method as in holdings-workbench CORPUS-FINDINGS.md, 'Round the loop with the ILS · 0.28.0'",
 }
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 # Light theme (the poster) as fallbacks; the page overrides every --fig-* var.
-# The four subfield hues were checked for colour-blind separation and contrast
+# The four subfield hues were checked for color-blind separation and contrast
 # on both themes; every mark that wears one also carries its subfield letter.
 STYLE = """
 .fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
@@ -247,8 +250,8 @@ def bar(x, y, w, h, cls, tip, r=4, round_end=True):
 
 
 def fmt_date(d: dt.date, year=False):
-    s = f"{d.day} {MONTHS[d.month - 1]}"
-    return f"{s} {d.year}" if year else s
+    s = f"{MONTHS[d.month - 1]} {d.day}"
+    return f"{s}, {d.year}" if year else s
 
 
 # --------------------------------------------------------------------------
@@ -272,7 +275,7 @@ def figure_statement(f853, f863):
     lines = [STATEMENT[:brk].rstrip(), STATEMENT[brk:]]
     body = [text(16, 20, "866 · as a person typed it", "muted", 13)]
 
-    # The statement, token by token, each underlined in its subfield's colour.
+    # The statement, token by token, each underlined in its subfield's color.
     y0, lh, pos = 54, 50, 0
     for tok, sf in TOKENS:
         start = STATEMENT.index(tok, pos)
@@ -339,7 +342,7 @@ def _month_starts(start, end):
 def _hit_title(d, versions):
     n = len(versions)
     span = versions[0] if n == 1 else f"{versions[0]} to {versions[-1]}"
-    return f"{fmt_date(d, True)}: {n} release{'s' if n > 1 else ''} ({span})"
+    return f"{fmt_date(d, True)}: {n} version{'s' if n > 1 else ''} ({span})"
 
 
 def figure_releases_wide(releases, sept):
@@ -355,7 +358,7 @@ def figure_releases_wide(releases, sept):
     s0 = dt.date(start.year, 9, 1)
     bx = L + (s0 - start).days * step
     body.append(f'<rect class="band" x="{bx:.1f}" y="40" width="{30 * step:.1f}" height="{base - 40 + 6}" rx="4"/>')
-    body.append(text(bx + 10, 58, f"{sept} releases in September", "strong", 13))
+    body.append(text(bx + 10, 58, f"{sept} versions in September", "strong", 13))
 
     body.append(f'<line class="rule" x1="{L}" x2="{W - R}" y1="{base + 6}" y2="{base + 6}"/>')
     body.append(text(L, base + 26, MONTHS[start.month - 1], "muted", 12))
@@ -377,7 +380,7 @@ def figure_releases_wide(releases, sept):
     # Milestone labels, staggered so they never collide.
     dates = dict(releases)
     tops = {v: base - (len(vs) - 1) * dy for vs in by_day.values() for v in vs}
-    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, release {len(releases)}")]
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     place = {  # version -> (label y, anchor)
         notes[0][0]: (150, "start"),
         notes[1][0]: (96, "end"),
@@ -428,7 +431,7 @@ def figure_releases_tall(releases, sept):
                     f"<title>{escape(_hit_title(d, versions))}</title></rect>")
 
     dates = dict(releases)
-    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, release {len(releases)}")]
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     LX = X0 + 10 * dx + 10
     for v, lbl in notes:
         d = dates[v]
@@ -442,11 +445,75 @@ def figure_releases_tall(releases, sept):
     return svg(W, H, "fig-releases-tall", *_releases_text(releases, sept), "\n".join(body))
 
 
+def figure_releases_col(releases, sept):
+    """The versions by week, drawn for one poster column: a day-by-day strip
+    that narrow would shrink its dots to specks."""
+    first_d = releases[0][1]
+    start = first_d - dt.timedelta(days=first_d.weekday())          # the Monday of the first week
+    weeks = (releases[-1][1] - start).days // 7 + 1
+    by_week = {}
+    for v, d in releases:
+        by_week.setdefault((d - start).days // 7, []).append(v)
+    W, L, R = 480, 28, 20
+    colw = (W - L - R) / weeks
+    per_row, dx, dy, r = 3, 7.6, 7.6, 3.1
+    tallest = max(-(-len(vs) // per_row) for vs in by_week.values())
+    base = 108 + tallest * dy
+    wx = lambda w: L + w * colw                                         # left edge of week w
+    dayx = lambda d: L + (d - start).days / 7 * colw
+    body = []
+
+    s0, s1 = dt.date(start.year, 9, 1), dt.date(start.year, 10, 1)
+    body.append(f'<rect class="band" x="{dayx(s0):.1f}" y="{base - tallest * dy - 8:.1f}" '
+                f'width="{dayx(s1) - dayx(s0):.1f}" height="{tallest * dy + 14:.1f}" rx="4"/>')
+
+    key = {v for v, _ in MILESTONES} | {releases[-1][0]}
+    spot = {}
+    for w, vs in sorted(by_week.items()):
+        x0 = wx(w) + (colw - (per_row - 1) * dx) / 2
+        for k, v in enumerate(vs):
+            cx, cy = x0 + (k % per_row) * dx, base - (k // per_row) * dy
+            spot[v] = (cx, cy)
+            cls = "dot-key" if v in key else "dot"
+            body.append(f'<circle class="{cls}" cx="{cx:.1f}" cy="{cy:.1f}" r="{r + (0.9 if v in key else 0)}"/>')
+        top = base - (-(-len(vs) // per_row) - 1) * dy - r - 3
+        wd = start + dt.timedelta(weeks=w)
+        tip = f"Week of {fmt_date(wd, True)}: {len(vs)} version{'s' if len(vs) > 1 else ''} ({vs[0]}" + (f" to {vs[-1]})" if len(vs) > 1 else ")")
+        body.append(f'<rect class="hit" x="{wx(w):.1f}" y="{top:.1f}" width="{colw:.1f}" height="{base + r + 3 - top:.1f}">'
+                    f"<title>{escape(tip)}</title></rect>")
+
+    body.append(f'<line class="rule" x1="{L}" x2="{W - R}" y1="{base + 7}" y2="{base + 7}"/>')
+    for m in _month_starts(start - dt.timedelta(days=1), releases[-1][1]):
+        mx = dayx(m)
+        if mx < L:
+            continue
+        body.append(f'<line class="rule" x1="{mx:.1f}" x2="{mx:.1f}" y1="{base + 7}" y2="{base + 13}"/>')
+        body.append(text(mx + 3, base + 27, MONTHS[m.month - 1], "muted", 12))
+    body.append(text(L, base + 27, MONTHS[start.month - 1], "muted", 12))
+    body.append(text((dayx(s0) + dayx(s1)) / 2, base + 47, f"{sept} in September", "strong", 12.5, "middle"))
+
+    # Milestones above the dots, in two rows so they never collide.
+    dates = dict(releases)
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
+    place = {notes[0][0]: (70, "start"), notes[1][0]: (22, "end"),
+             notes[2][0]: (22, "start"), notes[3][0]: (70, "end")}
+    for v, lbl in notes:
+        ly, anchor = place[v]
+        cx, cy = spot[v]
+        body.append(f'<line class="leader" x1="{cx:.1f}" x2="{cx:.1f}" y1="{ly + 19}" y2="{cy - r - 3:.1f}"/>')
+        tx = cx + (-4 if anchor == "end" else 4)
+        body.append(text(tx, ly, fmt_date(dates[v]), "strong", 12, anchor))
+        body.append(text(tx, ly + 15, lbl, "muted", 12, anchor))
+    title, desc = _releases_text(releases, sept)
+    return svg(W, base + 56, "fig-releases-col", title, desc.replace("Each dot is one numbered version",
+               "Each dot is one numbered version, grouped by week"), "\n".join(body))
+
+
 def _releases_text(releases, sept):
     first, last = releases[0], releases[-1]
     dates = dict(releases)
-    title = f"{len(releases)} releases, {fmt_date(first[1])} to {fmt_date(last[1], True)}"
-    desc = (f"Each dot is one released version of the Workbench, stacked by day. "
+    title = f"{len(releases)} numbered versions, {fmt_date(first[1])} to {fmt_date(last[1], True)}"
+    desc = (f"Each dot is one numbered version of the Workbench. "
             f"{sept} of the {len(releases)} came in September. "
             + " ".join(f"{fmt_date(dates[v])}: {lbl} ({v})." for v, lbl in MILESTONES)
             + f" The latest is {last[0]}, on {fmt_date(last[1])}.")
@@ -519,13 +586,66 @@ def figure_silent_loss(before, now):
                f"Silent losses, {before['lost']} to {now['lost']}", desc, "\n".join(body))
 
 
+def figure_silent_loss_wide(before, now):
+    """The same outcomes, drawn for a two-column block: the two bars and the
+    counts of silent losses are the largest things in it."""
+    W, L, R = 960, 16, 16
+    BX, BH, gap = 268, 42, 3
+    BW = W - R - BX
+    names = {k: label for k, _, label in OUTCOMES}
+    body = []
+    lx = L
+    for _, cls, label in OUTCOMES:     # the legend, on one line
+        body.append(f'<rect x="{lx}" y="{7}" width="14" height="14" rx="3" class="{cls}"/>')
+        body.append(text(lx + 20, 18.5, label, "", 12.5))
+        lx += 20 + len(label) * 6.9 + 20
+    if lx - 20 > W - R:
+        raise Stop("the silent-loss legend is wider than the figure")
+    y = 44
+    for data in (before, now):
+        n = data["statements"]
+        by = y
+        body.append(text(L, by + 22, data["label"], "strong", 17))
+        body.append(text(L, by + 44, f"version {data['version']} · {n} statements", "muted", 14.5))
+        segs = [(k, cls, data[k]) for k, cls, _ in OUTCOMES if data[k] > 0]
+        usable = BW - gap * (len(segs) - 1)
+        x = BX
+        for i, (k, cls, v) in enumerate(segs):
+            w = usable * v / n
+            body.append(bar(x, by, w, BH, cls, f"{names[k]}: {v} of {n}", r=6, round_end=(i == len(segs) - 1)))
+            if w > len(str(v)) * 13 + 14:
+                ink = "on-accent" if k == "lost" else ""
+                body.append(text(x + w / 2, by + 30, str(v), f"strong {ink}".strip(), 20, "middle"))
+            if k == "lost":
+                lost_x, lost_w = x, w
+            x += w + gap
+        lost = data["lost"]
+        if lost:
+            pct = round(100 * lost / n)
+            cx = lost_x + lost_w / 2
+            body.append(f'<line class="leader" x1="{cx:.1f}" x2="{cx:.1f}" y1="{by + BH + 3}" y2="{by + BH + 13}"/>')
+            body.append(text(W - R, by + BH + 35, f"{lost} of {n} ({pct}%) lost values silently", "strong", 22, "end"))
+        else:
+            body.append(text(BX, by + BH + 35, f"0 of {n} lose values silently", "strong", 22))
+        y = by + BH + 62
+    title = f"Silent losses, {before['lost']} to {now['lost']}"
+    desc = (f"Outcomes for the Workbench's corpus of real 866 statements. "
+            f"On {before['label']} (version {before['version']}), {before['statements']} statements: "
+            f"{before['clean']} converted cleanly, {before['warned']} converted and said what they left out, "
+            f"{before['lost']} lost values silently, {before['none']} converted nothing. "
+            f"On {now['label']} (version {now['version']}), {now['statements']} statements: "
+            f"{now['clean']} clean, {now['warned']} said what they left out, "
+            f"{now['lost']} lost values silently, {now['none']} converted nothing.")
+    return svg(W, y - 22, "fig-silent-loss-wide", title, desc, "\n".join(body))
+
+
 # --------------------------------------------------------------------------
 # How a statement becomes a pattern: the detector's tokens, the shape, the
 # named slots and the meanings it offers, as the Workbench produces them.
 # --------------------------------------------------------------------------
 
 # The same statement as figure 1, and a second from the same synthetic sample
-# whose first number carries no caption: the case a cataloguer decides.
+# whose first number carries no caption: the case a cataloger decides.
 UNCAPTIONED = "39 no 1 (Spring 1995)"
 EXPECTED_SHAPE = "VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR)"
 EXPECTED_UNCAPTIONED = {
@@ -543,17 +663,17 @@ SUBFIELD = "abcdef"
 CHRON_SUBFIELD = {"year": "i", "month": "j"}
 VALUE_KINDS = {"NUMBER", "YEAR", "CHRON"}
 CAPTION_KINDS = {"VOL_CAP", "ISS_CAP", "PT_CAP"}
-COLOURED = set("abij")
+COLORED = set("abij")
 
 
 def marc_segments(field):
-    """A field as display text, cut so each coloured subfield can be marked."""
+    """A field as display text, cut so each colored subfield can be marked."""
     head, _, rest = field.partition(" $")
     segments = [{"text": head + " ", "sf": None}]
     for part in ("$" + rest).split(" $"):
         part = part if part.startswith("$") else "$" + part
         code = part[1]
-        segments.append({"text": part, "sf": code if code in COLOURED else None})
+        segments.append({"text": part, "sf": code if code in COLORED else None})
         segments.append({"text": " ", "sf": None})
     segments.pop()
     if "".join(seg["text"] for seg in segments) != field:
@@ -596,14 +716,14 @@ def read_pattern():
             meaning = d["kind_label"]
         sf = SUBFIELD[r.level] if r.kind == "enum" else CHRON_SUBFIELD.get(r.kind)
         if sf is None:
-            raise Stop(f"no subfield colour for the slot {r.group} ({r.kind})")
+            raise Stop(f"no subfield color for the slot {r.group} ({r.kind})")
         slots.append({"slot": r.group, "value": match.group(r.group),
                       "meaning": meaning, "boundary": r.boundary,
                       "suggested": r.suggested, "sf": sf})
 
-    # Each piece of the statement takes its subfield's colour: a value from
+    # Each piece of the statement takes its subfield's color: a value from
     # the slot that captures it, a caption from the value it names. These must
-    # agree with figure 1's TOKENS, so the colours mean the same everywhere.
+    # agree with figure 1's TOKENS, so the colors mean the same everywhere.
     values = iter(slots)
     for t, tok in zip(toks, tokens):
         if t.kind in VALUE_KINDS:
@@ -616,7 +736,7 @@ def read_pattern():
             tok["sf"] = next(tokens[j]["sf"] for j in range(i + 1, len(toks))
                              if toks[j].kind in VALUE_KINDS)
     if [(tok["raw"], tok.get("sf")) for tok in tokens] != list(TOKENS):
-        raise Stop("the detector's pieces and figure 1's colours disagree")
+        raise Stop("the detector's pieces and figure 1's colors disagree")
 
     # The rule, simplified for reading: the statement with each value replaced
     # by the name of the slot that captures it.
@@ -667,7 +787,7 @@ def read_pattern():
 
 
 def figure_tokens(pattern):
-    """The statement cut into labelled pieces, and the shape those labels make."""
+    """The statement cut into labeled pieces, and the shape those labels make."""
     W, CW, LW = 340, 9.0, 6.4          # width; a token character; a label character
     PAD, GAP, CH = 5, 6, 26            # chip padding, gap between chips, chip height
     brk = STATEMENT.index(" (") + 1
@@ -678,7 +798,7 @@ def figure_tokens(pattern):
         start = STATEMENT.index(tok["raw"], pos)
         pos = start + len(tok["raw"])
         rows[0 if start < brk else 1].append(tok)
-    body = [text(16, 20, "1 · Cut into labelled pieces", "muted", 13)]
+    body = [text(16, 20, "1 · Cut into labeled pieces", "muted", 13)]
     y = 40
     for row in rows:
         widths = [max(len(t["raw"]) * CW, len(t["label"]) * LW) + 2 * PAD for t in row]
@@ -695,7 +815,7 @@ def figure_tokens(pattern):
         y += CH + 34
     y += 18
     body.append(text(16, y, "2 · Its shape", "muted", 13))
-    # The shape, each label underlined in its subfield's colour. A label in
+    # The shape, each label underlined in its subfield's color. A label in
     # the shape stands for the piece of the same label, in order: VOL for the
     # volume caption and its number, YEAR for a year, and so on.
     shape, SW = pattern["shape"], 7.2               # one monospace character at 12pt
@@ -710,7 +830,7 @@ def figure_tokens(pattern):
         body.append(f'<rect x="{sx + m.start() * SW:.1f}" y="{sy + 5}" '
                     f'width="{(m.end() - m.start()) * SW:.1f}" height="3" rx="1.5" class="sf-{sf}"/>')
     H = y + 46
-    desc = ("The statement " + STATEMENT + " is cut into pieces, each labelled: "
+    desc = ("The statement " + STATEMENT + " is cut into pieces, each labeled: "
             + ", ".join(f"{t['raw']} {t['label'] or '(punctuation)'}" for t in toks)
             + f". In order, the labels make its shape: {pattern['shape']}.")
     return svg(W, H, "fig-tokens", "How the detector reads a statement", desc, "\n".join(body))
@@ -741,7 +861,7 @@ def main():
         sys.exit(f"Stopped: about.json says version {version}, but its newest changelog entry is {latest_v}")
     months = Counter(d.strftime("%Y-%m") for _, d in releases)
     sept = months.get(f"{latest_d.year}-09", 0)
-    now = dict(corpus, label=f"{latest_d.day} {latest_d.strftime('%B')} {latest_d.year}", version=latest_v)
+    now = dict(corpus, label=f"{latest_d.strftime('%B')} {latest_d.day}, {latest_d.year}", version=latest_v)
     dates = dict(releases)
 
     FIG_DIR.mkdir(parents=True, exist_ok=True)
@@ -749,6 +869,8 @@ def main():
     (FIG_DIR / "releases-wide.svg").write_text(figure_releases_wide(releases, sept), encoding="utf-8")
     (FIG_DIR / "releases-tall.svg").write_text(figure_releases_tall(releases, sept), encoding="utf-8")
     (FIG_DIR / "silent-loss.svg").write_text(figure_silent_loss(BASELINE, now), encoding="utf-8")
+    (FIG_DIR / "silent-loss-wide.svg").write_text(figure_silent_loss_wide(BASELINE, now), encoding="utf-8")
+    (FIG_DIR / "releases-col.svg").write_text(figure_releases_col(releases, sept), encoding="utf-8")
     (FIG_DIR / "tokens.svg").write_text(figure_tokens(pattern), encoding="utf-8")
 
     numbers = {
@@ -779,7 +901,7 @@ def main():
 
     print(f"Workbench {latest_v} ({latest_d}): {len(releases)} releases, {sept} in September; "
           f"corpus {corpus['statements']} statements, {corpus['lost']} silent losses.")
-    print(f"Wrote 5 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
+    print(f"Wrote 7 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
 
 
 if __name__ == "__main__":
