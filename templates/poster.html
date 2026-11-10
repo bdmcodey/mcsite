@@ -91,7 +91,7 @@
           <tbody>
             <tr><th scope="row">Coding knowledge</th><td data-label="1 · By hand">The most</td><td data-label="2 · A model reads">The least</td><td data-label="3 · AI builds the tool">Some</td></tr>
             <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months, most of it on the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
-            <tr><th scope="row">Cost</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">To build it, likely a paid (pro or enterprise) AI assistant: a free tier is unlikely to manage a tool like this. To run it, nothing: no model or tokens</td></tr>
+            <tr><th scope="row">Cost</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">To build it, about $20/month (Pro plan): a free tier is unlikely to manage a tool like this. To run it, nothing: no model or tokens</td></tr>
             <tr><th scope="row">Same output every time</th><td data-label="1 · By hand">Yes</td><td data-label="2 · A model reads">Not guaranteed</td><td data-label="3 · AI builds the tool">Yes</td></tr>
             <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly: tuned to one collection</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it: patterns are found in each file, and it is tested on other libraries' statements</td></tr>
             <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully</td><td data-label="2 · A model reads">No code to read: the model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, kept honest by tests</td></tr>
@@ -180,7 +180,7 @@
             <li>Subfield convention: MARC 21, or a house convention adjustable subfield by subfield; the 853 indicators and numbering continuity (<code>$v</code>).</li>
             <li>Whether the parser converts statements no pattern claims, and <strong>strict</strong> mode: convert only what it reads in full.</li>
             <li>What to do when a value would be left out to fit MARC: convert and mark it, hold that statement, or leave the record as uploaded.</li>
-            <li>Whether to remove each 866 (only ever once everything in it went somewhere), and whether to clear existing 853/863s first.</li>
+            <li>Whether to remove each 866 (only once it has been converted), and whether to clear existing 853/863s first.</li>
           </ul>
         </section>
       </div>
@@ -203,9 +203,9 @@
         <figcaption>Each dot is one numbered version, stacked by day; {{ rel.by_month['2026-09'] }} of them came in September.</figcaption>
       </figure>
       <details class="data-view">
-        <summary>Releases as a table</summary>
+        <summary>Versions as a table</summary>
         <table>
-          <thead><tr><th scope="col">Month</th><th scope="col" class="num">Releases</th></tr></thead>
+          <thead><tr><th scope="col">Month</th><th scope="col" class="num">Versions</th></tr></thead>
           <tbody>
           {% for month, count in rel.by_month.items() %}
             <tr><td>{{ month }}</td><td class="num">{{ count }}</td></tr>
@@ -276,10 +276,10 @@
 
     <article class="panel">
       <h3>The human in the loop</h3>
-      <p>The AI writes the code; the cataloger decides what "correct" means. Two bugs were found by the cataloger, not by the tests:</p>
+      <p>The AI writes the code; I decide what "correct" means. Two bugs were found by me, using the tool, not by the tests:</p>
       <ul class="bugs">
-        <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
         <li>In <code>v. 15 no. 6 - v. 23 nos. 2/3 (Nov/Dec 1994 - Late Summer 2002)</code>, a confirmed pattern coded the last issue as Summer (<code>$j 22</code>) and dropped "Late" without a word. The tests missed it because they checked the standard parser, not patterns. It also can't simply be coded: the serial may have an Early Summer issue too, and coding both as Summer would merge two issues into one. Only the piece can settle it, so the season is now left out, named, and the record flagged for a person to check. Fixed in 0.9.6.</li>
+        <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
       </ul>
     </article>
 

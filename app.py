@@ -57,7 +57,8 @@ def long_date(iso):
     d = date.fromisoformat(iso)
     return f'{d:%B} {d.day}, {d.year}'
 
-POSTER_FIGURES = ('statement', 'tokens', 'releases-wide', 'releases-tall', 'silent-loss', 'qr', 'usc-logo')
+POSTER_FIGURES = ('statement', 'tokens', 'releases-wide', 'releases-tall', 'releases-col',
+                  'silent-loss', 'silent-loss-wide', 'qr', 'usc-logo')
 
 
 def _poster_page(template):

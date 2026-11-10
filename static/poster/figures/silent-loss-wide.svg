@@ -1,0 +1,58 @@
+<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 230" role="img" aria-labelledby="fig-silent-loss-wide-t fig-silent-loss-wide-d">
+<title id="fig-silent-loss-wide-t">Silent losses, 36 to 0</title>
+<desc id="fig-silent-loss-wide-d">Outcomes for the Workbench&#x27;s corpus of real 866 statements. On September 1, 2026 (version 0.6.0), 112 statements: 67 converted cleanly, 3 converted and said what they left out, 36 lost values silently, 6 converted nothing. On November 10, 2026 (version 0.50.0), 117 statements: 89 clean, 22 said what they left out, 0 lost values silently, 6 converted nothing.</desc>
+<style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
+.fig .mono{font-family:var(--fig-mono,ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace)}
+.fig .muted{fill:var(--fig-muted,#5d5a69)}
+.fig .strong{font-weight:600}
+.fig .rule{stroke:var(--fig-line,#d9d5e0);stroke-width:1;fill:none}
+.fig .leader{stroke:var(--fig-muted,#5d5a69);stroke-width:1;fill:none}
+.fig .band{fill:var(--fig-band,#efeaf7)}
+.fig .chip{fill:none;stroke:var(--fig-line,#d9d5e0);stroke-width:1}
+.fig .sf-a-stroke{stroke:var(--fig-sf-a,#6f55c0);stroke-width:2.5}
+.fig .sf-b-stroke{stroke:var(--fig-sf-b,#d9592a);stroke-width:2.5}
+.fig .sf-i-stroke{stroke:var(--fig-sf-i,#138a60);stroke-width:2.5}
+.fig .sf-j-stroke{stroke:var(--fig-sf-j,#b07a00);stroke-width:2.5}
+.fig .dot{fill:var(--fig-dot,#8f7dc8)}
+.fig .dot-key{fill:var(--fig-accent,#6f55c0);stroke:var(--fig-surface,#faf8f5);stroke-width:2}
+.fig .hit{fill:transparent}
+.fig .hit:hover{fill:var(--fig-line,#d9d5e0);fill-opacity:.5}
+.fig .seg-clean{fill:var(--fig-grey-1,#8e8a99)}
+.fig .seg-warned{fill:var(--fig-accent-soft,#c4b6ea)}
+.fig .seg-lost{fill:var(--fig-accent,#6f55c0)}
+.fig .seg-none{fill:var(--fig-grey-2,#d3d0db)}
+.fig .on-accent{fill:var(--fig-on-accent,#fff)}
+.fig .sf-a{fill:var(--fig-sf-a,#6f55c0)}
+.fig .sf-b{fill:var(--fig-sf-b,#d9592a)}
+.fig .sf-i{fill:var(--fig-sf-i,#138a60)}
+.fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
+.fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
+<rect x="16" y="7" width="14" height="14" rx="3" class="seg-clean"/>
+<text x="36.0" y="18.5" font-size="12.5">converted cleanly</text>
+<rect x="173.3" y="7" width="14" height="14" rx="3" class="seg-warned"/>
+<text x="193.3" y="18.5" font-size="12.5">converted, said what it left out</text>
+<rect x="434.1" y="7" width="14" height="14" rx="3" class="seg-lost"/>
+<text x="454.1" y="18.5" font-size="12.5">converted, losing values silently</text>
+<rect x="701.8000000000001" y="7" width="14" height="14" rx="3" class="seg-none"/>
+<text x="721.8" y="18.5" font-size="12.5">converted nothing (866 kept)</text>
+<text x="16.0" y="66.0" font-size="17" class="strong">September 1, 2026</text>
+<text x="16.0" y="88.0" font-size="14.5" class="muted">version 0.6.0 · 112 statements</text>
+<path class="seg-clean" d="M268.0,44.0 H667.0 Q667.0,44.0 667.0,44.0 V86.0 Q667.0,86.0 667.0,86.0 H268.0 Z"><title>converted cleanly: 67 of 112</title></path>
+<text x="467.5" y="74.0" font-size="20" text-anchor="middle" class="strong">67</text>
+<path class="seg-warned" d="M670.0,44.0 H687.9 Q687.9,44.0 687.9,44.0 V86.0 Q687.9,86.0 687.9,86.0 H670.0 Z"><title>converted, said what it left out: 3 of 112</title></path>
+<path class="seg-lost" d="M690.9,44.0 H905.3 Q905.3,44.0 905.3,44.0 V86.0 Q905.3,86.0 905.3,86.0 H690.9 Z"><title>converted, losing values silently: 36 of 112</title></path>
+<text x="798.1" y="74.0" font-size="20" text-anchor="middle" class="strong on-accent">36</text>
+<path class="seg-none" d="M908.3,44.0 H938.0 Q944.0,44.0 944.0,50.0 V80.0 Q944.0,86.0 938.0,86.0 H908.3 Z"><title>converted nothing (866 kept): 6 of 112</title></path>
+<text x="926.1" y="74.0" font-size="20" text-anchor="middle" class="strong">6</text>
+<line class="leader" x1="798.1" x2="798.1" y1="89" y2="99"/>
+<text x="944.0" y="121.0" font-size="22" text-anchor="end" class="strong">36 of 112 (32%) lost values silently</text>
+<text x="16.0" y="170.0" font-size="17" class="strong">November 10, 2026</text>
+<text x="16.0" y="192.0" font-size="14.5" class="muted">version 0.50.0 · 117 statements</text>
+<path class="seg-clean" d="M268.0,148.0 H777.7 Q777.7,148.0 777.7,148.0 V190.0 Q777.7,190.0 777.7,190.0 H268.0 Z"><title>converted cleanly: 89 of 117</title></path>
+<text x="522.8" y="178.0" font-size="20" text-anchor="middle" class="strong">89</text>
+<path class="seg-warned" d="M780.7,148.0 H906.6 Q906.6,148.0 906.6,148.0 V190.0 Q906.6,190.0 906.6,190.0 H780.7 Z"><title>converted, said what it left out: 22 of 117</title></path>
+<text x="843.6" y="178.0" font-size="20" text-anchor="middle" class="strong">22</text>
+<path class="seg-none" d="M909.6,148.0 H938.0 Q944.0,148.0 944.0,154.0 V184.0 Q944.0,190.0 938.0,190.0 H909.6 Z"><title>converted nothing (866 kept): 6 of 117</title></path>
+<text x="926.8" y="178.0" font-size="20" text-anchor="middle" class="strong">6</text>
+<text x="268.0" y="225.0" font-size="22" class="strong">0 of 117 lose values silently</text>
+</svg>

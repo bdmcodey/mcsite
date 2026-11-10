@@ -11,7 +11,9 @@ It writes, and the site reads:
     static/poster/figures/statement.svg      the 866 and the 853/863 it becomes
     static/poster/figures/releases-wide.svg  the releases, as a strip (poster, desktop)
     static/poster/figures/releases-tall.svg  the same, top to bottom (phones)
-    static/poster/figures/silent-loss.svg    corpus outcomes, then and now
+    static/poster/figures/silent-loss.svg    corpus outcomes, then and now (the page)
+    static/poster/figures/silent-loss-wide.svg  the same, for the poster's two-column block
+    static/poster/figures/releases-col.svg   the versions by week, for one poster column
     poster/numbers.json                      every number, with where it came from
 
 The Workbench repository is only read. Run this with a Python that has the
@@ -340,7 +342,7 @@ def _month_starts(start, end):
 def _hit_title(d, versions):
     n = len(versions)
     span = versions[0] if n == 1 else f"{versions[0]} to {versions[-1]}"
-    return f"{fmt_date(d, True)}: {n} release{'s' if n > 1 else ''} ({span})"
+    return f"{fmt_date(d, True)}: {n} version{'s' if n > 1 else ''} ({span})"
 
 
 def figure_releases_wide(releases, sept):
@@ -356,7 +358,7 @@ def figure_releases_wide(releases, sept):
     s0 = dt.date(start.year, 9, 1)
     bx = L + (s0 - start).days * step
     body.append(f'<rect class="band" x="{bx:.1f}" y="40" width="{30 * step:.1f}" height="{base - 40 + 6}" rx="4"/>')
-    body.append(text(bx + 10, 58, f"{sept} releases in September", "strong", 13))
+    body.append(text(bx + 10, 58, f"{sept} versions in September", "strong", 13))
 
     body.append(f'<line class="rule" x1="{L}" x2="{W - R}" y1="{base + 6}" y2="{base + 6}"/>')
     body.append(text(L, base + 26, MONTHS[start.month - 1], "muted", 12))
@@ -378,7 +380,7 @@ def figure_releases_wide(releases, sept):
     # Milestone labels, staggered so they never collide.
     dates = dict(releases)
     tops = {v: base - (len(vs) - 1) * dy for vs in by_day.values() for v in vs}
-    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, release {len(releases)}")]
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     place = {  # version -> (label y, anchor)
         notes[0][0]: (150, "start"),
         notes[1][0]: (96, "end"),
@@ -429,7 +431,7 @@ def figure_releases_tall(releases, sept):
                     f"<title>{escape(_hit_title(d, versions))}</title></rect>")
 
     dates = dict(releases)
-    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, release {len(releases)}")]
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     LX = X0 + 10 * dx + 10
     for v, lbl in notes:
         d = dates[v]
@@ -443,11 +445,75 @@ def figure_releases_tall(releases, sept):
     return svg(W, H, "fig-releases-tall", *_releases_text(releases, sept), "\n".join(body))
 
 
+def figure_releases_col(releases, sept):
+    """The versions by week, drawn for one poster column: a day-by-day strip
+    that narrow would shrink its dots to specks."""
+    first_d = releases[0][1]
+    start = first_d - dt.timedelta(days=first_d.weekday())          # the Monday of the first week
+    weeks = (releases[-1][1] - start).days // 7 + 1
+    by_week = {}
+    for v, d in releases:
+        by_week.setdefault((d - start).days // 7, []).append(v)
+    W, L, R = 480, 28, 20
+    colw = (W - L - R) / weeks
+    per_row, dx, dy, r = 3, 7.6, 7.6, 3.1
+    tallest = max(-(-len(vs) // per_row) for vs in by_week.values())
+    base = 108 + tallest * dy
+    wx = lambda w: L + w * colw                                         # left edge of week w
+    dayx = lambda d: L + (d - start).days / 7 * colw
+    body = []
+
+    s0, s1 = dt.date(start.year, 9, 1), dt.date(start.year, 10, 1)
+    body.append(f'<rect class="band" x="{dayx(s0):.1f}" y="{base - tallest * dy - 8:.1f}" '
+                f'width="{dayx(s1) - dayx(s0):.1f}" height="{tallest * dy + 14:.1f}" rx="4"/>')
+
+    key = {v for v, _ in MILESTONES} | {releases[-1][0]}
+    spot = {}
+    for w, vs in sorted(by_week.items()):
+        x0 = wx(w) + (colw - (per_row - 1) * dx) / 2
+        for k, v in enumerate(vs):
+            cx, cy = x0 + (k % per_row) * dx, base - (k // per_row) * dy
+            spot[v] = (cx, cy)
+            cls = "dot-key" if v in key else "dot"
+            body.append(f'<circle class="{cls}" cx="{cx:.1f}" cy="{cy:.1f}" r="{r + (0.9 if v in key else 0)}"/>')
+        top = base - (-(-len(vs) // per_row) - 1) * dy - r - 3
+        wd = start + dt.timedelta(weeks=w)
+        tip = f"Week of {fmt_date(wd, True)}: {len(vs)} version{'s' if len(vs) > 1 else ''} ({vs[0]}" + (f" to {vs[-1]})" if len(vs) > 1 else ")")
+        body.append(f'<rect class="hit" x="{wx(w):.1f}" y="{top:.1f}" width="{colw:.1f}" height="{base + r + 3 - top:.1f}">'
+                    f"<title>{escape(tip)}</title></rect>")
+
+    body.append(f'<line class="rule" x1="{L}" x2="{W - R}" y1="{base + 7}" y2="{base + 7}"/>')
+    for m in _month_starts(start - dt.timedelta(days=1), releases[-1][1]):
+        mx = dayx(m)
+        if mx < L:
+            continue
+        body.append(f'<line class="rule" x1="{mx:.1f}" x2="{mx:.1f}" y1="{base + 7}" y2="{base + 13}"/>')
+        body.append(text(mx + 3, base + 27, MONTHS[m.month - 1], "muted", 12))
+    body.append(text(L, base + 27, MONTHS[start.month - 1], "muted", 12))
+    body.append(text((dayx(s0) + dayx(s1)) / 2, base + 47, f"{sept} in September", "strong", 12.5, "middle"))
+
+    # Milestones above the dots, in two rows so they never collide.
+    dates = dict(releases)
+    notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
+    place = {notes[0][0]: (70, "start"), notes[1][0]: (22, "end"),
+             notes[2][0]: (22, "start"), notes[3][0]: (70, "end")}
+    for v, lbl in notes:
+        ly, anchor = place[v]
+        cx, cy = spot[v]
+        body.append(f'<line class="leader" x1="{cx:.1f}" x2="{cx:.1f}" y1="{ly + 19}" y2="{cy - r - 3:.1f}"/>')
+        tx = cx + (-4 if anchor == "end" else 4)
+        body.append(text(tx, ly, fmt_date(dates[v]), "strong", 12, anchor))
+        body.append(text(tx, ly + 15, lbl, "muted", 12, anchor))
+    title, desc = _releases_text(releases, sept)
+    return svg(W, base + 56, "fig-releases-col", title, desc.replace("Each dot is one numbered version",
+               "Each dot is one numbered version, grouped by week"), "\n".join(body))
+
+
 def _releases_text(releases, sept):
     first, last = releases[0], releases[-1]
     dates = dict(releases)
-    title = f"{len(releases)} releases, {fmt_date(first[1])} to {fmt_date(last[1], True)}"
-    desc = (f"Each dot is one released version of the Workbench, stacked by day. "
+    title = f"{len(releases)} numbered versions, {fmt_date(first[1])} to {fmt_date(last[1], True)}"
+    desc = (f"Each dot is one numbered version of the Workbench. "
             f"{sept} of the {len(releases)} came in September. "
             + " ".join(f"{fmt_date(dates[v])}: {lbl} ({v})." for v, lbl in MILESTONES)
             + f" The latest is {last[0]}, on {fmt_date(last[1])}.")
@@ -518,6 +584,59 @@ def figure_silent_loss(before, now):
             f"{now['lost']} lost values silently, {now['none']} converted nothing.")
     return svg(W, H, "fig-silent-loss",
                f"Silent losses, {before['lost']} to {now['lost']}", desc, "\n".join(body))
+
+
+def figure_silent_loss_wide(before, now):
+    """The same outcomes, drawn for a two-column block: the two bars and the
+    counts of silent losses are the largest things in it."""
+    W, L, R = 960, 16, 16
+    BX, BH, gap = 268, 42, 3
+    BW = W - R - BX
+    names = {k: label for k, _, label in OUTCOMES}
+    body = []
+    lx = L
+    for _, cls, label in OUTCOMES:     # the legend, on one line
+        body.append(f'<rect x="{lx}" y="{7}" width="14" height="14" rx="3" class="{cls}"/>')
+        body.append(text(lx + 20, 18.5, label, "", 12.5))
+        lx += 20 + len(label) * 6.9 + 20
+    if lx - 20 > W - R:
+        raise Stop("the silent-loss legend is wider than the figure")
+    y = 44
+    for data in (before, now):
+        n = data["statements"]
+        by = y
+        body.append(text(L, by + 22, data["label"], "strong", 17))
+        body.append(text(L, by + 44, f"version {data['version']} · {n} statements", "muted", 14.5))
+        segs = [(k, cls, data[k]) for k, cls, _ in OUTCOMES if data[k] > 0]
+        usable = BW - gap * (len(segs) - 1)
+        x = BX
+        for i, (k, cls, v) in enumerate(segs):
+            w = usable * v / n
+            body.append(bar(x, by, w, BH, cls, f"{names[k]}: {v} of {n}", r=6, round_end=(i == len(segs) - 1)))
+            if w > len(str(v)) * 13 + 14:
+                ink = "on-accent" if k == "lost" else ""
+                body.append(text(x + w / 2, by + 30, str(v), f"strong {ink}".strip(), 20, "middle"))
+            if k == "lost":
+                lost_x, lost_w = x, w
+            x += w + gap
+        lost = data["lost"]
+        if lost:
+            pct = round(100 * lost / n)
+            cx = lost_x + lost_w / 2
+            body.append(f'<line class="leader" x1="{cx:.1f}" x2="{cx:.1f}" y1="{by + BH + 3}" y2="{by + BH + 13}"/>')
+            body.append(text(W - R, by + BH + 35, f"{lost} of {n} ({pct}%) lost values silently", "strong", 22, "end"))
+        else:
+            body.append(text(BX, by + BH + 35, f"0 of {n} lose values silently", "strong", 22))
+        y = by + BH + 62
+    title = f"Silent losses, {before['lost']} to {now['lost']}"
+    desc = (f"Outcomes for the Workbench's corpus of real 866 statements. "
+            f"On {before['label']} (version {before['version']}), {before['statements']} statements: "
+            f"{before['clean']} converted cleanly, {before['warned']} converted and said what they left out, "
+            f"{before['lost']} lost values silently, {before['none']} converted nothing. "
+            f"On {now['label']} (version {now['version']}), {now['statements']} statements: "
+            f"{now['clean']} clean, {now['warned']} said what they left out, "
+            f"{now['lost']} lost values silently, {now['none']} converted nothing.")
+    return svg(W, y - 22, "fig-silent-loss-wide", title, desc, "\n".join(body))
 
 
 # --------------------------------------------------------------------------
@@ -750,6 +869,8 @@ def main():
     (FIG_DIR / "releases-wide.svg").write_text(figure_releases_wide(releases, sept), encoding="utf-8")
     (FIG_DIR / "releases-tall.svg").write_text(figure_releases_tall(releases, sept), encoding="utf-8")
     (FIG_DIR / "silent-loss.svg").write_text(figure_silent_loss(BASELINE, now), encoding="utf-8")
+    (FIG_DIR / "silent-loss-wide.svg").write_text(figure_silent_loss_wide(BASELINE, now), encoding="utf-8")
+    (FIG_DIR / "releases-col.svg").write_text(figure_releases_col(releases, sept), encoding="utf-8")
     (FIG_DIR / "tokens.svg").write_text(figure_tokens(pattern), encoding="utf-8")
 
     numbers = {
@@ -780,7 +901,7 @@ def main():
 
     print(f"Workbench {latest_v} ({latest_d}): {len(releases)} releases, {sept} in September; "
           f"corpus {corpus['statements']} statements, {corpus['lost']} silent losses.")
-    print(f"Wrote 5 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
+    print(f"Wrote 7 figures to {FIG_DIR.relative_to(SITE_ROOT)} and {NUMBERS.relative_to(SITE_ROOT)}.")
 
 
 if __name__ == "__main__":
