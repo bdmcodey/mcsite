@@ -165,8 +165,8 @@
         <section>
           <h4>On one record</h4>
           <ul>
-            <li><strong>Edit an 866</strong> before conversion, to fix a typo such as <code>(Fal 1995-Fall 1999)</code> or a wrong caption. The corrected text goes into the file, and "Put back as uploaded" undoes it.</li>
-            <li><strong>This record's 853:</strong> its frequency (<code>$w</code>), issues per volume (<code>$u</code>), and a caption for any level its statements leave blank.</li>
+            <li><strong>Edit an 866</strong> before conversion, to fix a typo such as <code>(Fal 1995-Fall 1999)</code> or a wrong caption. The corrected text goes into the file, and "Put back as uploaded" undoes it. <strong>Split</strong> divides one 866 in two, such as where a serial changes from months to seasons.</li>
+            <li><strong>This record's 853:</strong> its frequency (<code>$w</code>), numbering (<code>$v</code>), issues per volume (<code>$u</code>), and a caption for any level its statements leave blank.</li>
             <li>Skip the record, give each shape its own 853, mark it reviewed, or leave a note for the log.</li>
           </ul>
         </section>
@@ -187,13 +187,13 @@
     <article class="panel">
       <h3>How it was built</h3>
       {% set sz = rel.sizes %}
-      <p><strong>What the “releases” were.</strong> The Workbench went from version {{ rel.first.version }} ({{ rel.first.date | long_date }}) to {{ rel.latest.version }} ({{ rel.latest.date | long_date }}): {{ rel.count }} numbered versions in {{ sz.weeks }} weeks. These weren’t releases in the usual software sense of a batch of changes put out every few weeks. Each was one piece of work given its own number as it was finished, so the cataloguer always knew which version they were testing:</p>
+      <p><strong>What the “releases” were.</strong> The Workbench went from version {{ rel.first.version }} ({{ rel.first.date | long_date }}) to {{ rel.latest.version }} ({{ rel.latest.date | long_date }}): {{ rel.count }} numbered versions in {{ sz.weeks }} weeks. These weren’t releases in the usual software sense of a batch of changes put out every few weeks. Up to 0.49.0, each was one piece of work given its own number as it was finished, so the cataloguer always knew which version they were testing:</p>
       <ul class="cases">
         <li><strong>Most were small.</strong> The median version holds {{ sz.median_changes }} changes, and {{ sz.one_change }} hold just one. The {{ rel.count }} came out on {{ sz.days }} different days, and as many as {{ sz.most_in_a_day }} on one day.</li>
         <li>{{ sz.patch }} went up only in the last number (fixes and small additions, like 0.44.1), and {{ sz.minor }} in the middle number (something new or changed, like 0.45.0).</li>
         <li><strong>A few were large.</strong> 0.6.0, for example, holds {{ sz.changes_in_0_6_0 }} changes, because the numbers stood still for a week in August while the three original tools were being built.</li>
       </ul>
-      <p>So “{{ rel.count }} releases” is accurate but overstates how much each one was. It’s better described as {{ rel.count }} small, numbered steps, each with a changelog entry written for cataloguers. From 0.50.0 on, changes will be batched and numbered only when a set is worth installing, which is the more usual practice.</p>
+      <p>So “{{ rel.count }} releases” is accurate but overstates how much each one was. It’s better described as {{ rel.count }} small, numbered steps, each with a changelog entry written for cataloguers. From 0.50.0 on, changes are gathered and a version is numbered only when a set is worth installing, which is the more usual practice; anything not yet released is listed in the Workbench's About box.</p>
       <figure class="fig-frame">
         <div class="fig-wide">{{ fig.releases_wide }}</div>
         <div class="fig-tall">{{ fig.releases_tall }}</div>
@@ -235,6 +235,7 @@
     <article class="panel">
       <h3>The turning point: silent losses</h3>
       <p>A refusal is safe: nothing is written and the 866 stays. A <em>silent loss</em> is not: fields are written, the 866 is removed, and a volume or a month is gone with nothing on screen to say so. Measured on a corpus of real 866 statements, {{ before.lost }} of {{ before.statements }} lost values silently. Now none do; the ones that cannot be fully read say what they left out.</p>
+      <p>Zero is what was measured, not a guarantee. Before 0.50.0, a review found a shape that is in none of the test sources: a date with a doubled hyphen, as in <code>v.3 (1990--1995)</code>, kept its first year and dropped the rest without a word. It is now marked to check. The project's conversion audit, which checks every number going into a conversion against the fields coming out, can be run on any new file to look for the same.</p>
       <figure class="fig-frame fig-narrow">
         {{ fig.silent_loss }}
       </figure>
