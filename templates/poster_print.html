@@ -115,7 +115,7 @@
           <ul class="controls">
             <li><b>On a pattern:</b> what each value is, its caption and level; skip a shape; test or edit the rule; reuse the library on another collection.</li>
             <li><b>On one record:</b> edit an 866 before it is read, split it, set this record's 853 (frequency, numbering, issues per volume, missing captions), skip it, leave a note.</li>
-            <li><b>For the whole file:</b> holdings level, subfield convention, strict reading, what to do with a value MARC has no place for, and whether to keep each 866.</li>
+            <li><b>For the whole file:</b> holdings level, subfield convention, strict reading, values MARC has no place for, and whether to keep each 866.</li>
           </ul>
           <p class="small">Every decision is listed in a downloadable log.</p>
         </article>
@@ -131,10 +131,11 @@
         </article>
         <article class="block">
           <h3>The human in the loop</h3>
-          <p>The AI writes the code; the cataloguer decides what "correct" means. Two bugs were found by the cataloguer, not the tests:</p>
+          <p>The AI writes the code; the cataloguer decides what "correct" means. Silent losses the tests missed:</p>
           <ul class="bugs">
-            <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." when its pattern was confirmed (fixed in 0.32.0).</li>
-            <li><code>Late Summer 2002</code> was coded as plain Summer, though there may be an Early Summer issue too; now it is flagged (fixed in 0.9.6).</li>
+            <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." (the cataloguer; 0.32.0).</li>
+            <li><code>Late Summer 2002</code> became Summer, though an Early Summer issue may exist (the cataloguer; 0.9.6).</li>
+            <li><code>v.3 (1990--1995)</code> kept only 1990 (a one-shot Fable 5.2 review; 0.50.0).</li>
           </ul>
         </article>
       </div>
