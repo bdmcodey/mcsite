@@ -57,7 +57,7 @@ points to `https://matthewcodey.com/poster?src=qr` so scans can be counted.
   titled with the poster's title; the tags change nothing in print.
 - The USC logo, `static/poster/figures/usc-logo.svg`, is USC's official Primary
   Shield and Wordmark for light backgrounds (`PrimShield_Word_RegUse_Card-Blk`),
-  converted from the vector PDF with its colours set to USC's RGB cardinal
+  converted from the vector PDF with its colors set to USC's RGB cardinal
   (`#991b1e`) and black. Don't redraw or recolour it.
 
 ```bat
@@ -73,6 +73,6 @@ http://127.0.0.1:5000/poster/print/ (it is 3,480 px wide; zoom out).
 
 The figures are themed with CSS custom properties (`--fig-*`). The values
 written into each SVG are the poster's light theme; `static/css/poster.css`
-sets the page's dark one. The four subfield colours in figure 1 were checked
-for colour-blind separation and contrast in both themes; every mark that uses
+sets the page's dark one. The four subfield colors in figure 1 were checked
+for color-blind separation and contrast in both themes; every mark that uses
 one also carries its subfield letter.

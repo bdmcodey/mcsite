@@ -9,14 +9,14 @@
 {% set now = n.corpus.now %}
 {% set rx = n.real_export %}
 {% set pat = n.pattern %}
-{% macro coloured(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
+{% macro colored(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
 {% block content %}
 <div class="poster-page">
 
 <section class="poster-hero">
   <div class="wrap">
     <p class="draft-banner" role="note"><strong>Draft.</strong> Copy and layout are in progress; numbers are current as of Workbench {{ n.as_of_version }}.</p>
-    <div class="eyebrow">ALA Core Forum · 18–20 November 2026 · Poster</div>
+    <div class="eyebrow">ALA Core Forum · November 18–20, 2026 · Poster</div>
     <h1 class="big">Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
     <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong></p>
     <p class="byline">Matthew Codey · USC Libraries</p>
@@ -40,8 +40,8 @@
       <figure class="fig-frame fig-narrow">
         {{ fig.statement }}
         <figcaption>One statement from the Workbench's synthetic sample, and the fields its converter writes for it:
-          <code class="marc">{{ coloured(n.statement.segments_853) }}</code>
-          <code class="marc">{{ coloured(n.statement.segments_863) }}</code></figcaption>
+          <code class="marc">{{ colored(n.statement.segments_853) }}</code>
+          <code class="marc">{{ colored(n.statement.segments_863) }}</code></figcaption>
       </figure>
     </article>
 
@@ -55,7 +55,7 @@
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
           <div><dt>Pros</dt><dd>Results tuned to a bespoke collection, and code I knew intimately: I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
-          <div><dt>Cons</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalising it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
+          <div><dt>Cons</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalizing it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
         </dl>
         <p>It took me more than six months to adapt the script to my collection, much of it spent teaching myself Python; before that I had only followed online tutorials. The hardest part by far was the single, monolithic regular expression the whole parser rested on. It took weeks, if not months, of testing it against the corpus in regex101 before it accounted for every pattern. It handled most statements well, but some edge cases needed logic I couldn't see how to write. That was the wall, until AI coding assistants came along.</p>
         <p>Asking every institution to write its own expression that way seemed unviable, and that is what led me to induce the expressions instead: find the patterns in a file, and generate a rule for each.</p>
@@ -69,7 +69,7 @@
           <div><dt>Pros</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
           <div><dt>Cons</dt><dd>Expensive in tokens: the free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
         </dl>
-        <p>Holdings are public catalogue data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
+        <p>Holdings are public catalog data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
       </article>
       <article class="panel chosen">
         <span class="tag">Approach 3 · chosen</span>
@@ -78,7 +78,7 @@
         <p>Both began as one-shot prompts: the Pattern Detector from a single prompt in Cursor, and the Converter from handing my original parser to Claude Code and asking for the same thing, done better, with an interface. Those were proofs of concept. The real development began with version numbers.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>Some. Without my familiarity with code, I couldn't have described the features I wanted as well, or spotted bugs and other problems as they came up.</dd></div>
-          <div><dt>Pros</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloguer's own machine, and needs no model, API key or tokens to run.</dd></div>
+          <div><dt>Pros</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloger's own machine, and needs no model, API key or tokens to run.</dd></div>
           <div><dt>Cons</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress. It may also be overengineered, a common complaint about tools built this way, and that only widens the gap: I can't judge, as a senior software engineer could, whether a tool this size needs all the code and tests it has.</dd></div>
         </dl>
       </article>
@@ -115,20 +115,20 @@
 
     <article class="panel" id="how-it-reads">
       <h3>How the Workbench reads a statement</h3>
-      <p>Two parts read every file. The <strong>pattern detector</strong> sorts all of a file's 866 statements into groups of the same shape, so that a cataloguer decides what something means once per group rather than once per record. The <strong>standard parser</strong> reads each statement into volumes, issues and dates, and stops rather than guesses. Here is the statement from the top of the page, as the detector reads it.</p>
+      <p>Two parts read every file. The <strong>pattern detector</strong> sorts all of a file's 866 statements into groups of the same shape, so that a cataloger decides what something means once per group rather than once per record. The <strong>standard parser</strong> reads each statement into volumes, issues and dates, and stops rather than guesses. Here is the statement from the top of the page, as the detector reads it.</p>
       <figure class="fig-frame fig-narrow">
         {{ fig.tokens }}
-        <figcaption>The detector's own output for the statement in the first figure. The colours follow its subfields throughout:
+        <figcaption>The detector's own output for the statement in the first figure. The colors follow its subfields throughout:
           <span class="key"><span class="swatch sw-a"></span>$a volume</span>
           <span class="key"><span class="swatch sw-b"></span>$b issue</span>
           <span class="key"><span class="swatch sw-i"></span>$i year</span>
           <span class="key"><span class="swatch sw-j"></span>$j month</span></figcaption>
       </figure>
-      <p>Each piece is recognised by a fixed list of rules, tried in order, and the first rule that fits wins. The order is what makes it read the way a cataloguer would: <code>1992</code> is a year before it is a number, <code>Nov.</code> is November before it is "no" followed by "v.", and a caption counts only where a word starts. Spaces are set aside, so <code>v.1</code> and <code>v. 1</code> have the same shape. The long dash marks the hyphen that divides the start of the holdings from the end; the hyphen inside the dates means "through".</p>
+      <p>Each piece is recognized by a fixed list of rules, tried in order, and the first rule that fits wins. The order is what makes it read the way a cataloger would: <code>1992</code> is a year before it is a number, <code>Nov.</code> is November before it is "no" followed by "v.", and a caption counts only where a word starts. Spaces are set aside, so <code>v.1</code> and <code>v. 1</code> have the same shape. The long dash marks the hyphen that divides the start of the holdings from the end; the hyphen inside the dates means "through".</p>
 
       <h4 class="step">3 · A matching rule, with a slot for each value</h4>
       <p>Statements with the same labels in the same order are one group, whatever their numbers. For each group the detector writes a <strong>regular expression</strong>: the captions it saw, and a named slot for each value. This group's is {{ '{:,}'.format(pat.regex_length) }} characters long, because it accepts any month or season, any spacing, and combined issues such as <code>8/9</code>. Simplified, with each slot named:</p>
-      <p class="rule-line"><code>{{ coloured(pat.template_segments) }}</code></p>
+      <p class="rule-line"><code>{{ colored(pat.template_segments) }}</code></p>
       <div class="table-wrap">
         <table class="slot-table">
           <thead><tr><th scope="col">Slot</th><th scope="col">In this statement</th><th scope="col">Offered as</th></tr></thead>
@@ -141,20 +141,20 @@
       </div>
 
       <h4 class="step">4 · Confirm once, for the whole group</h4>
-      <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloguer can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What changes upon confirmation depends on the group:</p>
+      <p>Each group appears as a card: its shape, how many statements it holds, and a row for each slot with the detector's guess filled in. For each value the cataloger can set what it is (enumeration, year, month or season, day, or not encoded), its caption, its level, and whether it opens or closes the range. What changes upon confirmation depends on the group:</p>
       <ul class="cases">
         <li><strong>Nothing to decide.</strong> In this group every value carries its own caption, so the parser reads these statements in full and the pattern is confirmed without asking.</li>
         <li><strong>A caption to supply.</strong> In <code>{{ pat.uncaptioned.statement }}</code>, from the same sample, the {{ pat.uncaptioned.suggested_value }} has no caption; its shape is <code>{{ pat.uncaptioned.shape }}</code>. The card suggests <code>v.</code> but still asks. On its own the parser writes <code><span class="sf sf-a">$a (*)</span></code>, the standard's placeholder for an unnamed level; with <code>v.</code> confirmed, the 853 reads <code><span class="sf sf-a">$a v.</span> <span class="sf sf-b">$b no.</span></code></li>
-        <li><strong>A reading only the cataloguer can give.</strong> A lone number with no caption and no date could be a volume, an issue or a year. The parser holds it rather than guess, and the meaning confirmed on its pattern is what converts it.</li>
+        <li><strong>A reading only the cataloger can give.</strong> A lone number with no caption and no date could be a volume, an issue or a year. The parser holds it rather than guess, and the meaning confirmed on its pattern is what converts it.</li>
       </ul>
 
       <h4 class="step">5 · The parser reads; the pattern fills the gaps</h4>
       <p>A confirmed pattern decides which statements are its own, and supplies only what the parser cannot know: the meaning of a bare number, or a caption for a level written without one. It never overwrites a caption the statement prints. Wherever a statement says everything itself, the pattern and the parser alone write the same 853 and 863, and a test checks that both routes agree.</p>
     </article>
 
-    <article class="panel" id="cataloguer-controls">
-      <h3>What the cataloguer controls</h3>
-      <p>The cataloguer decides what "correct" means, and the Workbench is built to take those decisions: on a pattern (a group of statements with the same shape), on one record, or for the whole file.</p>
+    <article class="panel" id="cataloger-controls">
+      <h3>What the cataloger controls</h3>
+      <p>The cataloger decides what "correct" means, and the Workbench is built to take those decisions: on a pattern (a group of statements with the same shape), on one record, or for the whole file.</p>
       <div class="controls">
         <section>
           <h4>On a pattern</h4>
@@ -190,13 +190,13 @@
     <article class="panel">
       <h3>How it was built</h3>
       {% set sz = rel.sizes %}
-      <p><strong>What the “releases” were.</strong> The Workbench went from version {{ rel.first.version }} ({{ rel.first.date | long_date }}) to {{ rel.latest.version }} ({{ rel.latest.date | long_date }}): {{ rel.count }} numbered versions in {{ sz.weeks }} weeks. These weren’t releases in the usual software sense of a batch of changes put out every few weeks. Up to 0.49.0, each was one piece of work given its own number as it was finished, so the cataloguer always knew which version they were testing:</p>
+      <p><strong>What the “releases” were.</strong> The Workbench went from version {{ rel.first.version }} ({{ rel.first.date | long_date }}) to {{ rel.latest.version }} ({{ rel.latest.date | long_date }}): {{ rel.count }} numbered versions in {{ sz.weeks }} weeks. These weren’t releases in the usual software sense of a batch of changes put out every few weeks. Up to 0.49.0, each was one piece of work given its own number as it was finished, so the cataloger always knew which version they were testing:</p>
       <ul class="cases">
         <li><strong>Most were small.</strong> The median version holds {{ sz.median_changes }} changes, and {{ sz.one_change }} hold just one. The {{ rel.count }} came out on {{ sz.days }} different days, and as many as {{ sz.most_in_a_day }} on one day.</li>
         <li>{{ sz.patch }} went up only in the last number (fixes and small additions, like 0.44.1), and {{ sz.minor }} in the middle number (something new or changed, like 0.45.0).</li>
         <li><strong>A few were large.</strong> 0.6.0, for example, holds {{ sz.changes_in_0_6_0 }} changes, because the numbers stood still for a week in August while the three original tools were being built.</li>
       </ul>
-      <p>So “{{ rel.count }} releases” is accurate but overstates how much each one was. It’s better described as {{ rel.count }} small, numbered steps, each with a changelog entry written for cataloguers. From 0.50.0 on, changes are gathered and a version is numbered only when a set is worth installing, which is the more usual practice; anything not yet released is listed in the Workbench's About box.</p>
+      <p>So “{{ rel.count }} releases” is accurate but overstates how much each one was. It’s better described as {{ rel.count }} small, numbered steps, each with a changelog entry written for catalogers. From 0.50.0 on, changes are gathered and a version is numbered only when a set is worth installing, which is the more usual practice; anything not yet released is listed in the Workbench's About box.</p>
       <figure class="fig-frame">
         <div class="fig-wide">{{ fig.releases_wide }}</div>
         <div class="fig-tall">{{ fig.releases_tall }}</div>
@@ -231,7 +231,7 @@
         <li><strong>Nothing disappears silently.</strong> Every value is encoded, dropped with a warning that names it, or held for review with nothing written.</li>
         <li><strong>One reader of holdings.</strong> One parser reads every statement; a confirmed pattern supplies only what it cannot settle.</li>
         <li><strong>If a fix needs the tests rewritten, stop.</strong> It is usually arguing with the design rather than fixing a bug.</li>
-        <li><strong>Write the changelog for cataloguers.</strong> Say what changed about the output or the screen, not how the code changed.</li>
+        <li><strong>Write the changelog for catalogers.</strong> Say what changed about the output or the screen, not how the code changed.</li>
       </ol>
     </article>
 
@@ -271,12 +271,12 @@
 
     <article class="panel">
       <h3>Two tools became one</h3>
-      <p>The Pattern Detector and the Converter came first. On 25 August the Workbench arrived to combine them: find the patterns, confirm what they mean, convert in one place. For three weeks all three ran side by side, duplicating each other's code, until the copies drifted far enough that one deleted the other's pattern libraries. On 16 September the Workbench absorbed both, and they were retired.</p>
+      <p>The Pattern Detector and the Converter came first. On August 25 the Workbench arrived to combine them: find the patterns, confirm what they mean, convert in one place. For three weeks all three ran side by side, duplicating each other's code, until the copies drifted far enough that one deleted the other's pattern libraries. On September 16 the Workbench absorbed both, and they were retired.</p>
     </article>
 
     <article class="panel">
       <h3>The human in the loop</h3>
-      <p>The AI writes the code; the cataloguer decides what "correct" means. Two bugs were found by the cataloguer, not by the tests:</p>
+      <p>The AI writes the code; the cataloger decides what "correct" means. Two bugs were found by the cataloger, not by the tests:</p>
       <ul class="bugs">
         <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
         <li>In <code>v. 15 no. 6 - v. 23 nos. 2/3 (Nov/Dec 1994 - Late Summer 2002)</code>, a confirmed pattern coded the last issue as Summer (<code>$j 22</code>) and dropped "Late" without a word. The tests missed it because they checked the standard parser, not patterns. It also can't simply be coded: the serial may have an Early Summer issue too, and coding both as Summer would merge two issues into one. Only the piece can settle it, so the season is now left out, named, and the record flagged for a person to check. Fixed in 0.9.6.</li>
@@ -287,7 +287,7 @@
       <h3>Lessons, and what's next</h3>
       <div class="draft-copy">
         <p class="draft-label">Draft: edit freely</p>
-        <p><strong>A script reads what it was written for, and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterwards by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. The Workbench makes the check part of the tool. Every value in a statement is encoded, or named as left out, or the statement is held for review and its 866 kept.</p>
+        <p><strong>A script reads what it was written for, and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterward by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. The Workbench makes the check part of the tool. Every value in a statement is encoded, or named as left out, or the statement is held for review and its 866 kept.</p>
       </div>
       <div class="draft-copy">
         <p class="draft-label">Draft: edit freely</p>

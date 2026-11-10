@@ -69,7 +69,7 @@ MILESTONES = [
 # so they are copied with their source. The corpus then held 112 statements
 # ("held on 112 real statements"); it holds 117 now.
 BASELINE = {
-    "label": "1 September 2026",
+    "label": "September 1, 2026",
     "version": "0.6.0",
     "statements": 112,
     "clean": 67, "warned": 3, "lost": 36, "none": 6,
@@ -91,15 +91,16 @@ REAL_EXPORT = {
         "The imitation reproduces all 48 866s in the export that Alma itself "
         "built from hand-entered 863s."
     ),
-    "source": "Matthew Codey's re-measurement on Workbench 0.49.0, 2 November 2026 "
-              "(round-trip check: 938 / 103 / 14 / 0 drift; Alma's 866s 48 of 48); "
+    "source": "Matthew Codey's measurements: 0 unaccounted for, 0 drift and Alma's 866s 48 of 48 "
+              "at Workbench 0.50.0 (November 10, 2026); the round trip's 938 / 103 / 14 at 0.49.0 "
+              "(November 2, 2026); "
               "method as in holdings-workbench CORPUS-FINDINGS.md, 'Round the loop with the ILS · 0.28.0'",
 }
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 # Light theme (the poster) as fallbacks; the page overrides every --fig-* var.
-# The four subfield hues were checked for colour-blind separation and contrast
+# The four subfield hues were checked for color-blind separation and contrast
 # on both themes; every mark that wears one also carries its subfield letter.
 STYLE = """
 .fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
@@ -247,8 +248,8 @@ def bar(x, y, w, h, cls, tip, r=4, round_end=True):
 
 
 def fmt_date(d: dt.date, year=False):
-    s = f"{d.day} {MONTHS[d.month - 1]}"
-    return f"{s} {d.year}" if year else s
+    s = f"{MONTHS[d.month - 1]} {d.day}"
+    return f"{s}, {d.year}" if year else s
 
 
 # --------------------------------------------------------------------------
@@ -272,7 +273,7 @@ def figure_statement(f853, f863):
     lines = [STATEMENT[:brk].rstrip(), STATEMENT[brk:]]
     body = [text(16, 20, "866 · as a person typed it", "muted", 13)]
 
-    # The statement, token by token, each underlined in its subfield's colour.
+    # The statement, token by token, each underlined in its subfield's color.
     y0, lh, pos = 54, 50, 0
     for tok, sf in TOKENS:
         start = STATEMENT.index(tok, pos)
@@ -525,7 +526,7 @@ def figure_silent_loss(before, now):
 # --------------------------------------------------------------------------
 
 # The same statement as figure 1, and a second from the same synthetic sample
-# whose first number carries no caption: the case a cataloguer decides.
+# whose first number carries no caption: the case a cataloger decides.
 UNCAPTIONED = "39 no 1 (Spring 1995)"
 EXPECTED_SHAPE = "VOL ISS — VOL ISS(CHRON YEAR-CHRON YEAR)"
 EXPECTED_UNCAPTIONED = {
@@ -543,17 +544,17 @@ SUBFIELD = "abcdef"
 CHRON_SUBFIELD = {"year": "i", "month": "j"}
 VALUE_KINDS = {"NUMBER", "YEAR", "CHRON"}
 CAPTION_KINDS = {"VOL_CAP", "ISS_CAP", "PT_CAP"}
-COLOURED = set("abij")
+COLORED = set("abij")
 
 
 def marc_segments(field):
-    """A field as display text, cut so each coloured subfield can be marked."""
+    """A field as display text, cut so each colored subfield can be marked."""
     head, _, rest = field.partition(" $")
     segments = [{"text": head + " ", "sf": None}]
     for part in ("$" + rest).split(" $"):
         part = part if part.startswith("$") else "$" + part
         code = part[1]
-        segments.append({"text": part, "sf": code if code in COLOURED else None})
+        segments.append({"text": part, "sf": code if code in COLORED else None})
         segments.append({"text": " ", "sf": None})
     segments.pop()
     if "".join(seg["text"] for seg in segments) != field:
@@ -596,14 +597,14 @@ def read_pattern():
             meaning = d["kind_label"]
         sf = SUBFIELD[r.level] if r.kind == "enum" else CHRON_SUBFIELD.get(r.kind)
         if sf is None:
-            raise Stop(f"no subfield colour for the slot {r.group} ({r.kind})")
+            raise Stop(f"no subfield color for the slot {r.group} ({r.kind})")
         slots.append({"slot": r.group, "value": match.group(r.group),
                       "meaning": meaning, "boundary": r.boundary,
                       "suggested": r.suggested, "sf": sf})
 
-    # Each piece of the statement takes its subfield's colour: a value from
+    # Each piece of the statement takes its subfield's color: a value from
     # the slot that captures it, a caption from the value it names. These must
-    # agree with figure 1's TOKENS, so the colours mean the same everywhere.
+    # agree with figure 1's TOKENS, so the colors mean the same everywhere.
     values = iter(slots)
     for t, tok in zip(toks, tokens):
         if t.kind in VALUE_KINDS:
@@ -616,7 +617,7 @@ def read_pattern():
             tok["sf"] = next(tokens[j]["sf"] for j in range(i + 1, len(toks))
                              if toks[j].kind in VALUE_KINDS)
     if [(tok["raw"], tok.get("sf")) for tok in tokens] != list(TOKENS):
-        raise Stop("the detector's pieces and figure 1's colours disagree")
+        raise Stop("the detector's pieces and figure 1's colors disagree")
 
     # The rule, simplified for reading: the statement with each value replaced
     # by the name of the slot that captures it.
@@ -667,7 +668,7 @@ def read_pattern():
 
 
 def figure_tokens(pattern):
-    """The statement cut into labelled pieces, and the shape those labels make."""
+    """The statement cut into labeled pieces, and the shape those labels make."""
     W, CW, LW = 340, 9.0, 6.4          # width; a token character; a label character
     PAD, GAP, CH = 5, 6, 26            # chip padding, gap between chips, chip height
     brk = STATEMENT.index(" (") + 1
@@ -678,7 +679,7 @@ def figure_tokens(pattern):
         start = STATEMENT.index(tok["raw"], pos)
         pos = start + len(tok["raw"])
         rows[0 if start < brk else 1].append(tok)
-    body = [text(16, 20, "1 · Cut into labelled pieces", "muted", 13)]
+    body = [text(16, 20, "1 · Cut into labeled pieces", "muted", 13)]
     y = 40
     for row in rows:
         widths = [max(len(t["raw"]) * CW, len(t["label"]) * LW) + 2 * PAD for t in row]
@@ -695,7 +696,7 @@ def figure_tokens(pattern):
         y += CH + 34
     y += 18
     body.append(text(16, y, "2 · Its shape", "muted", 13))
-    # The shape, each label underlined in its subfield's colour. A label in
+    # The shape, each label underlined in its subfield's color. A label in
     # the shape stands for the piece of the same label, in order: VOL for the
     # volume caption and its number, YEAR for a year, and so on.
     shape, SW = pattern["shape"], 7.2               # one monospace character at 12pt
@@ -710,7 +711,7 @@ def figure_tokens(pattern):
         body.append(f'<rect x="{sx + m.start() * SW:.1f}" y="{sy + 5}" '
                     f'width="{(m.end() - m.start()) * SW:.1f}" height="3" rx="1.5" class="sf-{sf}"/>')
     H = y + 46
-    desc = ("The statement " + STATEMENT + " is cut into pieces, each labelled: "
+    desc = ("The statement " + STATEMENT + " is cut into pieces, each labeled: "
             + ", ".join(f"{t['raw']} {t['label'] or '(punctuation)'}" for t in toks)
             + f". In order, the labels make its shape: {pattern['shape']}.")
     return svg(W, H, "fig-tokens", "How the detector reads a statement", desc, "\n".join(body))
@@ -741,7 +742,7 @@ def main():
         sys.exit(f"Stopped: about.json says version {version}, but its newest changelog entry is {latest_v}")
     months = Counter(d.strftime("%Y-%m") for _, d in releases)
     sept = months.get(f"{latest_d.year}-09", 0)
-    now = dict(corpus, label=f"{latest_d.day} {latest_d.strftime('%B')} {latest_d.year}", version=latest_v)
+    now = dict(corpus, label=f"{latest_d.strftime('%B')} {latest_d.day}, {latest_d.year}", version=latest_v)
     dates = dict(releases)
 
     FIG_DIR.mkdir(parents=True, exist_ok=True)

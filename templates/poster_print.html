@@ -15,7 +15,7 @@
 {% set now = n.corpus.now %}
 {% set rx = n.real_export %}
 {% set pat = n.pattern %}
-{% macro coloured(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
+{% macro colored(segments) %}{% for seg in segments %}{% if seg.sf %}<span class="sf sf-{{ seg.sf }}">{{ seg.text }}</span>{% else %}{{ seg.text }}{% endif %}{% endfor %}{% endmacro %}
 <body>
 <main class="sheet">
 <div class="safe">
@@ -50,7 +50,7 @@
           <p>Many libraries' serials holdings are stored only as human-readable, free-text <b>866</b> fields rather than as MARC-encoded <b>853/863</b> pairs. Converting by hand is slow, conventions vary, and hand-typed data is prone to typos and other errors.</p>
           <p class="goal"><b>The goal:</b> a tool that is portable across collections, works on messy holdings as they are (no manual clean-up), and never silently loses anything.</p>
           <figure class="fig fig-statement" role="none">{{ fig.statement }}</figure>
-          <p class="marc"><code>{{ coloured(n.statement.segments_853) }}</code><code>{{ coloured(n.statement.segments_863) }}</code></p>
+          <p class="marc"><code>{{ colored(n.statement.segments_853) }}</code><code>{{ colored(n.statement.segments_863) }}</code></p>
         </article>
       </div>
       <div class="col span2">
@@ -100,18 +100,18 @@
         <article class="block">
           <h3>How the Workbench reads a statement</h3>
           <figure class="fig fig-tokens" role="none">{{ fig.tokens }}</figure>
-          <p class="rule"><code>{{ coloured(pat.template_segments) }}</code></p>
+          <p class="rule"><code>{{ colored(pat.template_segments) }}</code></p>
           <ol class="steps">
             <li>Statements with the same shape are one group, whatever their numbers.</li>
             <li>Each group gets a matching rule with a named slot for each value.</li>
-            <li>A cataloguer confirms what each value means, once per group.</li>
+            <li>A cataloger confirms what each value means, once per group.</li>
             <li>The parser reads every statement; a pattern fills only what it cannot know.</li>
           </ol>
         </article>
       </div>
       <div class="col">
         <article class="block">
-          <h3>What the cataloguer controls</h3>
+          <h3>What the cataloger controls</h3>
           <ul class="controls">
             <li><b>On a pattern:</b> what each value is, its caption and level; skip a shape; test or edit the rule; reuse the library on another collection.</li>
             <li><b>On one record:</b> edit an 866 before it is read, split it, set this record's 853 (frequency, numbering, issues per volume, missing captions), skip it, leave a note.</li>
@@ -126,12 +126,12 @@
             <li><b>Nothing disappears silently.</b></li>
             <li><b>One reader of holdings.</b></li>
             <li><b>If a fix needs the tests rewritten, stop.</b></li>
-            <li><b>Write the changelog for cataloguers.</b></li>
+            <li><b>Write the changelog for catalogers.</b></li>
           </ol>
         </article>
         <article class="block">
           <h3>The human in the loop</h3>
-          <p>The AI writes the code; the cataloguer decides what "correct" means. Two bugs were found by the cataloguer, not the tests:</p>
+          <p>The AI writes the code; the cataloger decides what "correct" means. Two bugs were found by the cataloger, not the tests:</p>
           <ul class="bugs">
             <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." when its pattern was confirmed (fixed in 0.32.0).</li>
             <li><code>Late Summer 2002</code> was coded as plain Summer, though there may be an Early Summer issue too; now it is flagged (fixed in 0.9.6).</li>
@@ -162,7 +162,7 @@
       <article class="block span2">
         <h3>How it was built: {{ rel.count }} numbered versions in {{ rel.sizes.weeks }} weeks, most of them small</h3>
         <figure class="fig fig-releases" role="none">{{ fig.releases_wide }}</figure>
-        <p class="caption">Each dot is one version. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on 16 September replaced them.</p>
+        <p class="caption">Each dot is one version. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on September 16 replaced them.</p>
       </article>
       <article class="block">
         <h3>Lessons, and what's next</h3>

@@ -8,8 +8,8 @@
 :root{
   --bg:#faf8f5; --card:#ffffff; --ink:#1f1c29; --muted:#5d5a69; --line:#d9d5e0;
   --accent:#6f55c0; --accent-soft:#efeaf7;
-  /* Figure 1's subfield colours, light steps (checked for contrast and
-     colour-blind separation on this background) */
+  /* Figure 1's subfield colors, light steps (checked for contrast and
+     color-blind separation on this background) */
   --fig-sf-a:#6f55c0; --fig-sf-b:#d9592a; --fig-sf-i:#138a60; --fig-sf-j:#b07a00;
   --fig-surface:#ffffff;
   /* One named code font, so the PDF looks the same on any machine */
