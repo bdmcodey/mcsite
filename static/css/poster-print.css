@@ -65,7 +65,7 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 .fig svg{display:block;width:100%;height:auto}
 .fig-statement svg{max-width:7in;margin:.1in auto 0}
 .fig-tokens svg{max-width:7.6in;margin:0 auto}
-.fig-loss svg{max-width:7.2in;margin:.1in auto 0}
+.fig-loss svg{max-width:6.2in;margin:.1in auto 0}
 .fig-releases svg{width:100%}
 .marc code{display:block;margin-top:.08in;font-size:24px;line-height:2}
 .rule code{display:block;font-size:24px;line-height:2;background:none;padding:0}
