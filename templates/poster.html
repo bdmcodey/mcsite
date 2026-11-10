@@ -235,7 +235,7 @@
     <article class="panel">
       <h3>The turning point: silent losses</h3>
       <p>A refusal is safe: nothing is written and the 866 stays. A <em>silent loss</em> is not: fields are written, the 866 is removed, and a volume or a month is gone with nothing on screen to say so. Measured on a corpus of real 866 statements, {{ before.lost }} of {{ before.statements }} lost values silently. Now none do; the ones that cannot be fully read say what they left out.</p>
-      <p>Zero is what was measured, not a guarantee. Before 0.50.0, a review found a shape that is in none of the test sources: a date with a doubled hyphen, as in <code>v.3 (1990--1995)</code>, kept its first year and dropped the rest without a word. It is now marked to check. The project's conversion audit, which checks every number going into a conversion against the fields coming out, can be run on any new file to look for the same.</p>
+      <p>Zero is what was measured, not a guarantee. Before 0.50.0, a one-shot review of the repository by Fable 5.2, a newly released Anthropic model with none of the project's history, found a shape that is in none of the test sources: a date with a doubled hyphen, as in <code>v.3 (1990--1995)</code>, kept its first year and dropped the rest without a word. It is now marked to check. The project's conversion audit, which checks every number going into a conversion against the fields coming out, can be run on any new file to look for the same.</p>
       <figure class="fig-frame fig-narrow">
         {{ fig.silent_loss }}
       </figure>
@@ -296,7 +296,7 @@
       </div>
       <div class="draft-copy">
         <p class="draft-label">Draft: edit freely</p>
-        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it. I can't evaluate it as they could: is it overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
+        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it. An outside review has already paid off once: the AI review that found the doubled-hyphen loss, above, caught a real bug the tests had missed. What I don't think it can settle is what I can't judge myself: is the tool overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
       </div>
     </article>
 
