@@ -102,7 +102,8 @@
 .panel .bugs code{white-space:normal;overflow-wrap:anywhere}
 
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:18px 0}
-.stats div{background:var(--surface-2);padding:18px 16px;display:flex;flex-direction:column-reverse;gap:4px}
+/* Number above its label; the numbers line up along the top however the labels wrap */
+.stats div{background:var(--surface-2);padding:18px 16px;display:flex;flex-direction:column-reverse;justify-content:flex-end;gap:4px}
 .stats dd{font-size:2rem;font-weight:600;color:var(--accent);line-height:1.1}
 .stats dt{color:var(--muted);font-size:.86rem}
 .note{font-size:.9rem;color:var(--muted) !important}
@@ -126,7 +127,8 @@
   .panel{padding:20px 16px}
   .slot-table{font-size:.84rem;min-width:0}
   .slot-table th,.slot-table td{padding-right:10px}
-  .slot-table code{overflow-wrap:anywhere}
+  /* Slot names and values stay whole; only the last column wraps */
+  .slot-table td:first-child,.slot-table td:nth-child(2){white-space:nowrap}
   /* The comparison stacks: one block per row, each value labeled */
   .compare-table{min-width:0}
   .compare-table thead{display:none}
