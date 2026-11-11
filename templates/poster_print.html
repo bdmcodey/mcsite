@@ -58,7 +58,7 @@
           <article class="block card">
             <p class="tag">Approach 1</p>
             <h3>Write the script by hand</h3>
-            <p>I adapted USC colleagues' script <span class="cite">(Chung &amp; Pendyala, 2023)</span> over six months, teaching myself Python; the hardest part was one monolithic regular expression.</p>
+            <p>I adapted a script by USC colleagues <span class="cite">(Chung &amp; Pendyala, 2023)</span> over six months while teaching myself Python. The hardest part was a single, very long regular expression.</p>
           </article>
           <article class="block card">
             <p class="tag">Approach 2</p>
@@ -75,11 +75,11 @@
           <thead><tr><td></td><th>1 · By hand</th><th>2 · A model reads</th><th>3 · AI builds the tool</th></tr></thead>
           <tbody>
             <tr><th>Coding knowledge</th><td>The most</td><td>The least</td><td>Some</td></tr>
-            <tr><th>Getting started</th><td>Over six months, most of it on the regular expression</td><td>Minimal prompting</td><td>A first working tool from one prompt</td></tr>
-            <tr><th>Cost</th><td>Nothing</td><td>Tokens for every statement; free access stopped within two dozen records</td><td>About $20/month (Pro plan) to build; nothing to run</td></tr>
+            <tr><th>Getting started</th><td>Over six months</td><td>Minimal prompting</td><td>A first working tool from one prompt</td></tr>
+            <tr><th>Cost</th><td>Nothing</td><td>Tokens for every statement</td><td>About $20/month (Pro plan) to build; nothing to run</td></tr>
             <tr><th>Same output every time</th><td>Yes</td><td>Not guaranteed</td><td>Yes</td></tr>
-            <tr><th>Other collections</th><td>Poorly: only clean, consistent 866s, and few institutions could write such an expression</td><td>Not tested far enough</td><td>Designed for it</td></tr>
-            <tr><th>Understanding the code</th><td>Fully, line by line</td><td>No code to read</td><td>Partly: a black box, kept honest by tests, and possibly overengineered</td></tr>
+            <tr><th>Other collections</th><td>Poorly. It needs clean, consistent 866s</td><td>Not tested far enough</td><td>Designed for it</td></tr>
+            <tr><th>Understanding the code</th><td>Fully, line by line</td><td>No code to read</td><td>Partly: a black box, checked by tests</td></tr>
           </tbody>
         </table>
       </div>
@@ -117,19 +117,19 @@
         <article class="block">
           <h3>The working rules</h3>
           <ol class="rules">
-            <li><b>Measure before you change:</b> count it on the corpus first.</li>
-            <li><b>Nothing disappears silently:</b> encoded, named, or held.</li>
-            <li><b>One reader of holdings:</b> patterns only fill the parser's gaps.</li>
-            <li><b>If a fix needs the tests rewritten, stop:</b> it fights the design.</li>
+            <li><b>Measure before you change.</b> Count first, then fix.</li>
+            <li><b>Nothing disappears silently.</b> Encoded, named, or held.</li>
+            <li><b>One reader of holdings.</b> Patterns only fill its gaps.</li>
+            <li><b>If a fix needs the tests rewritten, stop.</b> Rethink the fix.</li>
             <li><b>Write the changelog for catalogers,</b> not for coders.</li>
           </ol>
         </article>
         <article class="block">
           <h3>The human in the loop</h3>
-          <p>The AI writes the code; I decide what "correct" means. Two bugs were found by me, using the tool, not by the tests:</p>
+          <p>The AI writes the code; I decide what "correct" means. Using the tool, I found two bugs the tests had missed:</p>
           <ul class="bugs">
-            <li><code>Late Summer 2002</code> was coded as plain Summer, though there may be an Early Summer issue too; now it is flagged (fixed in 0.9.6).</li>
-            <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." when its pattern was confirmed (fixed in 0.32.0).</li>
+            <li><code>Late Summer 2002</code> was coded as plain Summer, but there may be an Early Summer issue too. Now flagged (0.9.6).</li>
+            <li><code>v. 58 Suppl. (Sep 2003)</code> lost "Suppl." when its pattern was confirmed. Supplements are now held (0.32.0).</li>
           </ul>
         </article>
       </div>
@@ -138,7 +138,7 @@
           <h3>How it was built</h3>
           <p>{{ rel.count }} numbered versions in {{ rel.sizes.weeks }} weeks, most of them small.</p>
           <figure class="fig fig-releases" role="none">{{ fig.releases_col }}</figure>
-          <p class="caption">Each dot is one version, grouped by week. The Pattern Detector and Converter began as one-shot prompts; the Workbench combined them, and on September 16 replaced them.</p>
+          <p class="caption">Each dot is one version. The Pattern Detector and Converter each began as a single prompt. The Workbench combined them, then replaced them on September&nbsp;16.</p>
         </article>
         <article class="block">
           <h3>On real data</h3>
@@ -158,16 +158,17 @@
         <h3>The turning point: silent losses</h3>
         <p>A silent loss writes the fields, removes the 866, and drops a volume or a month with nothing on screen to say so.</p>
         <figure class="fig fig-loss" role="none">{{ fig.silent_loss_wide }}</figure>
-        <p class="small">Zero is measured, not guaranteed: a one-shot review by a new AI model, Fable 5.2, found <code>v.3 (1990--1995)</code> keeping only 1990 (fixed in 0.50.0).</p>
+        <p class="small">Zero is what was measured, not a guarantee. A review by a new AI model, Fable 5.2, found one more: <code>v.3 (1990--1995)</code> kept only 1990. Fixed in 0.50.0.</p>
       </article>
       <article class="block">
         <h3>Lessons, and what's next</h3>
         <ul class="lessons">
-          <li><b>A script reads what it was written for, and passes over the rest.</b> That led to the rule "Nothing disappears silently," fundamental to the Workbench's development: every value is encoded, named as left out, or held with its 866 kept.</li>
-          <li><b>Decide whether you can work with code you don't fully understand.</b> Tests show it works, not that it isn't overengineered; only a software engineer can judge that. Perhaps the future: people building their own tools with AI, engineers building the guardrails.</li>
-          <li><b>The models improved while I worked:</b> newer ones broke through old roadblocks, then built features from one prompt.</li>
+          <li><b>A script reads what it was written for and passes over the rest.</b> So the first rule is that nothing disappears silently: every value is encoded, named as left out, or held with its 866 kept.</li>
+          <li><b>Decide whether you can work with code you don't fully understand.</b> Tests show the tool works, not that it was built well. That takes a software engineer to judge.</li>
+          <li><b>Where this may be heading:</b> people build their own tools with AI, and engineers build the guardrails.</li>
+          <li><b>The models improved as I worked.</b> Newer ones solved what had stopped older ones, then built features from one prompt.</li>
           <li><b>AI is at its best building the tool, not being it.</b></li>
-          <li><b>Next:</b> more real .mrc files from technical services colleagues, a review by a software engineer, and a 1.0 release.</li>
+          <li><b>Next:</b> more real .mrc files from colleagues, a review by a software engineer, then a 1.0 release.</li>
         </ul>
       </article>
     </div>

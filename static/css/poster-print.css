@@ -42,7 +42,7 @@ h1{font-size:124px;letter-spacing:0;max-width:27in;text-wrap:balance}
 .logo svg{display:block;height:2.1in;width:auto}
 .qr{flex:0 0 5.4in;text-align:center}
 .qr svg{display:block;width:4.6in;height:4.6in;margin:0 auto}
-.qr-cap{font-size:24px;color:var(--muted);margin-top:.12in}
+.qr-cap{font-size:24px;color:var(--muted);margin-top:.12in;text-wrap:balance}
 .qr-url{font-size:30px;font-weight:600}
 
 /* Parts */
@@ -59,6 +59,8 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 .block p + p,.block p + figure,.block figure + p{margin-top:.14in}
 .goal{border-left:8px solid var(--accent);padding-left:.18in}
 .small,.caption{font-size:26px;color:var(--muted)}
+/* No single word left alone on a caption's last line */
+.caption{text-wrap:pretty}
 .cite{color:var(--muted)}
 
 /* Figures: sized so their text prints at about 26-36px */
@@ -85,8 +87,13 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 .chosen{border:4px solid var(--accent)}
 .for b{color:#138a60} .against b{color:#b4471f}
 
-.compare{width:100%;border-collapse:collapse;margin-top:.3in;font-size:31px;background:var(--card);border:2px solid var(--line);border-radius:22px}
-.compare th,.compare td{text-align:left;padding:.1in .2in;border-bottom:2px solid var(--line)}
+/* The table fills the rest of its column, down to the foot of "The problem"
+   beside it, and its rows share that height. Side padding is .15in so every
+   cell fits on one line at this type size. */
+.col.span2{align-self:stretch}
+.compare{width:100%;flex:1;border-collapse:collapse;font-size:31px;background:var(--card);border:2px solid var(--line);border-radius:22px}
+.compare th,.compare td{text-align:left;padding:.1in .15in;border-bottom:2px solid var(--line)}
+.compare thead tr{height:.55in}
 .compare thead th{color:var(--accent);font-size:22px;letter-spacing:.08em;text-transform:uppercase}
 .compare tbody tr:last-child th,.compare tbody tr:last-child td{border-bottom:0}
 

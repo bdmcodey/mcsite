@@ -15,7 +15,6 @@
 
 <section class="poster-hero">
   <div class="wrap">
-    <p class="draft-banner" role="note"><strong>Draft.</strong> Copy and layout are in progress; numbers are current as of Workbench {{ n.as_of_version }}.</p>
     <div class="eyebrow">ALA Core Forum · November 18–20, 2026 · Poster</div>
     <h1 class="big">Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
     <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong></p>
@@ -50,12 +49,12 @@
       <article class="panel">
         <span class="tag">Approach 1</span>
         <h3>Write the script by hand</h3>
-        <p>Write the parsing code yourself: a regular expression and a script, built against your own collection's 866s.</p>
+        <p>Write the parsing code yourself, as a regular expression and a script built against your own collection's 866s.</p>
         <p>My starting point was a script USC colleagues wrote for ONE Archives serials migrated from Inmagic, which read 866s written year first <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>. I adapted it, but it was written for that one collection and expected a single 866 per record, so it did not translate well to my library's records.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The most.</dd></div>
-          <div><dt>Pros</dt><dd>Results tuned to a bespoke collection, and code I knew intimately: I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
-          <div><dt>Cons</dt><dd>Hard to make portable: a pattern written for one collection's habits does not carry to another's, and generalizing it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
+          <div><dt>Pros</dt><dd>The results were tuned to a bespoke collection, and I knew the code intimately. I stepped through it line by line, countless times, to see what it was doing. This is how the original parser's regular expression was written.</dd></div>
+          <div><dt>Cons</dt><dd>It is hard to make portable. A pattern written for one collection's habits does not carry to another's, and generalizing it by hand reached the limit of what I could do. It is only feasible when the 866s are already fairly clean and follow a consistent pattern; the messier they are, the harder it gets. That runs against the aim, which is a tool that works on messy holdings as they are, without a manual clean-up first, and without losing confidence that nothing is being silently lost.</dd></div>
         </dl>
         <p>It took me more than six months to adapt the script to my collection, much of it spent teaching myself Python; before that I had only followed online tutorials. The hardest part by far was the single, monolithic regular expression the whole parser rested on. It took weeks, if not months, of testing it against the corpus in regex101 before it accounted for every pattern. It handled most statements well, but some edge cases needed logic I couldn't see how to write. That was the wall, until AI coding assistants came along.</p>
         <p>Asking every institution to write its own expression that way seemed unviable, and that is what led me to induce the expressions instead: find the patterns in a file, and generate a rule for each.</p>
@@ -63,11 +62,11 @@
       <article class="panel">
         <span class="tag">Approach 2</span>
         <h3>Ask a model to read the statements</h3>
-        <p>Send the 866 statements to a large language model through its API and ask it to pick out the parts an 853/863 is built from: volumes, issues, dates. Not a conversion to 853/863, but an alternative to working out the patterns.</p>
+        <p>Send the 866 statements to a large language model through its API and ask it to pick out the parts an 853/863 is built from: volumes, issues and dates. This is not a conversion to 853/863. It is an alternative to working out the patterns.</p>
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>The least.</dd></div>
           <div><dt>Pros</dt><dd>With minimal prompting, it picked out the important parts of each statement.</dd></div>
-          <div><dt>Cons</dt><dd>Expensive in tokens: the free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
+          <div><dt>Cons</dt><dd>It is expensive in tokens. The free API access I had to ChatGPT at the time stopped me after fewer than two dozen records, before I could test much. And a model's output is not deterministic, so the same statements sent twice could come back read differently. I didn't test enough to see that happen, but nothing rules it out.</dd></div>
         </dl>
         <p>Holdings are public catalog data, so sending them out raised no real confidentiality concern; a stray internal note is the most that could slip through, and that was not how those fields were used here. I kept within USC's policy on sharing data with AI companies.</p>
       </article>
@@ -79,7 +78,7 @@
         <dl class="facts">
           <div><dt>Coding knowledge</dt><dd>Some. Without my familiarity with code, I couldn't have described the features I wanted as well, or spotted bugs and other problems as they came up.</dd></div>
           <div><dt>Pros</dt><dd>The finished tool converts the same file the same way every time, can run on the cataloger's own machine, and needs no model, API key or tokens to run.</dd></div>
-          <div><dt>Cons</dt><dd>The black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress. It may also be overengineered, a common complaint about tools built this way, and that only widens the gap: I can't judge, as a senior software engineer could, whether a tool this size needs all the code and tests it has.</dd></div>
+          <div><dt>Cons</dt><dd>It is a black box. With my own parser I had stepped through every line; now I can confirm the tool works, and add tests so it can't stop working, without fully understanding why it works. That bothered me at first, and less once a test suite and automated checks meant good output couldn't quietly regress. It may also be overengineered, a common complaint about tools built this way, and that only widens the gap: I can't judge, as a senior software engineer could, whether a tool this size needs all the code and tests it has.</dd></div>
         </dl>
       </article>
     </div>
@@ -90,11 +89,11 @@
           <thead><tr><th scope="col"><span class="sr-only">Compared on</span></th><th scope="col">1 · By hand</th><th scope="col">2 · A model reads</th><th scope="col">3 · AI builds the tool</th></tr></thead>
           <tbody>
             <tr><th scope="row">Coding knowledge</th><td data-label="1 · By hand">The most</td><td data-label="2 · A model reads">The least</td><td data-label="3 · AI builds the tool">Some</td></tr>
-            <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months, most of it on the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
-            <tr><th scope="row">Cost</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement; free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">To build it, about $20/month (Pro plan): a free tier is unlikely to manage a tool like this. To run it, nothing: no model or tokens</td></tr>
+            <tr><th scope="row">Getting started</th><td data-label="1 · By hand">Over six months. Most of that went to the regular expression</td><td data-label="2 · A model reads">Minimal prompting</td><td data-label="3 · AI builds the tool">A first working tool from one prompt</td></tr>
+            <tr><th scope="row">Cost</th><td data-label="1 · By hand">Nothing</td><td data-label="2 · A model reads">Tokens for every statement. My free API access stopped within two dozen records</td><td data-label="3 · AI builds the tool">About $20/month (Pro plan) to build; nothing to run. A free tier is unlikely to manage a tool like this</td></tr>
             <tr><th scope="row">Same output every time</th><td data-label="1 · By hand">Yes</td><td data-label="2 · A model reads">Not guaranteed</td><td data-label="3 · AI builds the tool">Yes</td></tr>
-            <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly: tuned to one collection</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it: patterns are found in each file, and it is tested on other libraries' statements</td></tr>
-            <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully</td><td data-label="2 · A model reads">No code to read: the model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, kept honest by tests</td></tr>
+            <tr><th scope="row">Other collections</th><td data-label="1 · By hand">Poorly. It was tuned to one collection and needs clean, consistent 866s</td><td data-label="2 · A model reads">Not tested far enough to say</td><td data-label="3 · AI builds the tool">Designed for it. Patterns are found in each file, and it is tested on other libraries' statements</td></tr>
+            <tr><th scope="row">Understanding the code</th><td data-label="1 · By hand">Fully, line by line</td><td data-label="2 · A model reads">No code to read. The model's reading can't be stepped through</td><td data-label="3 · AI builds the tool">Partly: a black box, checked by tests</td></tr>
           </tbody>
         </table>
       </div>
@@ -110,7 +109,7 @@
 
     <article class="panel">
       <h3>Built with an AI coding assistant; runs without one</h3>
-      <p>The result is the <strong>MARC Holdings Workbench</strong>, a Python application. It uses no AI when it runs: no model, no network calls, no API key, and nothing leaves the machine. The same file converts the same way every time. The AI was in how it was built: a library paraprofessional, not a developer, working with an AI coding assistant, release by release.</p>
+      <p>The result is the <strong>MARC Holdings Workbench</strong>, a Python application. It uses no AI when it runs: no model, no network calls, no API key, and nothing leaves the machine. The same file converts the same way every time. The AI was in how it was built. A library paraprofessional, not a developer, worked with an AI coding assistant, release by release.</p>
     </article>
 
     <article class="panel" id="how-it-reads">
@@ -225,7 +224,7 @@
 
     <article class="panel">
       <h3>The working rules</h3>
-      <p>Written down in the project's contributing guide "because most of them were arrived at by getting something wrong first":</p>
+      <p>These are written down in the project's contributing guide "because most of them were arrived at by getting something wrong first."</p>
       <ol class="rules">
         <li><strong>Measure before you change.</strong> Count what actually happens on the corpus before writing a fix.</li>
         <li><strong>Nothing disappears silently.</strong> Every value is encoded, dropped with a warning that names it, or held for review with nothing written.</li>
@@ -276,35 +275,20 @@
 
     <article class="panel">
       <h3>The human in the loop</h3>
-      <p>The AI writes the code; I decide what "correct" means. Two bugs were found by me, using the tool, not by the tests:</p>
+      <p>The AI writes the code; I decide what "correct" means. Using the tool, I found two bugs the tests had missed:</p>
       <ul class="bugs">
-        <li>In <code>v. 15 no. 6 - v. 23 nos. 2/3 (Nov/Dec 1994 - Late Summer 2002)</code>, a confirmed pattern coded the last issue as Summer (<code>$j 22</code>) and dropped "Late" without a word. The tests missed it because they checked the standard parser, not patterns. It also can't simply be coded: the serial may have an Early Summer issue too, and coding both as Summer would merge two issues into one. Only the piece can settle it, so the season is now left out, named, and the record flagged for a person to check. Fixed in 0.9.6.</li>
-        <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. Found in a demo dry run; fixed in 0.32.0.</li>
+        <li>In <code>v. 15 no. 6 - v. 23 nos. 2/3 (Nov/Dec 1994 - Late Summer 2002)</code>, a confirmed pattern coded the last issue as Summer (<code>$j 22</code>) and dropped "Late" without a word. The tests missed it because they checked the standard parser, not patterns. It also can't simply be coded: the serial may have an Early Summer issue too, and coding both as Summer would merge two issues into one. Only the piece can settle it, so the season is now left out, named, and the record flagged for a person to check. This was fixed in 0.9.6.</li>
+        <li>In <code>v. 58 Suppl. (Sep 2003)</code>, confirming the pattern it arrived with wrote the volume and date and dropped "Suppl." without a word. I found it in a demo dry run, and it was fixed in 0.32.0.</li>
       </ul>
     </article>
 
     <article class="panel">
       <h3>Lessons, and what's next</h3>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>A script reads what it was written for, and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterward by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. That risk led to the rule "Nothing disappears silently," which was fundamental to how the Workbench was developed: it makes the check part of the tool. Every value in a statement is encoded, or named as left out, or the statement is held for review and its 866 kept.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>Decide whether you can work with code you don't fully understand.</strong> That is the real trade in building with an AI coding assistant, especially for someone who isn't a programmer. What made it acceptable for me was a test suite and automated checks: I may not know why every line works, but I know the good output can't quietly stop. Passing tests show that the tool works, though, not that it was built well. It could be overengineered, or bloated beyond what the job needs, which is a common critique of "vibe-coded" applications, and I think only an experienced software engineer could properly judge that. That may also be where things are heading: people without a programming background using AI to build tools for their own needs, while software engineers build the guardrails that let that way of working happen safely. That is speculation, but it is worth raising in any discussion of where this goes next.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>The models improved while I worked, and so did what was possible.</strong> My earliest attempts to use AI to get past the roadblocks in my own parser went nowhere. As new models were released over the months I worked on this, they broke through those same barriers, and later implemented new features and ideas from a single prompt, often without a hitch. Watching the models improve in real time, and sometimes get worse after an update, has been one of the most interesting parts of the project.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it, for what I can't judge myself: is the tool overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
-      </div>
+      <p><strong>A script reads what it was written for and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterward by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. That risk led to the rule "Nothing disappears silently," which was fundamental to how the Workbench was developed. It makes the check part of the tool. Every value in a statement is encoded or named as left out, or the statement is held for review and its 866 kept.</p>
+      <p><strong>Decide whether you can work with code you don't fully understand.</strong> That is the real trade in building with an AI coding assistant, especially for someone who isn't a programmer. What made it acceptable for me was a test suite and automated checks: I may not know why every line works, but I know the good output can't quietly stop. Passing tests show that the tool works, though, not that it was built well. It could be overengineered, or bloated beyond what the job needs, which is a common critique of "vibe-coded" applications, and I think only an experienced software engineer could properly judge that. That may also be where things are heading: people without a programming background using AI to build tools for their own needs, while software engineers build the guardrails that let that way of working happen safely. That is speculation, but it is worth raising in any discussion of where this goes next.</p>
+      <p><strong>The models improved as I worked, and so did what was possible.</strong> My earliest attempts to use AI to get past the roadblocks in my own parser went nowhere. As new models were released over the months I worked on this, they broke through those same barriers, and later implemented new features and ideas from a single prompt, often without a hitch. Watching the models improve in real time, and sometimes get worse after an update, has been one of the most interesting parts of the project.</p>
+      <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
+      <p><strong>What's next.</strong> The Workbench is paused at version {{ n.as_of_version }} until after the conference. When work resumes, there are still bugs and edge cases to work through. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it, for what I can't judge myself: is the tool overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
     </article>
 
     <div class="card-links poster-links">
@@ -312,7 +296,7 @@
       <a class="btn-try2" href="{{ url_for('static', filename='poster/poster.pdf') }}" download="Codey-ALA-Core-Forum-2026-poster.pdf">Download the poster <span class="pdf-meta">(PDF, {{ pdf_size }})</span> <span aria-hidden="true">↓</span></a>
       <a class="src-link" href="https://github.com/bdmcodey/holdings-workbench" target="_blank" rel="noopener">View source <span aria-hidden="true">&rarr;</span><span class="sr-only"> (opens in a new tab)</span></a>
     </div>
-    <p class="poc-note">A proof of concept, under active development, not a supported service.</p>
+    <p class="poc-note">A proof of concept, paused at version {{ n.as_of_version }} until after the conference, not a supported service.</p>
   </div>
 </section>
 

@@ -26,7 +26,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 /* Nav */
 header.nav{position:sticky;top:0;z-index:50;background:rgba(14,14,17,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:block;padding:7px 0;font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem}
+.brand{display:block;white-space:nowrap;padding:7px 0;font-family:"Fraunces",serif;font-weight:600;font-size:1.15rem}
 .brand span{color:var(--accent)}
 nav ul{display:flex;gap:26px;list-style:none;align-items:center}
 /* Links and buttons are at least 44 x 44 px to tap (WCAG 2.5.5, beyond 2.2's 24 px minimum) */
@@ -122,9 +122,10 @@ footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-s
   .cards{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr}
 }
-/* Very narrow screens (and desktop zoomed to 400%): stack the brand above the
-   nav links so the header never scrolls sideways (WCAG 1.4.10 Reflow) */
-@media(max-width:374px){
+/* Phones (and desktop zoomed to 400%): the name and the four links need about
+   460px side by side, so below that the name sits above the links. The name
+   stays on one line and the header never scrolls sideways (WCAG 1.4.10 Reflow) */
+@media(max-width:459px){
   .nav-inner{flex-direction:column;align-items:flex-start;justify-content:center;height:auto;padding-top:6px;padding-bottom:6px;gap:0}
   html{scroll-padding-top:120px}
 }
