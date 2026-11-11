@@ -59,6 +59,8 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 .block p + p,.block p + figure,.block figure + p{margin-top:.14in}
 .goal{border-left:8px solid var(--accent);padding-left:.18in}
 .small,.caption{font-size:26px;color:var(--muted)}
+/* No single word left alone on a caption's last line */
+.caption{text-wrap:pretty}
 .cite{color:var(--muted)}
 
 /* Figures: sized so their text prints at about 26-36px */
