@@ -492,11 +492,12 @@ def figure_releases_col(releases, sept):
     body.append(text(L, base + 27, MONTHS[start.month - 1], "muted", 12))
     body.append(text((dayx(s0) + dayx(s1)) / 2, base + 47, f"{sept} in September", "strong", 12.5, "middle"))
 
-    # Milestones above the dots, in two rows so they never collide.
+    # Milestones above the dots, in two rows. The two September ones are nine
+    # days apart, so they go on different rows and never sit side by side.
     dates = dict(releases)
     notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     place = {notes[0][0]: (70, "start"), notes[1][0]: (22, "end"),
-             notes[2][0]: (22, "start"), notes[3][0]: (70, "end")}
+             notes[2][0]: (70, "start"), notes[3][0]: (22, "end")}
     for v, lbl in notes:
         ly, anchor = place[v]
         cx, cy = spot[v]
