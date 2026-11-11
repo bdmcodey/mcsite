@@ -15,7 +15,6 @@
 
 <section class="poster-hero">
   <div class="wrap">
-    <p class="draft-banner" role="note"><strong>Draft.</strong> Copy and layout are in progress; numbers are current as of Workbench {{ n.as_of_version }}.</p>
     <div class="eyebrow">ALA Core Forum · November 18–20, 2026 · Poster</div>
     <h1 class="big">Automating MARC Holdings Generation with AI: Lessons from the Field</h1>
     <p class="lede"><strong>Built with an AI coding assistant; runs without one.</strong></p>
@@ -285,26 +284,11 @@
 
     <article class="panel">
       <h3>Lessons, and what's next</h3>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>A script reads what it was written for and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterward by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. That risk led to the rule "Nothing disappears silently," which was fundamental to how the Workbench was developed. It makes the check part of the tool. Every value in a statement is encoded or named as left out, or the statement is held for review and its 866 kept.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>Decide whether you can work with code you don't fully understand.</strong> That is the real trade in building with an AI coding assistant, especially for someone who isn't a programmer. What made it acceptable for me was a test suite and automated checks: I may not know why every line works, but I know the good output can't quietly stop. Passing tests show that the tool works, though, not that it was built well. It could be overengineered, or bloated beyond what the job needs, which is a common critique of "vibe-coded" applications, and I think only an experienced software engineer could properly judge that. That may also be where things are heading: people without a programming background using AI to build tools for their own needs, while software engineers build the guardrails that let that way of working happen safely. That is speculation, but it is worth raising in any discussion of where this goes next.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>The models improved as I worked, and so did what was possible.</strong> My earliest attempts to use AI to get past the roadblocks in my own parser went nowhere. As new models were released over the months I worked on this, they broke through those same barriers, and later implemented new features and ideas from a single prompt, often without a hitch. Watching the models improve in real time, and sometimes get worse after an update, has been one of the most interesting parts of the project.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
-      </div>
-      <div class="draft-copy">
-        <p class="draft-label">Draft: edit freely</p>
-        <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it, for what I can't judge myself: is the tool overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
-      </div>
+      <p><strong>A script reads what it was written for and passes over the rest.</strong> In the original clean-up project <a class="cite" href="#ref-chung-2023">(Chung &amp; Pendyala, 2023)</a>, which this work builds on, about 600 of 5,254 records came out with no 863. They were found afterward by looking for what was missing. That is the ordinary risk of matching patterns, not a fault of that script, and it matters most when the original 866 is removed so the ILS can rebuild it: a statement that was skipped or only partly read can take the only record of what is held with it. That risk led to the rule "Nothing disappears silently," which was fundamental to how the Workbench was developed. It makes the check part of the tool. Every value in a statement is encoded or named as left out, or the statement is held for review and its 866 kept.</p>
+      <p><strong>Decide whether you can work with code you don't fully understand.</strong> That is the real trade in building with an AI coding assistant, especially for someone who isn't a programmer. What made it acceptable for me was a test suite and automated checks: I may not know why every line works, but I know the good output can't quietly stop. Passing tests show that the tool works, though, not that it was built well. It could be overengineered, or bloated beyond what the job needs, which is a common critique of "vibe-coded" applications, and I think only an experienced software engineer could properly judge that. That may also be where things are heading: people without a programming background using AI to build tools for their own needs, while software engineers build the guardrails that let that way of working happen safely. That is speculation, but it is worth raising in any discussion of where this goes next.</p>
+      <p><strong>The models improved as I worked, and so did what was possible.</strong> My earliest attempts to use AI to get past the roadblocks in my own parser went nowhere. As new models were released over the months I worked on this, they broke through those same barriers, and later implemented new features and ideas from a single prompt, often without a hitch. Watching the models improve in real time, and sometimes get worse after an update, has been one of the most interesting parts of the project.</p>
+      <p><strong>AI is at its best building the tool, not being it.</strong> Using AI to create tools for very specific, technical needs, from plain-language descriptions, is quickly becoming one of its best uses.</p>
+      <p><strong>What's next.</strong> The Workbench is still in active development (version {{ n.as_of_version }} as of this writing), working through bugs and edge cases. Next is testing it on more real holdings, in actual .mrc files: I have asked my technical services colleagues for examples they can share. I would also like someone with software engineering experience to review it, for what I can't judge myself: is the tool overengineered? Does a tool this small need such a large test suite? I don't know how to begin measuring that, and I think it takes someone who has built and maintained software to say. All of it is working toward a 1.0 release, once I'm confident the tool is ready for it.</p>
     </article>
 
     <div class="card-links poster-links">

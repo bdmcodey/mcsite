@@ -14,8 +14,6 @@
 .poster-hero h1.big{font-size:clamp(2rem,5vw,3.4rem);text-wrap:balance}
 .poster-hero .lede{margin-bottom:6px}
 .byline{color:#cfcfd8;font-size:clamp(1rem,1.8vw,1.1rem);white-space:nowrap}
-.draft-banner{display:inline-block;border:1px dashed var(--accent);color:var(--muted);font-size:.86rem;padding:6px 14px;border-radius:999px;margin-bottom:26px}
-.draft-banner strong{color:var(--accent)}
 
 .part{padding:40px 0}
 .part-title{font-size:clamp(1.5rem,3.2vw,2.1rem);margin-bottom:28px;max-width:820px}
@@ -75,10 +73,6 @@
 .controls section{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
 .controls h4{font-size:1rem;margin-bottom:4px;color:var(--accent)}
 .controls ul{margin-left:18px;font-size:.93rem}
-
-/* Drafted copy awaiting Matthew's edit */
-.draft-copy{border:1px dashed var(--accent);border-radius:10px;padding:14px 16px;margin-bottom:14px}
-.draft-label{color:var(--accent) !important;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
 
 /* Placeholders for copy still to be written */
 .todo{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted) !important;font-style:italic}
