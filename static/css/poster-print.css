@@ -42,7 +42,7 @@ h1{font-size:124px;letter-spacing:0;max-width:27in;text-wrap:balance}
 .logo svg{display:block;height:2.1in;width:auto}
 .qr{flex:0 0 5.4in;text-align:center}
 .qr svg{display:block;width:4.6in;height:4.6in;margin:0 auto}
-.qr-cap{font-size:24px;color:var(--muted);margin-top:.12in}
+.qr-cap{font-size:24px;color:var(--muted);margin-top:.12in;text-wrap:balance}
 .qr-url{font-size:30px;font-weight:600}
 
 /* Parts */
