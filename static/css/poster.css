@@ -40,9 +40,7 @@
 .facts div{border-top:1px solid var(--line);padding:10px 0}
 .facts dt{color:var(--accent);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px}
 .facts dd{color:#cfcfd8;font-size:.94rem}
-.facts dd.todo{margin:0}
 .approaches .panel{margin-bottom:0}
-.approaches + .todo{margin-top:20px}
 .approaches + .compare{margin-top:20px}
 .compare-table{border-collapse:collapse;font-size:.9rem;width:100%;min-width:560px}
 .compare-table th,.compare-table td{border-bottom:1px solid var(--line);padding:9px 14px 9px 0;text-align:left;vertical-align:top;color:#cfcfd8}
@@ -80,9 +78,6 @@
 .controls section{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
 .controls h4{font-size:1rem;margin-bottom:4px;color:var(--accent)}
 .controls ul{margin-left:18px;font-size:.93rem}
-
-/* Placeholders for copy still to be written */
-.todo{border-left:3px solid var(--accent);padding:4px 0 4px 12px;color:var(--muted) !important;font-style:italic}
 
 .fig-frame{margin:24px 0 4px}
 .fig-frame svg{display:block;width:100%;height:auto}
