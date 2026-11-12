@@ -139,3 +139,10 @@
   .compare-table td{display:block;border:0;padding:2px 0}
   .compare-table td::before{content:attr(data-label) ": ";color:var(--accent);font-weight:600;font-size:.8rem}
 }
+/* Very narrow screens (and desktop zoomed to 400%): the slot table cannot keep
+   its names whole and still fit, so they may break rather than make the table
+   scroll sideways, which a keyboard could not reach (WCAG 1.4.10, 2.1.1) */
+@media(max-width:374px){
+  .slot-table td:first-child,.slot-table td:nth-child(2){white-space:normal}
+  .slot-table code{overflow-wrap:anywhere}
+}
