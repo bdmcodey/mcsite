@@ -358,7 +358,8 @@ def figure_releases_wide(releases, sept):
     s0 = dt.date(start.year, 9, 1)
     bx = L + (s0 - start).days * step
     body.append(f'<rect class="band" x="{bx:.1f}" y="40" width="{30 * step:.1f}" height="{base - 40 + 6}" rx="4"/>')
-    body.append(text(bx + 10, 58, f"{sept} versions in September", "strong", 13))
+    # The count goes under the axis, clear of the milestone labels above the dots.
+    body.append(text(bx + 15 * step, base + 46, f"{sept} versions in September", "strong", 13, "middle"))
 
     body.append(f'<line class="rule" x1="{L}" x2="{W - R}" y1="{base + 6}" y2="{base + 6}"/>')
     body.append(text(L, base + 26, MONTHS[start.month - 1], "muted", 12))
@@ -395,7 +396,7 @@ def figure_releases_wide(releases, sept):
         tx = cx + (5 if anchor == "start" else -5)
         body.append(text(tx, ly, fmt_date(d), "strong", 12, anchor))
         body.append(text(tx, ly + 15, lbl, "muted", 12, anchor))
-    return svg(W, base + 34, "fig-releases-wide", *_releases_text(releases, sept), "\n".join(body))
+    return svg(W, base + 56, "fig-releases-wide", *_releases_text(releases, sept), "\n".join(body))
 
 
 def figure_releases_tall(releases, sept):
