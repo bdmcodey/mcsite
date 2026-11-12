@@ -1,4 +1,4 @@
-<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 284" role="img" aria-labelledby="fig-releases-wide-t fig-releases-wide-d">
+<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 306" role="img" aria-labelledby="fig-releases-wide-t fig-releases-wide-d">
 <title id="fig-releases-wide-t">119 numbered versions, Jul 24 to Nov 10, 2026</title>
 <desc id="fig-releases-wide-d">Each dot is one numbered version of the Workbench. 84 of the 119 came in September. Jul 24: First working version (0.1.0). Sep 16: Workbench replaces the other two (0.11.0). Sep 25: Simulated Alma round trip (0.28.0). The latest is 0.50.0, on Nov 10.</desc>
 <style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
@@ -28,7 +28,7 @@
 .fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
 .fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
 <rect class="band" x="356.3" y="40" width="231.9" height="216" rx="4"/>
-<text x="366.3" y="58.0" font-size="13" class="strong">84 versions in September</text>
+<text x="472.3" y="296.0" font-size="13" text-anchor="middle" class="strong">84 versions in September</text>
 <line class="rule" x1="24" x2="936" y1="256" y2="256"/>
 <text x="24.0" y="276.0" font-size="12" class="muted">Jul</text>
 <line class="rule" x1="116.7" x2="116.7" y1="256" y2="262"/>
