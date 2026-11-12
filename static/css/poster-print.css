@@ -113,4 +113,4 @@ h2{font-size:72px;display:flex;align-items:center;gap:.25in}
 
 .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:.6in;
       border-top:2px solid var(--line);padding-top:.2in;font-size:26px}
-.foot .ref{color:var(--muted);max-width:18in;text-align:right}
+.foot .ref{color:var(--muted);max-width:20in;text-align:right}
