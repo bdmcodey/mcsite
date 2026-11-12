@@ -83,7 +83,7 @@ h1.big{font-size:clamp(2.5rem,6vw,4rem);margin-bottom:22px}
 /* "Proof of concept" disclaimer under the tool links */
 .poc-note{color:var(--muted);font-size:.82rem;font-style:italic;margin-top:14px}
 /* Secondary "view source": quiet text link that stands apart from the buttons */
-.src-link{display:inline-flex;align-items:center;min-height:44px;color:var(--muted);font-weight:600;font-size:.86rem;transition:color .15s}
+.src-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--muted);font-weight:600;font-size:.86rem;transition:color .15s}
 .src-link:hover{color:var(--accent);text-decoration:underline}
 
 /* Resume */
