@@ -401,15 +401,17 @@ def figure_releases_wide(releases, sept):
 def figure_releases_tall(releases, sept):
     by_day, start, end = _release_layout(releases)
     days = (end - start).days + 1
-    W, T, step, dx, r = 372, 16, 9, 9, 3.6
-    X0 = 64
+    # Drawn 320 wide, about the width a phone gives it, so its 13px text
+    # reaches the screen at close to 13px instead of being scaled down.
+    W, T, step, dx, r = 320, 16, 9, 7.6, 3.1
+    X0 = 46
     y = lambda d: T + ((d - start).days + 0.5) * step
     body = []
 
     s0 = dt.date(start.year, 9, 1)
     by0 = T + (s0 - start).days * step
     body.append(f'<rect class="band" x="{X0 - 10}" y="{by0:.1f}" width="{W - X0 + 4}" height="{30 * step:.1f}" rx="4"/>')
-    body.append(text(W - 10, by0 + 18, f"{sept} in September", "strong", 12, "end"))
+    body.append(text(W - 10, by0 + 18, f"{sept} in September", "strong", 13, "end"))
 
     body.append(f'<line class="rule" x1="{X0 - 10}" x2="{X0 - 10}" y1="{T}" y2="{T + days * step}"/>')
     body.append(text(X0 - 20, T + 12, MONTHS[start.month - 1], "muted", 12, "end"))
@@ -433,15 +435,21 @@ def figure_releases_tall(releases, sept):
     dates = dict(releases)
     notes = [(v, lbl) for v, lbl in MILESTONES] + [(releases[-1][0], f"{releases[-1][0]}, version {len(releases)}")]
     LX = X0 + 10 * dx + 10
+    fits = int((W - 6 - LX) / (13 * 0.54))          # characters of 13px Inter that fit beside the dots
     for v, lbl in notes:
         d = dates[v]
         cy = y(d)
         cx = X0 + row_end[v] * dx + r + 5
-        body.append(f'<line class="leader" x1="{cx:.1f}" x2="{LX - 4}" y1="{cy:.1f}" y2="{cy:.1f}"/>')
-        body.append(text(LX, cy - 2, fmt_date(d), "strong", 12))
-        body.append(text(LX, cy + 13, lbl, "muted", 11.5))
+        body.append(f'<line class="leader" x1="{cx:.1f}" x2="{LX - 4:.1f}" y1="{cy:.1f}" y2="{cy:.1f}"/>')
+        body.append(text(LX, cy - 2, fmt_date(d), "strong", 13.5))
+        lines = [lbl]
+        if len(lbl) > fits:                          # too long for one line: break at the space nearest the middle
+            cut = min((i for i, c in enumerate(lbl) if c == " "), key=lambda i: abs(i - len(lbl) / 2))
+            lines = [lbl[:cut], lbl[cut + 1:]]
+        for n, line in enumerate(lines):
+            body.append(text(LX, cy + 15 + n * 16, line, "muted", 13))
     # Room below the last day for its two-line label, when the latest release is on it
-    H = T + days * step + 24
+    H = T + days * step + 28
     return svg(W, H, "fig-releases-tall", *_releases_text(releases, sept), "\n".join(body))
 
 

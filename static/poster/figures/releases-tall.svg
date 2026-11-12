@@ -1,4 +1,4 @@
-<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 372 1102" role="img" aria-labelledby="fig-releases-tall-t fig-releases-tall-d">
+<svg class="fig" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 1106" role="img" aria-labelledby="fig-releases-tall-t fig-releases-tall-d">
 <title id="fig-releases-tall-t">119 numbered versions, Jul 24 to Nov 10, 2026</title>
 <desc id="fig-releases-tall-d">Each dot is one numbered version of the Workbench. 84 of the 119 came in September. Jul 24: First working version (0.1.0). Sep 16: Workbench replaces the other two (0.11.0). Sep 25: Simulated Alma round trip (0.28.0). The latest is 0.50.0, on Nov 10.</desc>
 <style>.fig text{font-family:var(--fig-sans,"Inter",system-ui,sans-serif);fill:var(--fig-ink,#1f1c29)}
@@ -27,177 +27,178 @@
 .fig .sf-i{fill:var(--fig-sf-i,#138a60)}
 .fig .sf-j{fill:var(--fig-sf-j,#b07a00)}
 .fig .arrow{stroke:var(--fig-muted,#5d5a69);stroke-width:1.5;fill:none}</style>
-<rect class="band" x="54" y="403.0" width="312" height="270.0" rx="4"/>
-<text x="362.0" y="421.0" font-size="12" text-anchor="end" class="strong">84 in September</text>
-<line class="rule" x1="54" x2="54" y1="16" y2="1078"/>
-<text x="44.0" y="28.0" font-size="12" text-anchor="end" class="muted">Jul</text>
-<line class="rule" x1="48" x2="54" y1="124.0" y2="124.0"/>
-<text x="44.0" y="136.0" font-size="12" text-anchor="end" class="muted">Aug</text>
-<line class="rule" x1="48" x2="54" y1="403.0" y2="403.0"/>
-<text x="44.0" y="415.0" font-size="12" text-anchor="end" class="muted">Sep</text>
-<line class="rule" x1="48" x2="54" y1="673.0" y2="673.0"/>
-<text x="44.0" y="685.0" font-size="12" text-anchor="end" class="muted">Oct</text>
-<line class="rule" x1="48" x2="54" y1="952.0" y2="952.0"/>
-<text x="44.0" y="964.0" font-size="12" text-anchor="end" class="muted">Nov</text>
-<circle class="dot-key" cx="64.0" cy="56.5" r="4.6"/>
-<rect class="hit" x="57.4" y="52.0" width="13.2" height="9"><title>Jul 24, 2026: 1 version (0.1.0)</title></rect>
-<circle class="dot" cx="64.0" cy="110.5" r="3.6"/>
-<rect class="hit" x="57.4" y="106.0" width="13.2" height="9"><title>Jul 30, 2026: 1 version (0.2.0)</title></rect>
-<circle class="dot" cx="64.0" cy="146.5" r="3.6"/>
-<rect class="hit" x="57.4" y="142.0" width="13.2" height="9"><title>Aug 3, 2026: 1 version (0.3.0)</title></rect>
-<circle class="dot" cx="64.0" cy="155.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="155.5" r="3.6"/>
-<rect class="hit" x="57.4" y="151.0" width="22.2" height="9"><title>Aug 4, 2026: 2 versions (0.4.0 to 0.5.0)</title></rect>
-<circle class="dot" cx="64.0" cy="308.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="308.5" r="3.6"/>
-<rect class="hit" x="57.4" y="304.0" width="22.2" height="9"><title>Aug 21, 2026: 2 versions (0.5.1 to 0.5.2)</title></rect>
-<circle class="dot" cx="64.0" cy="344.5" r="3.6"/>
-<rect class="hit" x="57.4" y="340.0" width="13.2" height="9"><title>Aug 25, 2026: 1 version (0.6.0)</title></rect>
-<circle class="dot" cx="64.0" cy="407.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="407.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="407.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="407.5" r="3.6"/>
-<rect class="hit" x="57.4" y="403.0" width="40.2" height="9"><title>Sep 1, 2026: 4 versions (0.6.1 to 0.6.4)</title></rect>
-<circle class="dot" cx="64.0" cy="416.5" r="3.6"/>
-<rect class="hit" x="57.4" y="412.0" width="13.2" height="9"><title>Sep 2, 2026: 1 version (0.7.0)</title></rect>
-<circle class="dot" cx="64.0" cy="425.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="425.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="425.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="425.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="425.5" r="3.6"/>
-<rect class="hit" x="57.4" y="421.0" width="49.2" height="9"><title>Sep 3, 2026: 5 versions (0.7.1 to 0.8.0)</title></rect>
-<circle class="dot" cx="64.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="136.0" cy="497.5" r="3.6"/>
-<circle class="dot" cx="145.0" cy="497.5" r="3.6"/>
-<rect class="hit" x="57.4" y="493.0" width="94.2" height="9"><title>Sep 11, 2026: 10 versions (0.8.1 to 0.9.0)</title></rect>
-<circle class="dot" cx="64.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="533.5" r="3.6"/>
-<circle class="dot" cx="136.0" cy="533.5" r="3.6"/>
-<rect class="hit" x="57.4" y="529.0" width="85.2" height="9"><title>Sep 15, 2026: 9 versions (0.9.1 to 0.9.9)</title></rect>
-<circle class="dot" cx="64.0" cy="542.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="542.5" r="3.6"/>
-<circle class="dot-key" cx="82.0" cy="542.5" r="4.6"/>
-<circle class="dot" cx="91.0" cy="542.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="542.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="542.5" r="3.6"/>
-<rect class="hit" x="57.4" y="538.0" width="58.2" height="9"><title>Sep 16, 2026: 6 versions (0.10.0 to 0.12.0)</title></rect>
-<circle class="dot" cx="64.0" cy="551.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="551.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="551.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="551.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="551.5" r="3.6"/>
-<rect class="hit" x="57.4" y="547.0" width="49.2" height="9"><title>Sep 17, 2026: 5 versions (0.12.1 to 0.12.5)</title></rect>
-<circle class="dot" cx="64.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="560.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="560.5" r="3.6"/>
-<rect class="hit" x="57.4" y="556.0" width="76.2" height="9"><title>Sep 18, 2026: 8 versions (0.13.0 to 0.17.0)</title></rect>
-<circle class="dot" cx="64.0" cy="569.5" r="3.6"/>
-<rect class="hit" x="57.4" y="565.0" width="13.2" height="9"><title>Sep 19, 2026: 1 version (0.17.1)</title></rect>
-<circle class="dot" cx="64.0" cy="587.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="587.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="587.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="587.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="587.5" r="3.6"/>
-<rect class="hit" x="57.4" y="583.0" width="49.2" height="9"><title>Sep 21, 2026: 5 versions (0.17.2 to 0.17.6)</title></rect>
-<circle class="dot" cx="64.0" cy="596.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="596.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="596.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="596.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="596.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="596.5" r="3.6"/>
-<rect class="hit" x="57.4" y="592.0" width="58.2" height="9"><title>Sep 22, 2026: 6 versions (0.18.0 to 0.21.0)</title></rect>
-<circle class="dot" cx="64.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="605.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="605.5" r="3.6"/>
-<rect class="hit" x="57.4" y="601.0" width="76.2" height="9"><title>Sep 23, 2026: 8 versions (0.22.0 to 0.25.1)</title></rect>
-<circle class="dot" cx="64.0" cy="614.5" r="3.6"/>
-<rect class="hit" x="57.4" y="610.0" width="13.2" height="9"><title>Sep 24, 2026: 1 version (0.25.2)</title></rect>
-<circle class="dot" cx="64.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="623.5" r="3.6"/>
-<circle class="dot-key" cx="82.0" cy="623.5" r="4.6"/>
-<circle class="dot" cx="91.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="623.5" r="3.6"/>
-<circle class="dot" cx="136.0" cy="623.5" r="3.6"/>
-<rect class="hit" x="57.4" y="619.0" width="85.2" height="9"><title>Sep 25, 2026: 9 versions (0.26.0 to 0.30.3)</title></rect>
-<circle class="dot" cx="64.0" cy="668.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="668.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="668.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="668.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="668.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="668.5" r="3.6"/>
-<rect class="hit" x="57.4" y="664.0" width="58.2" height="9"><title>Sep 30, 2026: 6 versions (0.30.4 to 0.31.2)</title></rect>
-<circle class="dot" cx="64.0" cy="677.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="677.5" r="3.6"/>
-<rect class="hit" x="57.4" y="673.0" width="22.2" height="9"><title>Oct 1, 2026: 2 versions (0.31.3 to 0.31.4)</title></rect>
-<circle class="dot" cx="64.0" cy="740.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="740.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="740.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="740.5" r="3.6"/>
-<rect class="hit" x="57.4" y="736.0" width="40.2" height="9"><title>Oct 8, 2026: 4 versions (0.31.5 to 0.34.0)</title></rect>
-<circle class="dot" cx="64.0" cy="776.5" r="3.6"/>
-<rect class="hit" x="57.4" y="772.0" width="13.2" height="9"><title>Oct 12, 2026: 1 version (0.35.0)</title></rect>
-<circle class="dot" cx="64.0" cy="794.5" r="3.6"/>
-<rect class="hit" x="57.4" y="790.0" width="13.2" height="9"><title>Oct 14, 2026: 1 version (0.36.0)</title></rect>
-<circle class="dot" cx="64.0" cy="803.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="803.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="803.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="803.5" r="3.6"/>
-<rect class="hit" x="57.4" y="799.0" width="40.2" height="9"><title>Oct 15, 2026: 4 versions (0.37.0 to 0.39.0)</title></rect>
-<circle class="dot" cx="64.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="100.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="109.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="118.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="127.0" cy="812.5" r="3.6"/>
-<circle class="dot" cx="136.0" cy="812.5" r="3.6"/>
-<rect class="hit" x="57.4" y="808.0" width="85.2" height="9"><title>Oct 16, 2026: 9 versions (0.40.0 to 0.46.0)</title></rect>
-<circle class="dot" cx="64.0" cy="929.5" r="3.6"/>
-<circle class="dot" cx="73.0" cy="929.5" r="3.6"/>
-<circle class="dot" cx="82.0" cy="929.5" r="3.6"/>
-<circle class="dot" cx="91.0" cy="929.5" r="3.6"/>
-<rect class="hit" x="57.4" y="925.0" width="40.2" height="9"><title>Oct 29, 2026: 4 versions (0.46.1 to 0.48.0)</title></rect>
-<circle class="dot" cx="64.0" cy="938.5" r="3.6"/>
-<rect class="hit" x="57.4" y="934.0" width="13.2" height="9"><title>Oct 30, 2026: 1 version (0.49.0)</title></rect>
-<circle class="dot-key" cx="64.0" cy="1037.5" r="4.6"/>
-<rect class="hit" x="57.4" y="1033.0" width="13.2" height="9"><title>Nov 10, 2026: 1 version (0.50.0)</title></rect>
-<line class="leader" x1="72.6" x2="160" y1="56.5" y2="56.5"/>
-<text x="164.0" y="54.5" font-size="12" class="strong">Jul 24</text>
-<text x="164.0" y="69.5" font-size="11.5" class="muted">First working version</text>
-<line class="leader" x1="117.6" x2="160" y1="542.5" y2="542.5"/>
-<text x="164.0" y="540.5" font-size="12" class="strong">Sep 16</text>
-<text x="164.0" y="555.5" font-size="11.5" class="muted">Workbench replaces the other two</text>
-<line class="leader" x1="144.6" x2="160" y1="623.5" y2="623.5"/>
-<text x="164.0" y="621.5" font-size="12" class="strong">Sep 25</text>
-<text x="164.0" y="636.5" font-size="11.5" class="muted">Simulated Alma round trip</text>
-<line class="leader" x1="72.6" x2="160" y1="1037.5" y2="1037.5"/>
-<text x="164.0" y="1035.5" font-size="12" class="strong">Nov 10</text>
-<text x="164.0" y="1050.5" font-size="11.5" class="muted">0.50.0, version 119</text>
+<rect class="band" x="36" y="403.0" width="278" height="270.0" rx="4"/>
+<text x="310.0" y="421.0" font-size="13" text-anchor="end" class="strong">84 in September</text>
+<line class="rule" x1="36" x2="36" y1="16" y2="1078"/>
+<text x="26.0" y="28.0" font-size="12" text-anchor="end" class="muted">Jul</text>
+<line class="rule" x1="30" x2="36" y1="124.0" y2="124.0"/>
+<text x="26.0" y="136.0" font-size="12" text-anchor="end" class="muted">Aug</text>
+<line class="rule" x1="30" x2="36" y1="403.0" y2="403.0"/>
+<text x="26.0" y="415.0" font-size="12" text-anchor="end" class="muted">Sep</text>
+<line class="rule" x1="30" x2="36" y1="673.0" y2="673.0"/>
+<text x="26.0" y="685.0" font-size="12" text-anchor="end" class="muted">Oct</text>
+<line class="rule" x1="30" x2="36" y1="952.0" y2="952.0"/>
+<text x="26.0" y="964.0" font-size="12" text-anchor="end" class="muted">Nov</text>
+<circle class="dot-key" cx="46.0" cy="56.5" r="4.1"/>
+<rect class="hit" x="39.9" y="52.0" width="12.2" height="9"><title>Jul 24, 2026: 1 version (0.1.0)</title></rect>
+<circle class="dot" cx="46.0" cy="110.5" r="3.1"/>
+<rect class="hit" x="39.9" y="106.0" width="12.2" height="9"><title>Jul 30, 2026: 1 version (0.2.0)</title></rect>
+<circle class="dot" cx="46.0" cy="146.5" r="3.1"/>
+<rect class="hit" x="39.9" y="142.0" width="12.2" height="9"><title>Aug 3, 2026: 1 version (0.3.0)</title></rect>
+<circle class="dot" cx="46.0" cy="155.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="155.5" r="3.1"/>
+<rect class="hit" x="39.9" y="151.0" width="19.8" height="9"><title>Aug 4, 2026: 2 versions (0.4.0 to 0.5.0)</title></rect>
+<circle class="dot" cx="46.0" cy="308.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="308.5" r="3.1"/>
+<rect class="hit" x="39.9" y="304.0" width="19.8" height="9"><title>Aug 21, 2026: 2 versions (0.5.1 to 0.5.2)</title></rect>
+<circle class="dot" cx="46.0" cy="344.5" r="3.1"/>
+<rect class="hit" x="39.9" y="340.0" width="12.2" height="9"><title>Aug 25, 2026: 1 version (0.6.0)</title></rect>
+<circle class="dot" cx="46.0" cy="407.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="407.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="407.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="407.5" r="3.1"/>
+<rect class="hit" x="39.9" y="403.0" width="35.0" height="9"><title>Sep 1, 2026: 4 versions (0.6.1 to 0.6.4)</title></rect>
+<circle class="dot" cx="46.0" cy="416.5" r="3.1"/>
+<rect class="hit" x="39.9" y="412.0" width="12.2" height="9"><title>Sep 2, 2026: 1 version (0.7.0)</title></rect>
+<circle class="dot" cx="46.0" cy="425.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="425.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="425.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="425.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="425.5" r="3.1"/>
+<rect class="hit" x="39.9" y="421.0" width="42.6" height="9"><title>Sep 3, 2026: 5 versions (0.7.1 to 0.8.0)</title></rect>
+<circle class="dot" cx="46.0" cy="497.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="497.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="497.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="497.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="497.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="497.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="497.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="497.5" r="3.1"/>
+<circle class="dot" cx="106.8" cy="497.5" r="3.1"/>
+<circle class="dot" cx="114.4" cy="497.5" r="3.1"/>
+<rect class="hit" x="39.9" y="493.0" width="80.6" height="9"><title>Sep 11, 2026: 10 versions (0.8.1 to 0.9.0)</title></rect>
+<circle class="dot" cx="46.0" cy="533.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="533.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="533.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="533.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="533.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="533.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="533.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="533.5" r="3.1"/>
+<circle class="dot" cx="106.8" cy="533.5" r="3.1"/>
+<rect class="hit" x="39.9" y="529.0" width="73.0" height="9"><title>Sep 15, 2026: 9 versions (0.9.1 to 0.9.9)</title></rect>
+<circle class="dot" cx="46.0" cy="542.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="542.5" r="3.1"/>
+<circle class="dot-key" cx="61.2" cy="542.5" r="4.1"/>
+<circle class="dot" cx="68.8" cy="542.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="542.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="542.5" r="3.1"/>
+<rect class="hit" x="39.9" y="538.0" width="50.2" height="9"><title>Sep 16, 2026: 6 versions (0.10.0 to 0.12.0)</title></rect>
+<circle class="dot" cx="46.0" cy="551.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="551.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="551.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="551.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="551.5" r="3.1"/>
+<rect class="hit" x="39.9" y="547.0" width="42.6" height="9"><title>Sep 17, 2026: 5 versions (0.12.1 to 0.12.5)</title></rect>
+<circle class="dot" cx="46.0" cy="560.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="560.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="560.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="560.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="560.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="560.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="560.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="560.5" r="3.1"/>
+<rect class="hit" x="39.9" y="556.0" width="65.4" height="9"><title>Sep 18, 2026: 8 versions (0.13.0 to 0.17.0)</title></rect>
+<circle class="dot" cx="46.0" cy="569.5" r="3.1"/>
+<rect class="hit" x="39.9" y="565.0" width="12.2" height="9"><title>Sep 19, 2026: 1 version (0.17.1)</title></rect>
+<circle class="dot" cx="46.0" cy="587.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="587.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="587.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="587.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="587.5" r="3.1"/>
+<rect class="hit" x="39.9" y="583.0" width="42.6" height="9"><title>Sep 21, 2026: 5 versions (0.17.2 to 0.17.6)</title></rect>
+<circle class="dot" cx="46.0" cy="596.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="596.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="596.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="596.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="596.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="596.5" r="3.1"/>
+<rect class="hit" x="39.9" y="592.0" width="50.2" height="9"><title>Sep 22, 2026: 6 versions (0.18.0 to 0.21.0)</title></rect>
+<circle class="dot" cx="46.0" cy="605.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="605.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="605.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="605.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="605.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="605.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="605.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="605.5" r="3.1"/>
+<rect class="hit" x="39.9" y="601.0" width="65.4" height="9"><title>Sep 23, 2026: 8 versions (0.22.0 to 0.25.1)</title></rect>
+<circle class="dot" cx="46.0" cy="614.5" r="3.1"/>
+<rect class="hit" x="39.9" y="610.0" width="12.2" height="9"><title>Sep 24, 2026: 1 version (0.25.2)</title></rect>
+<circle class="dot" cx="46.0" cy="623.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="623.5" r="3.1"/>
+<circle class="dot-key" cx="61.2" cy="623.5" r="4.1"/>
+<circle class="dot" cx="68.8" cy="623.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="623.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="623.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="623.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="623.5" r="3.1"/>
+<circle class="dot" cx="106.8" cy="623.5" r="3.1"/>
+<rect class="hit" x="39.9" y="619.0" width="73.0" height="9"><title>Sep 25, 2026: 9 versions (0.26.0 to 0.30.3)</title></rect>
+<circle class="dot" cx="46.0" cy="668.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="668.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="668.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="668.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="668.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="668.5" r="3.1"/>
+<rect class="hit" x="39.9" y="664.0" width="50.2" height="9"><title>Sep 30, 2026: 6 versions (0.30.4 to 0.31.2)</title></rect>
+<circle class="dot" cx="46.0" cy="677.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="677.5" r="3.1"/>
+<rect class="hit" x="39.9" y="673.0" width="19.8" height="9"><title>Oct 1, 2026: 2 versions (0.31.3 to 0.31.4)</title></rect>
+<circle class="dot" cx="46.0" cy="740.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="740.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="740.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="740.5" r="3.1"/>
+<rect class="hit" x="39.9" y="736.0" width="35.0" height="9"><title>Oct 8, 2026: 4 versions (0.31.5 to 0.34.0)</title></rect>
+<circle class="dot" cx="46.0" cy="776.5" r="3.1"/>
+<rect class="hit" x="39.9" y="772.0" width="12.2" height="9"><title>Oct 12, 2026: 1 version (0.35.0)</title></rect>
+<circle class="dot" cx="46.0" cy="794.5" r="3.1"/>
+<rect class="hit" x="39.9" y="790.0" width="12.2" height="9"><title>Oct 14, 2026: 1 version (0.36.0)</title></rect>
+<circle class="dot" cx="46.0" cy="803.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="803.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="803.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="803.5" r="3.1"/>
+<rect class="hit" x="39.9" y="799.0" width="35.0" height="9"><title>Oct 15, 2026: 4 versions (0.37.0 to 0.39.0)</title></rect>
+<circle class="dot" cx="46.0" cy="812.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="812.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="812.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="812.5" r="3.1"/>
+<circle class="dot" cx="76.4" cy="812.5" r="3.1"/>
+<circle class="dot" cx="84.0" cy="812.5" r="3.1"/>
+<circle class="dot" cx="91.6" cy="812.5" r="3.1"/>
+<circle class="dot" cx="99.2" cy="812.5" r="3.1"/>
+<circle class="dot" cx="106.8" cy="812.5" r="3.1"/>
+<rect class="hit" x="39.9" y="808.0" width="73.0" height="9"><title>Oct 16, 2026: 9 versions (0.40.0 to 0.46.0)</title></rect>
+<circle class="dot" cx="46.0" cy="929.5" r="3.1"/>
+<circle class="dot" cx="53.6" cy="929.5" r="3.1"/>
+<circle class="dot" cx="61.2" cy="929.5" r="3.1"/>
+<circle class="dot" cx="68.8" cy="929.5" r="3.1"/>
+<rect class="hit" x="39.9" y="925.0" width="35.0" height="9"><title>Oct 29, 2026: 4 versions (0.46.1 to 0.48.0)</title></rect>
+<circle class="dot" cx="46.0" cy="938.5" r="3.1"/>
+<rect class="hit" x="39.9" y="934.0" width="12.2" height="9"><title>Oct 30, 2026: 1 version (0.49.0)</title></rect>
+<circle class="dot-key" cx="46.0" cy="1037.5" r="4.1"/>
+<rect class="hit" x="39.9" y="1033.0" width="12.2" height="9"><title>Nov 10, 2026: 1 version (0.50.0)</title></rect>
+<line class="leader" x1="54.1" x2="128.0" y1="56.5" y2="56.5"/>
+<text x="132.0" y="54.5" font-size="13.5" class="strong">Jul 24</text>
+<text x="132.0" y="71.5" font-size="13" class="muted">First working version</text>
+<line class="leader" x1="92.1" x2="128.0" y1="542.5" y2="542.5"/>
+<text x="132.0" y="540.5" font-size="13.5" class="strong">Sep 16</text>
+<text x="132.0" y="557.5" font-size="13" class="muted">Workbench replaces</text>
+<text x="132.0" y="573.5" font-size="13" class="muted">the other two</text>
+<line class="leader" x1="114.9" x2="128.0" y1="623.5" y2="623.5"/>
+<text x="132.0" y="621.5" font-size="13.5" class="strong">Sep 25</text>
+<text x="132.0" y="638.5" font-size="13" class="muted">Simulated Alma round trip</text>
+<line class="leader" x1="54.1" x2="128.0" y1="1037.5" y2="1037.5"/>
+<text x="132.0" y="1035.5" font-size="13.5" class="strong">Nov 10</text>
+<text x="132.0" y="1052.5" font-size="13" class="muted">0.50.0, version 119</text>
 </svg>
