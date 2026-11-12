@@ -27,7 +27,14 @@
 .panel p.goal{border-left:3px solid var(--accent);padding:2px 0 2px 14px;margin-top:16px;color:var(--text)}
 .part-intro{color:#cfcfd8;max-width:720px;margin:28px 0 20px}
 .approaches{display:grid;grid-template-columns:1fr;gap:20px}
-@media(min-width:1000px){.approaches{grid-template-columns:repeat(3,1fr)}}
+/* Desktop: approach 1 is the longest by far, so it runs down a narrower left
+   column and approaches 2 and 3 stack beside it. Three equal columns left the
+   two short cards mostly empty. 7fr/11fr is the split at which both sides end
+   level with the current copy; re-tune it if the cards' text changes much. */
+@media(min-width:1000px){
+  .approaches{grid-template-columns:7fr 11fr}
+  .approaches .panel:first-child{grid-row:span 2}
+}
 .approaches .panel.chosen{border-color:var(--accent)}
 .facts{margin-top:16px}
 .facts div{border-top:1px solid var(--line);padding:10px 0}
