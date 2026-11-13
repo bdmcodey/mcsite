@@ -66,3 +66,8 @@ followed by a service restart.
 
 Code is released under the MIT License (see [LICENSE](LICENSE)). Site content, the
 résumé, and images are © Matthew Codey and are not covered by that license.
+
+The one exception is the conference poster and its companion page (`/poster/`):
+their text and figures are licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). See
+[poster/README.md](poster/README.md).
