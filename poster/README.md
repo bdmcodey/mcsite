@@ -76,3 +76,12 @@ written into each SVG are the poster's light theme; `static/css/poster.css`
 sets the page's dark one. The four subfield colors in figure 1 were checked
 for color-blind separation and contrast in both themes; every mark that uses
 one also carries its subfield letter.
+
+## License
+
+The poster, the companion page and their figures (`templates/poster.html`,
+`templates/poster_print.html`, `static/poster/`) are licensed under
+[Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/)
+(CC BY 4.0), © 2026 Matthew Codey. The scripts in this folder are code, and are
+covered by the repository's MIT License. The USC logo is a trademark of the
+University of Southern California and is not covered by either license.
